@@ -6,7 +6,7 @@ Maintainer: Andreas Bertsatos <abertsatos@biol.uoa.gr>
 Title: TensorFlow interface for GNU Octave
 Description: TensorFlow interface for GNU Octave.
 Categories: Machine Learning
-Depends: octave (>= 9.1.0)
+Depends: octave (>= 8.1.0)
 BuildRequires: libtensorflow-cpu-linux-x86_64-2.15.0 [CPU]
                libtensorflow-gpu-linux-x86_64-2.15.0 [GPU]
 License: GPLv3+

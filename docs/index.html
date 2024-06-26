@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TensorFlow interface for GNU Octave</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <script type="text/javascript">
+      window.addEventListener("load", () => {
+        for (let i of document.querySelectorAll(".collapse ul")) {
+          let tog = document.createElement("div");
+          tog.innerHTML = i.previousSibling.textContent;
+          tog.className = "toggle";
+          tog.onclick = () => tog.classList.toggle("show");
+          i.parentElement.removeChild(i.previousSibling);
+          i.parentElement.insertBefore(tog, i);
+        }
+      });
+    </script>
+    <style>
+    h6:hover {
+      color: gray;
+    }
+    var {
+      font-style: italics;
+      font-weight: bold;
+    }
+    td {
+      vertical-align: top;
+    }
+    [id^="togList"],                        /* HIDE CHECKBOX */
+    [id^="togList"] ~ .list,                /* HIDE LIST */
+    [id^="togList"] + label  span + span,   /* HIDE "Collapse" */
+    [id^="togList"]:checked + label span{   /* HIDE "Expand" (IF CHECKED) */
+      display:none;
+    }
+    [id^="togList"]:checked + label span + span{
+      display:inline-block;                 /* SHOW "Collapse" (IF CHECKED) */
+    }
+    [id^="togList"]:checked ~ .list{
+      display:block;                        /* SHOW LIST (IF CHECKED) */
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=https://gnu-octave.github.io/packages/tensorflow>
+              <img src="assets/tensorflow.png" alt="tensorflow" class="d-inline-block align-top" width="25" height="25">
+              TensorFlow interface for GNU Octave
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="card rounded">
+        <div class="card-header card-header-mod">
+          <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-sm-3 col-md-2 mb-2 mb-sm-0">
+              <img src="assets/tensorflow.png" class="d-block m-auto" alt="tensorflow">
+            </div>
+            <div class="col-sm-9 col-md-10">
+              <h3 class="d-inline-block mr-2">tensorflow</h3>
+              <b>0.1.0&nbsp;2024-6-25</b>
+              <p class="indent">
+                TensorFlow interface for GNU Octave.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+           <p>Select Category:
+             <select name="cat" onchange="location = this.options[this.selectedIndex].value;">
+             <option value="#Machine Learning">Machine Learning</option>
+             </select>
+           <p>
+
+           <h3 class="category">
+             <a name="Machine Learning">Machine Learning</a>
+           </h3>
+           <table class="table table-striped">
+             <tbody>
+               <tr>
+                 <td>
+                   <b><code>
+                   <a href="tensorflow.html">tensorflow</a>
+                   </code></b>
+                 </td>
+                 <td>This is a TensorFlow binding for GNU Octave.</td>
+               </tr>
+             </tbody>
+           </table>
+
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

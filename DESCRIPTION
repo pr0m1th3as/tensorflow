@@ -10,4 +10,4 @@ Depends: octave (>= 8.1.0)
 BuildRequires: libtensorflow-cpu-linux-x86_64-2.15.0 [CPU]
                libtensorflow-gpu-linux-x86_64-2.15.0 [GPU]
 License: GPLv3+
-Url: https://github.com/gnu-octave/statistics
+Url: https://github.com/pr0m1th3as/tensorflow

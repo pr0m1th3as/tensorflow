@@ -1,6 +1,6 @@
 Name: tensorflow
 Version: 0.1.0
-Date: 2024-6-25
+Date: 2024-6-26
 Author: Andreas Bertsatos <abertsatos@biol.uoa.gr>
 Maintainer: Andreas Bertsatos <abertsatos@biol.uoa.gr>
 Title: TensorFlow interface for GNU Octave

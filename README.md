@@ -4,9 +4,8 @@ TensorFlow interface for GNU Octave
 **Content:**
 
 1. About
-2. Documentation
-3. Install
-4. Contribute
+2. Install
+3. Contribute
 
 ## 1. About
 This is an experimental Octave Package for interfacing GNU Octave to the TensorFlow library (`v2.15.0`) through its C API. At the moment, there is only a single dynamically linked octave library (the `tensorflow` function), which is handling the interface between Octave and TensorFlow's C API. This package is at a very early stage of development and the calls to the intermediate **`OCT`** interface might (most likely) change in the near future. Once the **`OCT`** interface supports most of TensorFlow's C API, Octave classdefs will be added as wrappers to facilitate the use of the TensorFlow library through GNU Octave. This package has been inspired by @asteinh's work on [tensorflow.m](https://github.com/asteinh/tensorflow.m).

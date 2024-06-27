@@ -882,7 +882,7 @@ void OCT_TF_TensorBitcastFrom (OCT_ARGS)
            "Tensor parsed to the 'TF_TensorBitcastFrom' C API function.");
   }
   // Check octave_value type for pointer to Status
-  if (! args(6).is_uint64_type() || ! args(6).is_scalar_type())
+  if (! args(6).is_uint64_type () || ! args(6).is_scalar_type ())
   {
     error ("tensorflow: 7th argument must be an uint64 scalar pointer to "
            "the Status parsed to the 'TF_TensorBitcastFrom' C API function.");

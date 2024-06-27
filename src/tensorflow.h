@@ -74,6 +74,34 @@ void OCT_TF_AddGradients (OCT_ARGS);
 void OCT_TF_AddGradientsWithPrefix (OCT_ARGS);
 octave_value OCT_TF_GraphToFunction (OCT_ARGS);
 octave_value OCT_TF_GraphToFunctionWithControlOutputs (OCT_ARGS);
+// -----------------------------------------------------------------------------
+// C API functions referenced by the TF_OperationDescription classdef
+// -----------------------------------------------------------------------------
+void OCT_TF_SetDevice (OCT_ARGS);
+void OCT_TF_AddInput (OCT_ARGS);
+void OCT_TF_AddInputList (OCT_ARGS);
+void OCT_TF_AddControlInput (OCT_ARGS);
+void OCT_TF_SetAttrString (OCT_ARGS);
+void OCT_TF_SetAttrStringList (OCT_ARGS);
+void OCT_TF_SetAttrInt (OCT_ARGS);
+void OCT_TF_SetAttrIntList (OCT_ARGS);
+void OCT_TF_SetAttrFloat (OCT_ARGS);
+void OCT_TF_SetAttrFloatList (OCT_ARGS);
+void OCT_TF_SetAttrBool (OCT_ARGS);
+void OCT_TF_SetAttrBoolList (OCT_ARGS);
+void OCT_TF_SetAttrType (OCT_ARGS);
+void OCT_TF_SetAttrTypeList (OCT_ARGS);
+void OCT_TF_SetAttrPlaceholder (OCT_ARGS);
+void OCT_TF_SetAttrFuncName (OCT_ARGS);
+void OCT_TF_SetAttrShape (OCT_ARGS);
+void OCT_TF_SetAttrShapeList (OCT_ARGS);
+void OCT_TF_SetAttrTensorShapeProto (OCT_ARGS);
+void OCT_TF_SetAttrTensorShapeProtoList (OCT_ARGS);
+void OCT_TF_SetAttrTensor (OCT_ARGS);
+void OCT_TF_SetAttrTensorList (OCT_ARGS);
+void OCT_TF_SetAttrValueProto (OCT_ARGS);
+octave_value OCT_TF_FinishOperationLocked (OCT_ARGS);
+octave_value OCT_TF_FinishOperation (OCT_ARGS);
 // ---------------------------------------------------------------------------
 // C API functions referenced by the TF_Status classdef
 // ---------------------------------------------------------------------------

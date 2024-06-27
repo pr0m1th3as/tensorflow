@@ -60,6 +60,7 @@ Note that @code{tensorflow} uses the following conventions throughout its API. \
 DataType or Status Code. \n\n\
 @item @code{int32} is used for storing the number of dimensions. \n\n\
 @item @code{uint8} is used for storing raw data retrieved from Buffers. \n\n\
+@item All vectors must be row vectors. \n\n\
 @end itemize \n\n\
 \
 @code{tensorflow} supports the following C API and Octave specific functions. \
@@ -86,7 +87,7 @@ C API functions relared to the TF_Buffer classdef \n\
 \n\
 @item @qcode{'TF_NewBufferFromString'} \n\
 @itemize \n\
-@item @var{in2}: row vector of @code{uint8} or @code{char} to be saved into a new Buffer. \n\
+@item @var{in2}: vector of @code{uint8} or @code{char} to be saved into a new Buffer. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GetBuffer'} \n\
@@ -94,7 +95,7 @@ C API functions relared to the TF_Buffer classdef \n\
 @item @var{in2}: scalar @code{uint64} pointer to Buffer to get the data from. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{out}: row vector of @code{uint8} from Buffer. \n\
+@item @var{out}: vector of @code{uint8} from Buffer. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GetBufferToString'} \n\
@@ -102,7 +103,7 @@ C API functions relared to the TF_Buffer classdef \n\
 @item @var{in2}: scalar @code{uint64} pointer to Buffer to get the data from. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{out}: row vector of @code{char} from Buffer. \n\
+@item @var{out}: vector of @code{char} from Buffer. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -113,7 +114,7 @@ C API functions relared to the TF_DataType classdef \n\
 @item @var{in2}: scalar @code{uint32} index to DataType. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{out}: row vector of @code{char} DataType name. \n\
+@item @var{out}: vector of @code{char} DataType name. \n\
 @end itemize \n\
 @item @qcode{'TF_DataTypeSize'} \n\
 @itemize \n\
@@ -172,8 +173,8 @@ C API functions relared to the TF_Graph classdef \n\
 @end itemize \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: row vector @code{char} type of new Operation. \n\
-@item @var{in4}: row vector @code{char} name of new Operation. \n\
+@item @var{in3}: vector @code{char} type of new Operation. \n\
+@item @var{in4}: vector @code{char} name of new Operation. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_NewOperation'} \n\
@@ -182,8 +183,8 @@ C API functions relared to the TF_Graph classdef \n\
 @end itemize \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: row vector @code{char} type of new Operation. \n\
-@item @var{in4}: row vector @code{char} name of new Operation. \n\
+@item @var{in3}: vector @code{char} type of new Operation. \n\
+@item @var{in4}: vector @code{char} name of new Operation. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphOperationByName'} \n\
@@ -192,7 +193,7 @@ C API functions relared to the TF_Graph classdef \n\
 @end itemize \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: row vector @code{char} name of Operation in Graph. \n\
+@item @var{in3}: vector @code{char} name of Operation in Graph. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphNextOperation'} \n\
@@ -214,7 +215,7 @@ C API functions relared to the TF_Graph classdef \n\
 @item @qcode{'TF_GraphGetOpDef'} \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: row vector @code{char} name of OperationDefinition in Graph. \n\
+@item @var{in3}: vector @code{char} name of OperationDefinition in Graph. \n\
 @item @var{in4}: scalar @code{uint64} pointer to Buffer. \n\
 @item @var{in5}: scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
@@ -306,7 +307,7 @@ C API functions relared to the TF_Graph classdef \n\
 @item @qcode{'TF_AddGradientsWithPrefix'} \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: row vector @code{char} prefix for Gradient. \n\
+@item @var{in3}: vector @code{char} prefix for Gradient. \n\
 @item @var{in4}: scalar @code{uint64} pointer to Output y. \n\
 @item @var{in5}: scalar @code{int32} number of inputs in y. \n\
 @item @var{in6}: scalar @code{uint64} pointer to Output x. \n\
@@ -314,6 +315,199 @@ C API functions relared to the TF_Graph classdef \n\
 @item @var{in8}: scalar @code{uint64} pointer to Output dx. \n\
 @item @var{in9}: scalar @code{uint64} pointer to Status. \n\
 @item @var{in10}: scalar @code{uint64} pointer to Output dy. \n\
+@end itemize \n\
+@end itemize \n\
+\n\
+C API functions relared to the TF_OperationDescription classdef \n\
+@itemize \n\
+@item @qcode{'TF_SetDevice'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} device name. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_AddInput'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: scalar @code{uint64} pointer to Output input. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_AddInputList'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{uint64} pointers to Output inputs. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_AddControlInput'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrString'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{char} value for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrStringList'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{cellstr} values for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrInt'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: scalar @code{int64} value for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrIntList'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{int64} values for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrFloat'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: scalar @code{single} value for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrFloatList'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{single} values for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrBool'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: scalar @code{logical} value for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrBoolList'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{logical} values for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrType'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: scalar @code{uint32} DataType for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrTypeList'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{uint32} DataTypes for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrPlaceholder'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{char} placeholder for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrFuncName'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{char} function name for attribute. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrShape'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{int64} the size of the dimensions of \
+the attribute's shape. \n\
+@item @var{in5}: scalar @code{int32} the number of the dimensions of \
+the attribute's shape. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrShapeList'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: matrix @code{int64} the size of the dimensions of \
+the attribute's shapes with each row corresponding to a shape.  The rows \
+representing shapes with fewer dimensions are padded with zeros.\n\
+@item @var{in5}: vector @code{int32} the number of the dimensions of \
+the attribute's shapes with each element corresponding to a shape.  The number \
+of elements must equal the number of rows of the previous input.\n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrTensorShapeProto'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{uint8} binary-serialized TensorShapeProto data. \n\
+@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'OCT_TF_SetAttrTensorShapeProtoList'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{cell} a list of binary-serialized \
+TensorShapeProto data, each represented as a @code{uint8} vector. \n\
+@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrTensor'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrTensorList'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{uint64} pointers to Tensors. \n\
+@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetAttrValueProto'} \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: vector @code{char} name of attribute. \n\
+@item @var{in4}: vector @code{uint8} a binary serialization of an AttrValue \
+protocol buffer for attribute. \n\
+@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_FinishOperationLocked'} \n\
+@itemize \n\
+@item @var{out}: scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_FinishOperation'} \n\
+@itemize \n\
+@item @var{out}: scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3}: scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -333,21 +527,21 @@ C API functions relared to the TF_Status classdef \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to Status. \n\
 @item @var{in3}: scalar @code{uint32} Code to Status. \n\
-@item @var{in4}: row vector @code{char} message to Status. \n\
+@item @var{in4}: vector @code{char} message to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetPayload'} \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to Status. \n\
-@item @var{in3}: row vector @code{char} 'key' as payload to Status. \n\
-@item @var{in4}: row vector @code{char} 'value' as payload to Status. \n\
+@item @var{in3}: vector @code{char} 'key' as payload to Status. \n\
+@item @var{in4}: vector @code{char} 'value' as payload to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetStatus'} \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to Status. \n\
 @item @var{in3}: scalar @code{int32} I/O error code. \n\
-@item @var{in4}: row vector @code{char} message for I/O error code. \n\
+@item @var{in4}: vector @code{char} message for I/O error code. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GetCode'} \n\
@@ -357,7 +551,7 @@ C API functions relared to the TF_Status classdef \n\
 \n\
 @item @qcode{'TF_Message'} \n\
 @itemize \n\
-@item @var{out}: row vector @code{char} message from Status. \n\
+@item @var{out}: vector @code{char} message from Status. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -373,12 +567,12 @@ C API functions relared to the TF_TString classdef \n\
 @item @var{out}: scalar @code{uint64} pointer to new TString. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: row vector @code{char} character vector to new TString. \n\
+@item @var{in2}: vector @code{char} character vector to new TString. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SaveTString'} \n\
 @itemize \n\
-@item @var{out}: row vector @code{char} character vector from TString. \n\
+@item @var{out}: vector @code{char} character vector from TString. \n\
 @end itemize \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to new TString. \n\
@@ -392,14 +586,14 @@ C API functions relared to the TF_TString classdef \n\
 @item @qcode{'TF_StringCopy'} \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to destination TString. \n\
-@item @var{in3}: row vector @code{char} character vector as source string. \n\
+@item @var{in3}: vector @code{char} character vector as source string. \n\
 @item @var{in4}: scalar @code{uint64} length of source string. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_StringAssignView'} \n\
 @itemize \n\
 @item @var{in2}: scalar @code{uint64} pointer to destination TString. \n\
-@item @var{in3}: row vector @code{char} character vector as source string. \n\
+@item @var{in3}: vector @code{char} character vector as source string. \n\
 @item @var{in4}: scalar @code{uint64} length of source string. \n\
 @end itemize \n\
 \n\
@@ -729,6 +923,109 @@ C API functions relared to the TF_Tensor classdef \n\
   else if (c_api == "TF_GraphToFunctionWithControlOutputs")
   {
     plhs = OCT_TF_GraphToFunctionWithControlOutputs (nrhs, args);
+  }
+  // ---------------------------------------------------------------------------
+  // C API functions referenced by the TF_OperationDescription classdef
+  // ---------------------------------------------------------------------------
+  else if (c_api == "TF_SetDevice")
+  {
+    OCT_TF_SetDevice (nrhs, args);
+  }
+  else if (c_api == "TF_AddInput")
+  {
+    OCT_TF_AddInput (nrhs, args);
+  }
+  else if (c_api == "TF_AddInputList")
+  {
+    OCT_TF_AddInputList (nrhs, args);
+  }
+  else if (c_api == "TF_AddControlInput")
+  {
+    OCT_TF_AddControlInput (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrString")
+  {
+    OCT_TF_SetAttrString (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrStringList")
+  {
+    OCT_TF_SetAttrStringList (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrInt")
+  {
+    OCT_TF_SetAttrInt (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrIntList")
+  {
+    OCT_TF_SetAttrIntList (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrFloat")
+  {
+    OCT_TF_SetAttrFloat (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrFloatList")
+  {
+    OCT_TF_SetAttrFloatList (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrBool")
+  {
+    OCT_TF_SetAttrBool (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrBoolList")
+  {
+    OCT_TF_SetAttrBoolList (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrType")
+  {
+    OCT_TF_SetAttrType (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrTypeList")
+  {
+    OCT_TF_SetAttrTypeList (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrPlaceholder")
+  {
+    OCT_TF_SetAttrPlaceholder (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrFuncName")
+  {
+    OCT_TF_SetAttrFuncName (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrShape")
+  {
+    OCT_TF_SetAttrShape (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrShapeList")
+  {
+    OCT_TF_SetAttrShapeList (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrTensorShapeProto")
+  {
+    OCT_TF_SetAttrTensorShapeProto (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrTensorShapeProtoList")
+  {
+    OCT_TF_SetAttrTensorShapeProtoList (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrTensor")
+  {
+    OCT_TF_SetAttrTensor (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrTensorList")
+  {
+    OCT_TF_SetAttrTensorList (nrhs, args);
+  }
+  else if (c_api == "TF_SetAttrValueProto")
+  {
+    OCT_TF_SetAttrValueProto (nrhs, args);
+  }
+  else if (c_api == "TF_FinishOperationLocked")
+  {
+    plhs = OCT_TF_FinishOperationLocked (nrhs, args);
+  }
+  else if (c_api == "TF_FinishOperation")
+  {
+    plhs = OCT_TF_FinishOperation (nrhs, args);
   }
   // ---------------------------------------------------------------------------
   // C API functions referenced by the TF_Status classdef
@@ -1327,6 +1624,494 @@ C API functions relared to the TF_Tensor classdef \n\
 ## Unsupported C API function
 %!error <tensorflow: 'TF_GraphToFunctionWithControlOutputs' C API function not supported yet.>
 %! tensorflow ('TF_GraphToFunctionWithControlOutputs')
+
+  ## ---------------------------------------------------------------------------
+  ## C API functions referenced by the TF_OperationDescription classdef
+  ## ---------------------------------------------------------------------------
+%!error <tensorflow: two extra arguments are required for the 'TF_SetDevice' C API function.> ...
+%! tensorflow ('TF_SetDevice');
+%!error <tensorflow: two extra arguments are required for the 'TF_SetDevice' C API function.> ...
+%! tensorflow ('TF_SetDevice', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetDevice' C API function.> ...
+%! tensorflow ('TF_SetDevice', 1, 2);
+%!error <tensorflow: 3rd argument must be a character vector defining the device parsed to the 'TF_SetDevice' C API function.> ...
+%! tensorflow ('TF_SetDevice', uint64 (1), 2);
+%!error <tensorflow: 3rd argument must be a character vector defining the device parsed to the 'TF_SetDevice' C API function.> ...
+%! tensorflow ('TF_SetDevice', uint64 (1), ['a'; 'b']);
+
+%!error <tensorflow: two extra arguments are required for the 'TF_AddInput' C API function.> ...
+%! tensorflow ('TF_AddInput');
+%!error <tensorflow: two extra arguments are required for the 'TF_AddInput' C API function.> ...
+%! tensorflow ('TF_AddInput', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_AddInput' C API function.> ...
+%! tensorflow ('TF_AddInput', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_AddInput' C API function.> ...
+%! tensorflow ('TF_AddInput', uint64 ([1, 2]), 2);
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the input parsed to the 'TF_AddInput' C API function.> ...
+%! tensorflow ('TF_AddInput', uint64 (1), 2);
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the input parsed to the 'TF_AddInput' C API function.> ...
+%! tensorflow ('TF_AddInput', uint64 (1), uint64 ([1, 2]));
+
+%!error <tensorflow: two extra arguments are required for the 'TF_AddInputList' C API function.> ...
+%! tensorflow ('TF_AddInputList');
+%!error <tensorflow: two extra arguments are required for the 'TF_AddInputList' C API function.> ...
+%! tensorflow ('TF_AddInputList', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_AddInputList' C API function.> ...
+%! tensorflow ('TF_AddInputList', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_AddInputList' C API function.> ...
+%! tensorflow ('TF_AddInputList', uint64 ([1, 2]), 2);
+%!error <tensorflow: 3rd argument must be an uint64 vector of pointers to the inputs parsed to the 'TF_AddInputList' C API function.> ...
+%! tensorflow ('TF_AddInputList', uint64 (1), 2);
+%!error <tensorflow: 3rd argument must be an uint64 vector of pointers to the inputs parsed to the 'TF_AddInputList' C API function.> ...
+%! tensorflow ('TF_AddInputList', uint64 (1), uint64 ([1; 2]));
+
+%!error <tensorflow: two extra arguments are required for the 'TF_AddControlInput' C API function.> ...
+%! tensorflow ('TF_AddControlInput');
+%!error <tensorflow: two extra arguments are required for the 'TF_AddControlInput' C API function.> ...
+%! tensorflow ('TF_AddControlInput', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_AddControlInput' C API function.> ...
+%! tensorflow ('TF_AddControlInput', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_AddControlInput' C API function.> ...
+%! tensorflow ('TF_AddControlInput', uint64 ([1, 2]), 2);
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_AddControlInput' C API function.> ...
+%! tensorflow ('TF_AddControlInput', uint64 (1), 2);
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_AddControlInput' C API function.> ...
+%! tensorflow ('TF_AddControlInput', uint64 (1), uint64 ([1, 2]));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrString' C API function.> ...
+%! tensorflow ('TF_SetAttrString');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrString' C API function.> ...
+%! tensorflow ('TF_SetAttrString', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrString' C API function.> ...
+%! tensorflow ('TF_SetAttrString', 1, 2);
+%!error <2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrString' C API function.> ...
+%! tensorflow ('TF_SetAttrString', 1, 2, 3);
+%!error <2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrString' C API function.> ...
+%! tensorflow ('TF_SetAttrString', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrString' C API function.> ...
+%! tensorflow ('TF_SetAttrString', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrString' C API function.> ...
+%! tensorflow ('TF_SetAttrString', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be a character vector defining the attribute string parsed to the 'TF_SetAttrString' C API function.> ...
+%! tensorflow ('TF_SetAttrString', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be a character vector defining the attribute string parsed to the 'TF_SetAttrString' C API function.> ...
+%! tensorflow ('TF_SetAttrString', uint64 (1), 'name',  ['a'; 'b']);
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrStringList' C API function.> ...
+%! tensorflow ('TF_SetAttrStringList');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrStringList' C API function.> ...
+%! tensorflow ('TF_SetAttrStringList', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrStringList' C API function.> ...
+%! tensorflow ('TF_SetAttrStringList', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrStringList' C API function.> ...
+%! tensorflow ('TF_SetAttrStringList', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrStringList' C API function.> ...
+%! tensorflow ('TF_SetAttrStringList', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrStringList' C API function.> ...
+%! tensorflow ('TF_SetAttrStringList', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrStringList' C API function.> ...
+%! tensorflow ('TF_SetAttrStringList', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be a cellstr vector defining the attribute string parsed to the 'TF_SetAttrStringList' C API function.> ...
+%! tensorflow ('TF_SetAttrStringList', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be a cellstr vector defining the attribute string parsed to the 'TF_SetAttrStringList' C API function.> ...
+%! tensorflow ('TF_SetAttrStringList', uint64 (1), 'name', {3});
+%!error <tensorflow: 4th argument must be a cellstr vector defining the attribute string parsed to the 'TF_SetAttrStringList' C API function.> ...
+%! tensorflow ('TF_SetAttrStringList', uint64 (1), 'name', {"a", "b"; "c", "d"});
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrInt' C API function.> ...
+%! tensorflow ('TF_SetAttrInt');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrInt' C API function.> ...
+%! tensorflow ('TF_SetAttrInt', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrInt' C API function.> ...
+%! tensorflow ('TF_SetAttrInt', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrInt' C API function.> ...
+%! tensorflow ('TF_SetAttrInt', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrInt' C API function.> ...
+%! tensorflow ('TF_SetAttrInt', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrInt' C API function.> ...
+%! tensorflow ('TF_SetAttrInt', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrInt' C API function.> ...
+%! tensorflow ('TF_SetAttrInt', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be an int64 scalar parsed to the 'TF_SetAttrInt' C API function.> ...
+%! tensorflow ('TF_SetAttrInt', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be an int64 scalar parsed to the 'TF_SetAttrInt' C API function.> ...
+%! tensorflow ('TF_SetAttrInt', uint64 (1), 'name', int64 ([1, 2]));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrIntList' C API function.> ...
+%! tensorflow ('TF_SetAttrIntList');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrIntList' C API function.> ...
+%! tensorflow ('TF_SetAttrIntList', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrIntList' C API function.> ...
+%! tensorflow ('TF_SetAttrIntList', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrIntList' C API function.> ...
+%! tensorflow ('TF_SetAttrIntList', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrIntList' C API function.> ...
+%! tensorflow ('TF_SetAttrIntList', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrIntList' C API function.> ...
+%! tensorflow ('TF_SetAttrIntList', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrIntList' C API function.> ...
+%! tensorflow ('TF_SetAttrIntList', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be an int64 vector parsed to the 'TF_SetAttrIntList' C API function.> ...
+%! tensorflow ('TF_SetAttrIntList', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be an int64 vector parsed to the 'TF_SetAttrIntList' C API function.> ...
+%! tensorflow ('TF_SetAttrIntList', uint64 (1), 'name', int64 ([1; 2]));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrFloat' C API function.> ...
+%! tensorflow ('TF_SetAttrFloat');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrFloat' C API function.> ...
+%! tensorflow ('TF_SetAttrFloat', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrFloat' C API function.> ...
+%! tensorflow ('TF_SetAttrFloat', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrFloat' C API function.> ...
+%! tensorflow ('TF_SetAttrFloat', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrFloat' C API function.> ...
+%! tensorflow ('TF_SetAttrFloat', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrFloat' C API function.> ...
+%! tensorflow ('TF_SetAttrFloat', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrFloat' C API function.> ...
+%! tensorflow ('TF_SetAttrFloat', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be a float scalar parsed to the 'TF_SetAttrFloat' C API function.> ...
+%! tensorflow ('TF_SetAttrFloat', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be a float scalar parsed to the 'TF_SetAttrFloat' C API function.> ...
+%! tensorflow ('TF_SetAttrFloat', uint64 (1), 'name', single ([1, 2]));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrFloatList' C API function.> ...
+%! tensorflow ('TF_SetAttrFloatList');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrFloatList' C API function.> ...
+%! tensorflow ('TF_SetAttrFloatList', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrFloatList' C API function.> ...
+%! tensorflow ('TF_SetAttrFloatList', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrFloatList' C API function.> ...
+%! tensorflow ('TF_SetAttrFloatList', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrFloatList' C API function.> ...
+%! tensorflow ('TF_SetAttrFloatList', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrFloatList' C API function.> ...
+%! tensorflow ('TF_SetAttrFloatList', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrFloatList' C API function.> ...
+%! tensorflow ('TF_SetAttrFloatList', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be a float vector parsed to the 'TF_SetAttrFloatList' C API function.> ...
+%! tensorflow ('TF_SetAttrFloatList', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be a float vector parsed to the 'TF_SetAttrFloatList' C API function.> ...
+%! tensorflow ('TF_SetAttrFloatList', uint64 (1), 'name', single ([1; 2]));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrBool' C API function.> ...
+%! tensorflow ('TF_SetAttrBool');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrBool' C API function.> ...
+%! tensorflow ('TF_SetAttrBool', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrBool' C API function.> ...
+%! tensorflow ('TF_SetAttrBool', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrBool' C API function.> ...
+%! tensorflow ('TF_SetAttrBool', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrBool' C API function.> ...
+%! tensorflow ('TF_SetAttrBool', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrBool' C API function.> ...
+%! tensorflow ('TF_SetAttrBool', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrBool' C API function.> ...
+%! tensorflow ('TF_SetAttrBool', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be a bool scalar parsed to the 'TF_SetAttrBool' C API function.> ...
+%! tensorflow ('TF_SetAttrBool', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be a bool scalar parsed to the 'TF_SetAttrBool' C API function.> ...
+%! tensorflow ('TF_SetAttrBool', uint64 (1), 'name', [true, true]);
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrBoolList' C API function.> ...
+%! tensorflow ('TF_SetAttrBoolList');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrBoolList' C API function.> ...
+%! tensorflow ('TF_SetAttrBoolList', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrBoolList' C API function.> ...
+%! tensorflow ('TF_SetAttrBoolList', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrBoolList' C API function.> ...
+%! tensorflow ('TF_SetAttrBoolList', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrBoolList' C API function.> ...
+%! tensorflow ('TF_SetAttrBoolList', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrBoolList' C API function.> ...
+%! tensorflow ('TF_SetAttrBoolList', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrBoolList' C API function.> ...
+%! tensorflow ('TF_SetAttrBoolList', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be a bool vector parsed to the 'TF_SetAttrBoolList' C API function.> ...
+%! tensorflow ('TF_SetAttrBoolList', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be a bool vector parsed to the 'TF_SetAttrBoolList' C API function.> ...
+%! tensorflow ('TF_SetAttrBoolList', uint64 (1), 'name', [true; true]);
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrType' C API function.> ...
+%! tensorflow ('TF_SetAttrType');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrType' C API function.> ...
+%! tensorflow ('TF_SetAttrType', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrType' C API function.> ...
+%! tensorflow ('TF_SetAttrType', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrType' C API function.> ...
+%! tensorflow ('TF_SetAttrType', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrType' C API function.> ...
+%! tensorflow ('TF_SetAttrType', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrType' C API function.> ...
+%! tensorflow ('TF_SetAttrType', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrType' C API function.> ...
+%! tensorflow ('TF_SetAttrType', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be an uint32 scalar defining the DataType parsed to the 'TF_SetAttrType' C API function.> ...
+%! tensorflow ('TF_SetAttrType', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be an uint32 scalar defining the DataType parsed to the 'TF_SetAttrType' C API function.> ...
+%! tensorflow ('TF_SetAttrType', uint64 (1), 'name', uint32 ([1, 2]));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrTypeList' C API function.> ...
+%! tensorflow ('TF_SetAttrTypeList');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrTypeList' C API function.> ...
+%! tensorflow ('TF_SetAttrTypeList', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrTypeList' C API function.> ...
+%! tensorflow ('TF_SetAttrTypeList', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrTypeList' C API function.> ...
+%! tensorflow ('TF_SetAttrTypeList', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrTypeList' C API function.> ...
+%! tensorflow ('TF_SetAttrTypeList', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrTypeList' C API function.> ...
+%! tensorflow ('TF_SetAttrTypeList', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrTypeList' C API function.> ...
+%! tensorflow ('TF_SetAttrTypeList', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be an uint32 vector defining the DataType parsed to the 'TF_SetAttrTypeList' C API function.> ...
+%! tensorflow ('TF_SetAttrTypeList', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be an uint32 vector defining the DataType parsed to the 'TF_SetAttrTypeList' C API function.> ...
+%! tensorflow ('TF_SetAttrTypeList', uint64 (1), 'name', uint32 ([1; 2]));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrPlaceholder' C API function.> ...
+%! tensorflow ('TF_SetAttrPlaceholder');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrPlaceholder' C API function.> ...
+%! tensorflow ('TF_SetAttrPlaceholder', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrPlaceholder' C API function.> ...
+%! tensorflow ('TF_SetAttrPlaceholder', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrPlaceholder' C API function.> ...
+%! tensorflow ('TF_SetAttrPlaceholder', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrPlaceholder' C API function.> ...
+%! tensorflow ('TF_SetAttrPlaceholder', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrPlaceholder' C API function.> ...
+%! tensorflow ('TF_SetAttrPlaceholder', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrPlaceholder' C API function.> ...
+%! tensorflow ('TF_SetAttrPlaceholder', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be a character vector defining the placeholder parsed to the 'TF_SetAttrPlaceholder' C API function.> ...
+%! tensorflow ('TF_SetAttrPlaceholder', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be a character vector defining the placeholder parsed to the 'TF_SetAttrPlaceholder' C API function.> ...
+%! tensorflow ('TF_SetAttrPlaceholder', uint64 (1), 'name', ['a'; 'b']);
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrFuncName' C API function.> ...
+%! tensorflow ('TF_SetAttrFuncName');
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrFuncName' C API function.> ...
+%! tensorflow ('TF_SetAttrFuncName', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_SetAttrFuncName' C API function.> ...
+%! tensorflow ('TF_SetAttrFuncName', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrFuncName' C API function.> ...
+%! tensorflow ('TF_SetAttrFuncName', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrFuncName' C API function.> ...
+%! tensorflow ('TF_SetAttrFuncName', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrFuncName' C API function.> ...
+%! tensorflow ('TF_SetAttrFuncName', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrFuncName' C API function.> ...
+%! tensorflow ('TF_SetAttrFuncName', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be a character vector defining the function name parsed to the 'TF_SetAttrFuncName' C API function.> ...
+%! tensorflow ('TF_SetAttrFuncName', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be a character vector defining the function name parsed to the 'TF_SetAttrFuncName' C API function.> ...
+%! tensorflow ('TF_SetAttrFuncName', uint64 (1), 'name', ['a'; 'b']);
+
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape');
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', 1);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', 1, 2);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', 1, 2, 3, 4);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', uint64 ([1, 2]), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', uint64 (1), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', uint64 (1), ['a'; 'b'], 3, 4);
+%!error <tensorflow: 4th argument must be an int64 scalar or vector defining the size of the dimensions parsed to the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', uint64 (1), 'name', 3, 4);
+%!error <tensorflow: 4th argument must be an int64 scalar or vector defining the size of the dimensions parsed to the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', uint64 (1), 'name', int64 ([2; 3]), 4);
+%!error <tensorflow: 5th argument must be an int32 scalar defining the number of the dimensions parsed to the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', uint64 (1), 'name', int64 (2), 4);
+%!error <tensorflow: 5th argument must be an int32 scalar defining the number of the dimensions parsed to the 'TF_SetAttrShape' C API function.> ...
+%! tensorflow ('TF_SetAttrShape', uint64 (1), 'name', int64 (2), int32 ([1, 3]));
+
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList');
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', 1);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', 1, 2);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', 1, 2, 3, 4);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', uint64 ([1, 2]), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', uint64 (1), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', uint64 (1), ['a'; 'b'], 3, 4);
+%!error <tensorflow: 4th argument must be an int64 matrix with each row defining the size of the dimensions of the respective shape parsed to the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', uint64 (1), 'name', 3, 4);
+%!error <tensorflow: 4th argument must be an int64 matrix with each row defining the size of the dimensions of the respective shape parsed to the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', uint64 (1), 'name', int64 (ones (2, 2, 2)), 4);
+%!error <tensorflow: 5th argument must be an int32 vector defining the number of the dimensions of each shape parsed to the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', uint64 (1), 'name', int64 (2), 4);
+%!error <tensorflow: 5th argument must be an int32 vector defining the number of the dimensions of each shape parsed to the 'TF_SetAttrShapeList' C API function.> ...
+%! tensorflow ('TF_SetAttrShapeList', uint64 (1), 'name', int64 (2), int32 ([1; 3]));
+
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto');
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', 1);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', 1, 2);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', 1, 2, 3, 4);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', uint64 ([1, 2]), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', uint64 (1), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', uint64 (1), ['a'; 'b'], 3, 4);
+%!error <tensorflow: 4th argument must be a uint8 vector of binary-serialized TensorShapeProto data parsed to the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', uint64 (1), 'name', 3, 4);
+%!error <tensorflow: 4th argument must be a uint8 vector of binary-serialized TensorShapeProto data parsed to the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', uint64 (1), 'name', uint8 ([2; 3]), 4);
+%!error <tensorflow: 5th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', uint64 (1), 'name', uint8 ([2, 3]), 4);
+%!error <tensorflow: 5th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetAttrTensorShapeProto' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProto', uint64 (1), 'name', uint8 ([2, 3]), uint64 ([1, 2]));
+
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList');
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', 1);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', 1, 2);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', 1, 2, 3, 4);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', uint64 ([1, 2]), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', uint64 (1), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', uint64 (1), ['a'; 'b'], 3, 4);
+%!error <tensorflow: 4th argument must be a cell vector of uint8 vectors representing a list of binary-serialized TensorShapeProtos parsed to the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', uint64 (1), 'name', 3, 4);
+%!error <tensorflow: 4th argument must be a cell vector of uint8 vectors representing a list of binary-serialized TensorShapeProtos parsed to the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', uint64 (1), 'name', {2; 3}, 4);
+%!error <tensorflow: 4th argument must be a cell vector of uint8 vectors representing a list of binary-serialized TensorShapeProtos parsed to the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', uint64 (1), 'name', {uint8([1, 2, 3]), 3}, 4);
+%!error <tensorflow: 4th argument must be a cell vector of uint8 vectors representing a list of binary-serialized TensorShapeProtos parsed to the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', uint64 (1), 'name', {uint8([1, 2, 3]); uint8([1; 2])}, 4);
+%!error <tensorflow: 5th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', uint64 (1), 'name', {uint8([1, 2, 3]), uint8([1, 2])}, 4);
+%!error <tensorflow: 5th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetAttrTensorShapeProtoList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorShapeProtoList', uint64 (1), 'name', {uint8([1, 2, 3]), uint8([1, 2])}, uint64 ([4, 5]));
+
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor');
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', 1);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', 1, 2);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', 1, 2, 3, 4);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', uint64 ([1, 2]), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', uint64 (1), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', uint64 (1), ['a'; 'b'], 3, 4);
+%!error <tensorflow: 4th argument must be an uint64 scalar pointer to the Tensor parsed to the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', uint64 (1), 'name', 3, 4);
+%!error <tensorflow: 4th argument must be an uint64 scalar pointer to the Tensor parsed to the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', uint64 (1), 'name', uint64 ([2, 3]), 4);
+%!error <tensorflow: 5th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', uint64 (1), 'name', uint64 (3), 4);
+%!error <tensorflow: 5th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetAttrTensor' C API function.> ...
+%! tensorflow ('TF_SetAttrTensor', uint64 (1), 'name', uint64 (3), uint64 ([4, 5]));
+
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList');
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', 1);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', 1, 2);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', 1, 2, 3, 4);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', uint64 ([1, 2]), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', uint64 (1), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', uint64 (1), ['a'; 'b'], 3, 4);
+%!error <tensorflow: 4th argument must be an uint64 vector of pointers to the Tensors parsed to the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', uint64 (1), 'name', 3, 4);
+%!error <tensorflow: 4th argument must be an uint64 vector of pointers to the Tensors parsed to the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', uint64 (1), 'name', uint64 ([2; 3]), 4);
+%!error <tensorflow: 5th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', uint64 (1), 'name', uint64 (3), 4);
+%!error <tensorflow: 5th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetAttrTensorList' C API function.> ...
+%! tensorflow ('TF_SetAttrTensorList', uint64 (1), 'name', uint64 (3), uint64 ([4, 5]));
+
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto');
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', 1);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', 1, 2);
+%!error <tensorflow: four extra arguments are required for the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', 1, 2, 3, 4);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', uint64 ([1, 2]), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', uint64 (1), 2, 3, 4);
+%!error <tensorflow: 3rd argument must be a character vector defining the attribute name parsed to the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', uint64 (1), ['a'; 'b'], 3, 4);
+%!error <tensorflow: 4th argument must be a uint8 vector representing a binary serialization of an AttrValue protocol buffer parsed to the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', uint64 (1), 'name', 3, 4);
+%!error <tensorflow: 4th argument must be a uint8 vector representing a binary serialization of an AttrValue protocol buffer parsed to the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', uint64 (1), 'name', uint8 ([1; 2]), 4);
+%!error <tensorflow: 5th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', uint64 (1), 'name', uint8 ([1, 2]), 4);
+%!error <tensorflow: 5th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetAttrValueProto' C API function.> ...
+%! tensorflow ('TF_SetAttrValueProto', uint64 (1), 'name', uint8 ([1, 2]), uint64 ([3, 4]));
+
+%!error <tensorflow: two extra arguments are required for the 'TF_FinishOperationLocked' C API function.> ...
+%! tensorflow ('TF_FinishOperationLocked');
+%!error <tensorflow: two extra arguments are required for the 'TF_FinishOperationLocked' C API function.> ...
+%! tensorflow ('TF_FinishOperationLocked', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_FinishOperationLocked' C API function.> ...
+%! tensorflow ('TF_FinishOperationLocked', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_FinishOperationLocked' C API function.> ...
+%! tensorflow ('TF_FinishOperationLocked', uint64 ([1, 2]), 2);
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the Status parsed to the 'TF_FinishOperationLocked' C API function.> ...
+%! tensorflow ('TF_FinishOperationLocked', uint64 (1), 2);
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the Status parsed to the 'TF_FinishOperationLocked' C API function.> ...
+%! tensorflow ('TF_FinishOperationLocked', uint64 (1), uint64 ([2, 2]));
+
+%!error <tensorflow: two extra arguments are required for the 'TF_FinishOperation' C API function.> ...
+%! tensorflow ('TF_FinishOperation');
+%!error <tensorflow: two extra arguments are required for the 'TF_FinishOperation' C API function.> ...
+%! tensorflow ('TF_FinishOperation', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_FinishOperation' C API function.> ...
+%! tensorflow ('TF_FinishOperation', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_FinishOperation' C API function.> ...
+%! tensorflow ('TF_FinishOperation', uint64 ([1, 2]), 2);
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the Status parsed to the 'TF_FinishOperation' C API function.> ...
+%! tensorflow ('TF_FinishOperation', uint64 (1), 2);
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the Status parsed to the 'TF_FinishOperation' C API function.> ...
+%! tensorflow ('TF_FinishOperation', uint64 (1), uint64 ([2, 2]));
 
   ## ---------------------------------------------------------------------------
   ## C API functions referenced by the TF_Status classdef

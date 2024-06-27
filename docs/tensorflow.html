@@ -155,7 +155,7 @@
 <ul>
 <li> <code>'TF_Version'</code> 
 <ul>
-<li> <var>out</var>: <code>char</code> vector containing tensorflow C API version. 
+<li> <var>out</var> : <code>char</code> vector containing tensorflow C API version. 
 </li></ul>
 
 </li></ul>
@@ -165,39 +165,39 @@
 </p><ul>
 <li> <code>'TF_NewBuffer'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new Buffer. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new Buffer. 
 </li></ul>
 
 
 </li><li> <code>'TF_DeleteBuffer'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Buffer to be deleted. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Buffer to be deleted. 
 </li></ul>
 
 
 </li><li> <code>'TF_NewBufferFromString'</code> 
 <ul>
-<li> <var>in2</var>: vector of <code>uint8</code> or <code>char</code> to be saved into a new Buffer. 
+<li> <var>in2</var> : vector of <code>uint8</code> or <code>char</code> to be saved into a new Buffer. 
 </li></ul>
 
 
 </li><li> <code>'TF_GetBuffer'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Buffer to get the data from. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Buffer to get the data from. 
 </li></ul>
 
 <ul>
-<li> <var>out</var>: vector of <code>uint8</code> from Buffer. 
+<li> <var>out</var> : vector of <code>uint8</code> from Buffer. 
 </li></ul>
 
 
 </li><li> <code>'TF_GetBufferToString'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Buffer to get the data from. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Buffer to get the data from. 
 </li></ul>
 
 <ul>
-<li> <var>out</var>: vector of <code>char</code> from Buffer. 
+<li> <var>out</var> : vector of <code>char</code> from Buffer. 
 </li></ul>
 
 </li></ul>
@@ -207,20 +207,20 @@
 </p><ul>
 <li> <code>'TF_DataTypeName'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint32</code> index to DataType. 
+<li> <var>in2</var> : scalar <code>uint32</code> index to DataType. 
 </li></ul>
 
 <ul>
-<li> <var>out</var>: vector of <code>char</code> DataType name. 
+<li> <var>out</var> : vector of <code>char</code> DataType name. 
 </li></ul>
 
 </li><li> <code>'TF_DataTypeSize'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint32</code> index to DataType. 
+<li> <var>in2</var> : scalar <code>uint32</code> index to DataType. 
 </li></ul>
 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> bytesize of selected DataType. 
+<li> <var>out</var> : scalar <code>uint64</code> bytesize of selected DataType. 
 </li></ul>
 
 </li></ul>
@@ -230,222 +230,222 @@
 </p><ul>
 <li> <code>'TF_NewGraph'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new Graph. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new Graph. 
 </li></ul>
 
 
 </li><li> <code>'TF_DeleteGraph'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphSetTensorShape'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Output. 
-</li><li> <var>in4</var>: vector <code>uint64</code> size of dimensions of Output in Graph. 
-</li><li> <var>in5</var>: scalar <code>int32</code> number of dimensions of Output in Graph. 
-</li><li> <var>in6</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Output. 
+</li><li> <var>in4</var> : vector <code>uint64</code> size of dimensions of Output in Graph. 
+</li><li> <var>in5</var> : scalar <code>int32</code> number of dimensions of Output in Graph. 
+</li><li> <var>in6</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphGetTensorNumDims'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>int32</code> number of dimensions of Output in Graph. 
+<li> <var>out</var> : scalar <code>int32</code> number of dimensions of Output in Graph. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Output. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Output. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphGetTensorShape'</code> 
 <ul>
-<li> <var>out</var>: vector <code>uint64</code> size of dimensions of Output in Graph. 
+<li> <var>out</var> : vector <code>uint64</code> size of dimensions of Output in Graph. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Output. 
-</li><li> <var>in4</var>: scalar <code>int32</code> number of dimensions of Output in Graph. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Output. 
+</li><li> <var>in4</var> : scalar <code>int32</code> number of dimensions of Output in Graph. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_NewOperationLocked'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new OperationDescription. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new OperationDescription. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: vector <code>char</code> type of new Operation. 
-</li><li> <var>in4</var>: vector <code>char</code> name of new Operation. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : vector <code>char</code> type of new Operation. 
+</li><li> <var>in4</var> : vector <code>char</code> name of new Operation. 
 </li></ul>
 
 
 </li><li> <code>'TF_NewOperation'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new OperationDescription. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new OperationDescription. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: vector <code>char</code> type of new Operation. 
-</li><li> <var>in4</var>: vector <code>char</code> name of new Operation. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : vector <code>char</code> type of new Operation. 
+</li><li> <var>in4</var> : vector <code>char</code> name of new Operation. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphOperationByName'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to Operation. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to Operation. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: vector <code>char</code> name of Operation in Graph. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : vector <code>char</code> name of Operation in Graph. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphNextOperation'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to Operation. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to Operation. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> position of Operation in Graph. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> position of Operation in Graph. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphToGraphDef'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Buffer. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Buffer. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphGetOpDef'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: vector <code>char</code> name of OperationDefinition in Graph. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to Buffer. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : vector <code>char</code> name of OperationDefinition in Graph. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to Buffer. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphVersions'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to Buffer. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to Buffer. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphImportGraphDefWithResults'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to ImportGraphDefResults. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to ImportGraphDefResults. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to Buffer. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to ImportGraphDefOptions. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to Buffer. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to ImportGraphDefOptions. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphImportGraphDefWithReturnOutputs'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Buffer. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to ImportGraphDefOptions. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Output(s). 
-</li><li> <var>in6</var>: scalar <code>int32</code> number of return Output(s). 
-</li><li> <var>in7</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Buffer. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to ImportGraphDefOptions. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Output(s). 
+</li><li> <var>in6</var> : scalar <code>int32</code> number of return Output(s). 
+</li><li> <var>in7</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphImportGraphDef'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Buffer. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to ImportGraphDefOptions. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Buffer. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to ImportGraphDefOptions. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphCopyFunction'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Function. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to gradient Function. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Function. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to gradient Function. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphNumFunctions'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>int32</code> number of Functions in Graph. 
+<li> <var>out</var> : scalar <code>int32</code> number of Functions in Graph. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
 </li></ul>
 
 
 </li><li> <code>'TF_GraphGetFunctions'</code> 
 <ul>
-<li> <var>out</var>: vector <code>uint64</code> pointer(s) to Function(s) in Graph. 
+<li> <var>out</var> : vector <code>uint64</code> pointer(s) to Function(s) in Graph. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_NewWhile'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new WhileParams. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new WhileParams. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Output. 
-</li><li> <var>in4</var>: scalar <code>int32</code> number of inputs. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Output. 
+</li><li> <var>in4</var> : scalar <code>int32</code> number of inputs. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_AddGradients'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Output y. 
-</li><li> <var>in4</var>: scalar <code>int32</code> number of inputs in y. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Output x. 
-</li><li> <var>in6</var>: scalar <code>int32</code> number of inputs in x. 
-</li><li> <var>in7</var>: scalar <code>uint64</code> pointer to Output dx. 
-</li><li> <var>in8</var>: scalar <code>uint64</code> pointer to Status. 
-</li><li> <var>in9</var>: scalar <code>uint64</code> pointer to Output dy. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Output y. 
+</li><li> <var>in4</var> : scalar <code>int32</code> number of inputs in y. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Output x. 
+</li><li> <var>in6</var> : scalar <code>int32</code> number of inputs in x. 
+</li><li> <var>in7</var> : scalar <code>uint64</code> pointer to Output dx. 
+</li><li> <var>in8</var> : scalar <code>uint64</code> pointer to Status. 
+</li><li> <var>in9</var> : scalar <code>uint64</code> pointer to Output dy. 
 </li></ul>
 
 
 </li><li> <code>'TF_AddGradientsWithPrefix'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Graph. 
-</li><li> <var>in3</var>: vector <code>char</code> prefix for Gradient. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to Output y. 
-</li><li> <var>in5</var>: scalar <code>int32</code> number of inputs in y. 
-</li><li> <var>in6</var>: scalar <code>uint64</code> pointer to Output x. 
-</li><li> <var>in7</var>: scalar <code>int32</code> number of inputs in x. 
-</li><li> <var>in8</var>: scalar <code>uint64</code> pointer to Output dx. 
-</li><li> <var>in9</var>: scalar <code>uint64</code> pointer to Status. 
-</li><li> <var>in10</var>: scalar <code>uint64</code> pointer to Output dy. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Graph. 
+</li><li> <var>in3</var> : vector <code>char</code> prefix for Gradient. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to Output y. 
+</li><li> <var>in5</var> : scalar <code>int32</code> number of inputs in y. 
+</li><li> <var>in6</var> : scalar <code>uint64</code> pointer to Output x. 
+</li><li> <var>in7</var> : scalar <code>int32</code> number of inputs in x. 
+</li><li> <var>in8</var> : scalar <code>uint64</code> pointer to Output dx. 
+</li><li> <var>in9</var> : scalar <code>uint64</code> pointer to Status. 
+</li><li> <var>in10</var> : scalar <code>uint64</code> pointer to Output dy. 
 </li></ul>
 
 </li></ul>
@@ -455,210 +455,210 @@
 </p><ul>
 <li> <code>'TF_SetDevice'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> device name. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> device name. 
 </li></ul>
 
 
 </li><li> <code>'TF_AddInput'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Output input. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Output input. 
 </li></ul>
 
 
 </li><li> <code>'TF_AddInputList'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>uint64</code> pointers to Output inputs. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>uint64</code> pointers to Output inputs. 
 </li></ul>
 
 
 </li><li> <code>'TF_AddControlInput'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Operation. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Operation. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrString'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>char</code> value for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>char</code> value for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrStringList'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>cellstr</code> values for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>cellstr</code> values for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrInt'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: scalar <code>int64</code> value for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : scalar <code>int64</code> value for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrIntList'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>int64</code> values for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>int64</code> values for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrFloat'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: scalar <code>single</code> value for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : scalar <code>single</code> value for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrFloatList'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>single</code> values for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>single</code> values for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrBool'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: scalar <code>logical</code> value for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : scalar <code>logical</code> value for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrBoolList'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>logical</code> values for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>logical</code> values for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrType'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: scalar <code>uint32</code> DataType for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : scalar <code>uint32</code> DataType for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrTypeList'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>uint32</code> DataTypes for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>uint32</code> DataTypes for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrPlaceholder'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>char</code> placeholder for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>char</code> placeholder for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrFuncName'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>char</code> function name for attribute. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>char</code> function name for attribute. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrShape'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>int64</code> the size of the dimensions of the attribute&rsquo;s shape. 
-</li><li> <var>in5</var>: scalar <code>int32</code> the number of the dimensions of the attribute&rsquo;s shape. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>int64</code> the size of the dimensions of the attribute&rsquo;s shape. 
+</li><li> <var>in5</var> : scalar <code>int32</code> the number of the dimensions of the attribute&rsquo;s shape. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrShapeList'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: matrix <code>int64</code> the size of the dimensions of the attribute&rsquo;s shapes with each row corresponding to a shape.  The rows representing shapes with fewer dimensions are padded with zeros.
-</li><li> <var>in5</var>: vector <code>int32</code> the number of the dimensions of the attribute&rsquo;s shapes with each element corresponding to a shape.  The number of elements must equal the number of rows of the previous input.
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : matrix <code>int64</code> the size of the dimensions of the attribute&rsquo;s shapes with each row corresponding to a shape.  The rows representing shapes with fewer dimensions are padded with zeros.
+</li><li> <var>in5</var> : vector <code>int32</code> the number of the dimensions of the attribute&rsquo;s shapes with each element corresponding to a shape.  The number of elements must equal the number of rows of the previous input.
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrTensorShapeProto'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>uint8</code> binary-serialized TensorShapeProto data. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>uint8</code> binary-serialized TensorShapeProto data. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'OCT_TF_SetAttrTensorShapeProtoList'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>cell</code> a list of binary-serialized TensorShapeProto data, each represented as a <code>uint8</code> vector. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>cell</code> a list of binary-serialized TensorShapeProto data, each represented as a <code>uint8</code> vector. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrTensor'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to Tensor. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to Tensor. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrTensorList'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>uint64</code> pointers to Tensors. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>uint64</code> pointers to Tensors. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetAttrValueProto'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: vector <code>char</code> name of attribute. 
-</li><li> <var>in4</var>: vector <code>uint8</code> a binary serialization of an AttrValue protocol buffer for attribute. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : vector <code>char</code> name of attribute. 
+</li><li> <var>in4</var> : vector <code>uint8</code> a binary serialization of an AttrValue protocol buffer for attribute. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_FinishOperationLocked'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to Operation. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to Operation. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_FinishOperation'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to Operation. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to Operation. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to OperationDescription. 
-</li><li> <var>in3</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
+</li><li> <var>in3</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 </li></ul>
@@ -668,49 +668,49 @@
 </p><ul>
 <li> <code>'TF_NewStatus'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new Status. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_DeleteStatus'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetStatus'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Status. 
-</li><li> <var>in3</var>: scalar <code>uint32</code> Code to Status. 
-</li><li> <var>in4</var>: vector <code>char</code> message to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Status. 
+</li><li> <var>in3</var> : scalar <code>uint32</code> Code to Status. 
+</li><li> <var>in4</var> : vector <code>char</code> message to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetPayload'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Status. 
-</li><li> <var>in3</var>: vector <code>char</code> &rsquo;key&rsquo; as payload to Status. 
-</li><li> <var>in4</var>: vector <code>char</code> &rsquo;value&rsquo; as payload to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Status. 
+</li><li> <var>in3</var> : vector <code>char</code> &rsquo;key&rsquo; as payload to Status. 
+</li><li> <var>in4</var> : vector <code>char</code> &rsquo;value&rsquo; as payload to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetStatus'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Status. 
-</li><li> <var>in3</var>: scalar <code>int32</code> I/O error code. 
-</li><li> <var>in4</var>: vector <code>char</code> message for I/O error code. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Status. 
+</li><li> <var>in3</var> : scalar <code>int32</code> I/O error code. 
+</li><li> <var>in4</var> : vector <code>char</code> message for I/O error code. 
 </li></ul>
 
 
 </li><li> <code>'TF_GetCode'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint32</code> Code from Status. 
+<li> <var>out</var> : scalar <code>uint32</code> Code from Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_Message'</code> 
 <ul>
-<li> <var>out</var>: vector <code>char</code> message from Status. 
+<li> <var>out</var> : vector <code>char</code> message from Status. 
 </li></ul>
 
 </li></ul>
@@ -720,13 +720,13 @@
 </p><ul>
 <li> <code>'TF_NewTString'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new TString. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new TString. 
 </li></ul>
 
 
 </li><li> <code>'TF_LoadTString'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new TString. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new TString. 
 </li></ul>
 
 <ul>
@@ -736,79 +736,79 @@
 
 </li><li> <code>'TF_SaveTString'</code> 
 <ul>
-<li> <var>out</var>: vector <code>char</code> character vector from TString. 
+<li> <var>out</var> : vector <code>char</code> character vector from TString. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to new TString. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to new TString. 
 </li></ul>
 
 
 </li><li> <code>'TF_StringInit'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to TString. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to TString. 
 </li></ul>
 
 
 </li><li> <code>'TF_StringCopy'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to destination TString. 
-</li><li> <var>in3</var>: vector <code>char</code> character vector as source string. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> length of source string. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to destination TString. 
+</li><li> <var>in3</var> : vector <code>char</code> character vector as source string. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> length of source string. 
 </li></ul>
 
 
 </li><li> <code>'TF_StringAssignView'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to destination TString. 
-</li><li> <var>in3</var>: vector <code>char</code> character vector as source string. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> length of source string. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to destination TString. 
+</li><li> <var>in3</var> : vector <code>char</code> character vector as source string. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> length of source string. 
 </li></ul>
 
 
 </li><li> <code>'TF_StringGetDataPointer'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to TString data. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to TString data. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to TString. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to TString. 
 </li></ul>
 
 
 </li><li> <code>'TF_StringGetType'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint32</code> type of TString. 
+<li> <var>out</var> : scalar <code>uint32</code> type of TString. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to TString. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to TString. 
 </li></ul>
 
 
 </li><li> <code>'TF_StringGetSize'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> size of TString. 
+<li> <var>out</var> : scalar <code>uint64</code> size of TString. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to TString. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to TString. 
 </li></ul>
 
 
 </li><li> <code>'TF_StringGetCapacity'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> capacity of TString. 
+<li> <var>out</var> : scalar <code>uint64</code> capacity of TString. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to TString. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to TString. 
 </li></ul>
 
 
 </li><li> <code>'TF_StringDealloc'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to TString. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to TString. 
 </li></ul>
 
 </li></ul>
@@ -818,162 +818,162 @@
 </p><ul>
 <li> <code>'TF_LoadTensor'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new Tensor. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new Tensor. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: any non-empty value of supported DataType. 
+<li> <var>in2</var> : any non-empty value of supported DataType. 
 </li></ul>
 
 
 </li><li> <code>'TF_SaveTensor'</code> 
 <ul>
-<li> <var>out</var>: any value of supported DataType. 
+<li> <var>out</var> : any value of supported DataType. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_NewTensor'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new Tensor. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new Tensor. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint32</code> DataType code for new Tensor. 
-</li><li> <var>in3</var>: scalar <code>int64</code> size of dimensions for new Tensor. 
-</li><li> <var>in4</var>: scalar <code>int32</code> number of dimensions for new Tensor. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> pointer to data for new Tensor. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> bytesize of data for new Tensor. 
+<li> <var>in2</var> : scalar <code>uint32</code> DataType code for new Tensor. 
+</li><li> <var>in3</var> : scalar <code>int64</code> size of dimensions for new Tensor. 
+</li><li> <var>in4</var> : scalar <code>int32</code> number of dimensions for new Tensor. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> pointer to data for new Tensor. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> bytesize of data for new Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_AllocateTensor'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to new Tensor. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to new Tensor. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint32</code> DataType code for new Tensor. 
-</li><li> <var>in3</var>: scalar <code>int64</code> size of dimensions for new Tensor. 
-</li><li> <var>in4</var>: scalar <code>int32</code> number of dimensions for new Tensor. 
-</li><li> <var>in5</var>: scalar <code>uint64</code> bytesize of data for new Tensor. 
+<li> <var>in2</var> : scalar <code>uint32</code> DataType code for new Tensor. 
+</li><li> <var>in3</var> : scalar <code>int64</code> size of dimensions for new Tensor. 
+</li><li> <var>in4</var> : scalar <code>int32</code> number of dimensions for new Tensor. 
+</li><li> <var>in5</var> : scalar <code>uint64</code> bytesize of data for new Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_TensorMaybeMove'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to maybe moved Tensor. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to maybe moved Tensor. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_DeleteTensor'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_TensorType'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint32</code> DataType code of Tensor. 
+<li> <var>out</var> : scalar <code>uint32</code> DataType code of Tensor. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_SetShape'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
-</li><li> <var>in3</var>: scalar <code>int64</code> size of dimensions for new Tensor. 
-</li><li> <var>in4</var>: scalar <code>int32</code> number of dimensions for new Tensor. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
+</li><li> <var>in3</var> : scalar <code>int64</code> size of dimensions for new Tensor. 
+</li><li> <var>in4</var> : scalar <code>int32</code> number of dimensions for new Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_NumDims'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>int32</code> number of dimensions of Tensor. 
+<li> <var>out</var> : scalar <code>int32</code> number of dimensions of Tensor. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_Dim'</code> 
 <ul>
-<li> <var>out</var>: vector <code>int64</code> size of indexed dimension of Tensor. 
+<li> <var>out</var> : vector <code>int64</code> size of indexed dimension of Tensor. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
-</li><li> <var>in3</var>: scalar <code>int32</code> dimension index. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
+</li><li> <var>in3</var> : scalar <code>int32</code> dimension index. 
 </li></ul>
 
 
 </li><li> <code>'TF_TensorByteSize'</code> 
 <ul>
-<li> <var>out</var>: vector <code>uint64</code> bytesize of Tensor. 
+<li> <var>out</var> : vector <code>uint64</code> bytesize of Tensor. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_TensorData'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>uint64</code> pointer to data from Tensor. 
+<li> <var>out</var> : scalar <code>uint64</code> pointer to data from Tensor. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_TensorFromProto'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Buffer. 
-</li><li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
-</li><li> <var>in2</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Buffer. 
+</li><li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
+</li><li> <var>in2</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_TensorElementCount'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>int64</code> number of elements in Tensor. 
+<li> <var>out</var> : scalar <code>int64</code> number of elements in Tensor. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
 </li></ul>
 
 
 </li><li> <code>'TF_TensorBitcastFrom'</code> 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to source Tensor. 
-</li><li> <var>in3</var>: scalar <code>uint32</code> DataType code for target Tensor. 
-</li><li> <var>in4</var>: scalar <code>uint64</code> pointer to target Tensor. 
-</li><li> <var>in5</var>: scalar <code>int64</code> size of dimensions for new Tensor. 
-</li><li> <var>in6</var>: scalar <code>int32</code> number of dimensions for new Tensor. 
-</li><li> <var>in7</var>: scalar <code>uint64</code> pointer to Status. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to source Tensor. 
+</li><li> <var>in3</var> : scalar <code>uint32</code> DataType code for target Tensor. 
+</li><li> <var>in4</var> : scalar <code>uint64</code> pointer to target Tensor. 
+</li><li> <var>in5</var> : scalar <code>int64</code> size of dimensions for new Tensor. 
+</li><li> <var>in6</var> : scalar <code>int32</code> number of dimensions for new Tensor. 
+</li><li> <var>in7</var> : scalar <code>uint64</code> pointer to Status. 
 </li></ul>
 
 
 </li><li> <code>'TF_TensorIsAligned'</code> 
 <ul>
-<li> <var>out</var>: scalar <code>bool</code> value for Tensor alignment. 
+<li> <var>out</var> : scalar <code>bool</code> value for Tensor alignment. 
 </li></ul>
 
 <ul>
-<li> <var>in2</var>: scalar <code>uint64</code> pointer to Tensor. 
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Tensor. 
 </li></ul>
 
 </li></ul>

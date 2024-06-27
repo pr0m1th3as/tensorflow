@@ -69,7 +69,7 @@ Extra input arguments are identified as @var{in2}, @var{in3}, @var{in3}, etc. \
 @itemize \n\
 @item @qcode{'TF_Version'} \n\
 @itemize \n\
-@item @var{out}: @code{char} vector containing tensorflow C API version. \n\
+@item @var{out} : @code{char} vector containing tensorflow C API version. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -77,33 +77,33 @@ C API functions relared to the TF_Buffer classdef \n\
 @itemize \n\
 @item @qcode{'TF_NewBuffer'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new Buffer. \n\
+@item @var{out} : scalar @code{uint64} pointer to new Buffer. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_DeleteBuffer'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Buffer to be deleted. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Buffer to be deleted. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_NewBufferFromString'} \n\
 @itemize \n\
-@item @var{in2}: vector of @code{uint8} or @code{char} to be saved into a new Buffer. \n\
+@item @var{in2} : vector of @code{uint8} or @code{char} to be saved into a new Buffer. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GetBuffer'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Buffer to get the data from. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Buffer to get the data from. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{out}: vector of @code{uint8} from Buffer. \n\
+@item @var{out} : vector of @code{uint8} from Buffer. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GetBufferToString'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Buffer to get the data from. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Buffer to get the data from. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{out}: vector of @code{char} from Buffer. \n\
+@item @var{out} : vector of @code{char} from Buffer. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -111,17 +111,17 @@ C API functions relared to the TF_DataType classdef \n\
 @itemize \n\
 @item @qcode{'TF_DataTypeName'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint32} index to DataType. \n\
+@item @var{in2} : scalar @code{uint32} index to DataType. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{out}: vector of @code{char} DataType name. \n\
+@item @var{out} : vector of @code{char} DataType name. \n\
 @end itemize \n\
 @item @qcode{'TF_DataTypeSize'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint32} index to DataType. \n\
+@item @var{in2} : scalar @code{uint32} index to DataType. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} bytesize of selected DataType. \n\
+@item @var{out} : scalar @code{uint64} bytesize of selected DataType. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -129,192 +129,192 @@ C API functions relared to the TF_Graph classdef \n\
 @itemize \n\
 @item @qcode{'TF_NewGraph'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new Graph. \n\
+@item @var{out} : scalar @code{uint64} pointer to new Graph. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_DeleteGraph'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphSetTensorShape'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Output. \n\
-@item @var{in4}: vector @code{uint64} size of dimensions of Output in Graph. \n\
-@item @var{in5}: scalar @code{int32} number of dimensions of Output in Graph. \n\
-@item @var{in6}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Output. \n\
+@item @var{in4} : vector @code{uint64} size of dimensions of Output in Graph. \n\
+@item @var{in5} : scalar @code{int32} number of dimensions of Output in Graph. \n\
+@item @var{in6} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphGetTensorNumDims'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{int32} number of dimensions of Output in Graph. \n\
+@item @var{out} : scalar @code{int32} number of dimensions of Output in Graph. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Output. \n\
-@item @var{in4}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Output. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphGetTensorShape'} \n\
 @itemize \n\
-@item @var{out}: vector @code{uint64} size of dimensions of Output in Graph. \n\
+@item @var{out} : vector @code{uint64} size of dimensions of Output in Graph. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Output. \n\
-@item @var{in4}: scalar @code{int32} number of dimensions of Output in Graph. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Output. \n\
+@item @var{in4} : scalar @code{int32} number of dimensions of Output in Graph. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_NewOperationLocked'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new OperationDescription. \n\
+@item @var{out} : scalar @code{uint64} pointer to new OperationDescription. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: vector @code{char} type of new Operation. \n\
-@item @var{in4}: vector @code{char} name of new Operation. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : vector @code{char} type of new Operation. \n\
+@item @var{in4} : vector @code{char} name of new Operation. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_NewOperation'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new OperationDescription. \n\
+@item @var{out} : scalar @code{uint64} pointer to new OperationDescription. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: vector @code{char} type of new Operation. \n\
-@item @var{in4}: vector @code{char} name of new Operation. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : vector @code{char} type of new Operation. \n\
+@item @var{in4} : vector @code{char} name of new Operation. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphOperationByName'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to Operation. \n\
+@item @var{out} : scalar @code{uint64} pointer to Operation. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: vector @code{char} name of Operation in Graph. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : vector @code{char} name of Operation in Graph. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphNextOperation'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to Operation. \n\
+@item @var{out} : scalar @code{uint64} pointer to Operation. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} position of Operation in Graph. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} position of Operation in Graph. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphToGraphDef'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Buffer. \n\
-@item @var{in4}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Buffer. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphGetOpDef'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: vector @code{char} name of OperationDefinition in Graph. \n\
-@item @var{in4}: scalar @code{uint64} pointer to Buffer. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : vector @code{char} name of OperationDefinition in Graph. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Buffer. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphVersions'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in4}: scalar @code{uint64} pointer to Buffer. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Buffer. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphImportGraphDefWithResults'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to ImportGraphDefResults. \n\
+@item @var{out} : scalar @code{uint64} pointer to ImportGraphDefResults. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in4}: scalar @code{uint64} pointer to Buffer. \n\
-@item @var{in4}: scalar @code{uint64} pointer to ImportGraphDefOptions. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Buffer. \n\
+@item @var{in4} : scalar @code{uint64} pointer to ImportGraphDefOptions. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphImportGraphDefWithReturnOutputs'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Buffer. \n\
-@item @var{in4}: scalar @code{uint64} pointer to ImportGraphDefOptions. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Output(s). \n\
-@item @var{in6}: scalar @code{int32} number of return Output(s). \n\
-@item @var{in7}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Buffer. \n\
+@item @var{in4} : scalar @code{uint64} pointer to ImportGraphDefOptions. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Output(s). \n\
+@item @var{in6} : scalar @code{int32} number of return Output(s). \n\
+@item @var{in7} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphImportGraphDef'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Buffer. \n\
-@item @var{in4}: scalar @code{uint64} pointer to ImportGraphDefOptions. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Buffer. \n\
+@item @var{in4} : scalar @code{uint64} pointer to ImportGraphDefOptions. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphCopyFunction'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Function. \n\
-@item @var{in4}: scalar @code{uint64} pointer to gradient Function. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Function. \n\
+@item @var{in4} : scalar @code{uint64} pointer to gradient Function. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphNumFunctions'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{int32} number of Functions in Graph. \n\
+@item @var{out} : scalar @code{int32} number of Functions in Graph. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphGetFunctions'} \n\
 @itemize \n\
-@item @var{out}: vector @code{uint64} pointer(s) to Function(s) in Graph. \n\
+@item @var{out} : vector @code{uint64} pointer(s) to Function(s) in Graph. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_NewWhile'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new WhileParams. \n\
+@item @var{out} : scalar @code{uint64} pointer to new WhileParams. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Output. \n\
-@item @var{in4}: scalar @code{int32} number of inputs. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Output. \n\
+@item @var{in4} : scalar @code{int32} number of inputs. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_AddGradients'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Output y. \n\
-@item @var{in4}: scalar @code{int32} number of inputs in y. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Output x. \n\
-@item @var{in6}: scalar @code{int32} number of inputs in x. \n\
-@item @var{in7}: scalar @code{uint64} pointer to Output dx. \n\
-@item @var{in8}: scalar @code{uint64} pointer to Status. \n\
-@item @var{in9}: scalar @code{uint64} pointer to Output dy. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Output y. \n\
+@item @var{in4} : scalar @code{int32} number of inputs in y. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Output x. \n\
+@item @var{in6} : scalar @code{int32} number of inputs in x. \n\
+@item @var{in7} : scalar @code{uint64} pointer to Output dx. \n\
+@item @var{in8} : scalar @code{uint64} pointer to Status. \n\
+@item @var{in9} : scalar @code{uint64} pointer to Output dy. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_AddGradientsWithPrefix'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Graph. \n\
-@item @var{in3}: vector @code{char} prefix for Gradient. \n\
-@item @var{in4}: scalar @code{uint64} pointer to Output y. \n\
-@item @var{in5}: scalar @code{int32} number of inputs in y. \n\
-@item @var{in6}: scalar @code{uint64} pointer to Output x. \n\
-@item @var{in7}: scalar @code{int32} number of inputs in x. \n\
-@item @var{in8}: scalar @code{uint64} pointer to Output dx. \n\
-@item @var{in9}: scalar @code{uint64} pointer to Status. \n\
-@item @var{in10}: scalar @code{uint64} pointer to Output dy. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : vector @code{char} prefix for Gradient. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Output y. \n\
+@item @var{in5} : scalar @code{int32} number of inputs in y. \n\
+@item @var{in6} : scalar @code{uint64} pointer to Output x. \n\
+@item @var{in7} : scalar @code{int32} number of inputs in x. \n\
+@item @var{in8} : scalar @code{uint64} pointer to Output dx. \n\
+@item @var{in9} : scalar @code{uint64} pointer to Status. \n\
+@item @var{in10} : scalar @code{uint64} pointer to Output dy. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -322,192 +322,192 @@ C API functions relared to the TF_OperationDescription classdef \n\
 @itemize \n\
 @item @qcode{'TF_SetDevice'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} device name. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} device name. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_AddInput'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Output input. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Output input. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_AddInputList'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{uint64} pointers to Output inputs. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{uint64} pointers to Output inputs. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_AddControlInput'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Operation. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Operation. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrString'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{char} value for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{char} value for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrStringList'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{cellstr} values for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{cellstr} values for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrInt'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: scalar @code{int64} value for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : scalar @code{int64} value for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrIntList'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{int64} values for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{int64} values for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrFloat'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: scalar @code{single} value for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : scalar @code{single} value for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrFloatList'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{single} values for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{single} values for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrBool'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: scalar @code{logical} value for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : scalar @code{logical} value for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrBoolList'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{logical} values for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{logical} values for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrType'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: scalar @code{uint32} DataType for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : scalar @code{uint32} DataType for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrTypeList'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{uint32} DataTypes for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{uint32} DataTypes for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrPlaceholder'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{char} placeholder for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{char} placeholder for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrFuncName'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{char} function name for attribute. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{char} function name for attribute. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrShape'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{int64} the size of the dimensions of \
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{int64} the size of the dimensions of \
 the attribute's shape. \n\
-@item @var{in5}: scalar @code{int32} the number of the dimensions of \
+@item @var{in5} : scalar @code{int32} the number of the dimensions of \
 the attribute's shape. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrShapeList'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: matrix @code{int64} the size of the dimensions of \
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : matrix @code{int64} the size of the dimensions of \
 the attribute's shapes with each row corresponding to a shape.  The rows \
 representing shapes with fewer dimensions are padded with zeros.\n\
-@item @var{in5}: vector @code{int32} the number of the dimensions of \
+@item @var{in5} : vector @code{int32} the number of the dimensions of \
 the attribute's shapes with each element corresponding to a shape.  The number \
 of elements must equal the number of rows of the previous input.\n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrTensorShapeProto'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{uint8} binary-serialized TensorShapeProto data. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{uint8} binary-serialized TensorShapeProto data. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'OCT_TF_SetAttrTensorShapeProtoList'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{cell} a list of binary-serialized \
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{cell} a list of binary-serialized \
 TensorShapeProto data, each represented as a @code{uint8} vector. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrTensor'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: scalar @code{uint64} pointer to Tensor. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrTensorList'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{uint64} pointers to Tensors. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{uint64} pointers to Tensors. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetAttrValueProto'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: vector @code{char} name of attribute. \n\
-@item @var{in4}: vector @code{uint8} a binary serialization of an AttrValue \
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : vector @code{char} name of attribute. \n\
+@item @var{in4} : vector @code{uint8} a binary serialization of an AttrValue \
 protocol buffer for attribute. \n\
-@item @var{in5}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in5} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_FinishOperationLocked'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to Operation. \n\
+@item @var{out} : scalar @code{uint64} pointer to Operation. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_FinishOperation'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to Operation. \n\
+@item @var{out} : scalar @code{uint64} pointer to Operation. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to OperationDescription. \n\
-@item @var{in3}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to OperationDescription. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -515,43 +515,43 @@ C API functions relared to the TF_Status classdef \n\
 @itemize \n\
 @item @qcode{'TF_NewStatus'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new Status. \n\
+@item @var{out} : scalar @code{uint64} pointer to new Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_DeleteStatus'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetStatus'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Status. \n\
-@item @var{in3}: scalar @code{uint32} Code to Status. \n\
-@item @var{in4}: vector @code{char} message to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Status. \n\
+@item @var{in3} : scalar @code{uint32} Code to Status. \n\
+@item @var{in4} : vector @code{char} message to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetPayload'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Status. \n\
-@item @var{in3}: vector @code{char} 'key' as payload to Status. \n\
-@item @var{in4}: vector @code{char} 'value' as payload to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Status. \n\
+@item @var{in3} : vector @code{char} 'key' as payload to Status. \n\
+@item @var{in4} : vector @code{char} 'value' as payload to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetStatus'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Status. \n\
-@item @var{in3}: scalar @code{int32} I/O error code. \n\
-@item @var{in4}: vector @code{char} message for I/O error code. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Status. \n\
+@item @var{in3} : scalar @code{int32} I/O error code. \n\
+@item @var{in4} : vector @code{char} message for I/O error code. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GetCode'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint32} Code from Status. \n\
+@item @var{out} : scalar @code{uint32} Code from Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_Message'} \n\
 @itemize \n\
-@item @var{out}: vector @code{char} message from Status. \n\
+@item @var{out} : vector @code{char} message from Status. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -559,12 +559,12 @@ C API functions relared to the TF_TString classdef \n\
 @itemize \n\
 @item @qcode{'TF_NewTString'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new TString. \n\
+@item @var{out} : scalar @code{uint64} pointer to new TString. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_LoadTString'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new TString. \n\
+@item @var{out} : scalar @code{uint64} pointer to new TString. \n\
 @end itemize \n\
 @itemize \n\
 @item @var{in2}: vector @code{char} character vector to new TString. \n\
@@ -572,66 +572,66 @@ C API functions relared to the TF_TString classdef \n\
 \n\
 @item @qcode{'TF_SaveTString'} \n\
 @itemize \n\
-@item @var{out}: vector @code{char} character vector from TString. \n\
+@item @var{out} : vector @code{char} character vector from TString. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to new TString. \n\
+@item @var{in2} : scalar @code{uint64} pointer to new TString. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_StringInit'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to TString. \n\
+@item @var{in2} : scalar @code{uint64} pointer to TString. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_StringCopy'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to destination TString. \n\
-@item @var{in3}: vector @code{char} character vector as source string. \n\
-@item @var{in4}: scalar @code{uint64} length of source string. \n\
+@item @var{in2} : scalar @code{uint64} pointer to destination TString. \n\
+@item @var{in3} : vector @code{char} character vector as source string. \n\
+@item @var{in4} : scalar @code{uint64} length of source string. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_StringAssignView'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to destination TString. \n\
-@item @var{in3}: vector @code{char} character vector as source string. \n\
-@item @var{in4}: scalar @code{uint64} length of source string. \n\
+@item @var{in2} : scalar @code{uint64} pointer to destination TString. \n\
+@item @var{in3} : vector @code{char} character vector as source string. \n\
+@item @var{in4} : scalar @code{uint64} length of source string. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_StringGetDataPointer'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to TString data. \n\
+@item @var{out} : scalar @code{uint64} pointer to TString data. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to TString. \n\
+@item @var{in2} : scalar @code{uint64} pointer to TString. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_StringGetType'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint32} type of TString. \n\
+@item @var{out} : scalar @code{uint32} type of TString. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to TString. \n\
+@item @var{in2} : scalar @code{uint64} pointer to TString. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_StringGetSize'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} size of TString. \n\
+@item @var{out} : scalar @code{uint64} size of TString. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to TString. \n\
+@item @var{in2} : scalar @code{uint64} pointer to TString. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_StringGetCapacity'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} capacity of TString. \n\
+@item @var{out} : scalar @code{uint64} capacity of TString. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to TString. \n\
+@item @var{in2} : scalar @code{uint64} pointer to TString. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_StringDealloc'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to TString. \n\
+@item @var{in2} : scalar @code{uint64} pointer to TString. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -639,135 +639,135 @@ C API functions relared to the TF_Tensor classdef \n\
 @itemize \n\
 @item @qcode{'TF_LoadTensor'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new Tensor. \n\
+@item @var{out} : scalar @code{uint64} pointer to new Tensor. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: any non-empty value of supported DataType. \n\
+@item @var{in2} : any non-empty value of supported DataType. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SaveTensor'} \n\
 @itemize \n\
-@item @var{out}: any value of supported DataType. \n\
+@item @var{out} : any value of supported DataType. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_NewTensor'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new Tensor. \n\
+@item @var{out} : scalar @code{uint64} pointer to new Tensor. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint32} DataType code for new Tensor. \n\
-@item @var{in3}: scalar @code{int64} size of dimensions for new Tensor. \n\
-@item @var{in4}: scalar @code{int32} number of dimensions for new Tensor. \n\
-@item @var{in5}: scalar @code{uint64} pointer to data for new Tensor. \n\
-@item @var{in5}: scalar @code{uint64} bytesize of data for new Tensor. \n\
+@item @var{in2} : scalar @code{uint32} DataType code for new Tensor. \n\
+@item @var{in3} : scalar @code{int64} size of dimensions for new Tensor. \n\
+@item @var{in4} : scalar @code{int32} number of dimensions for new Tensor. \n\
+@item @var{in5} : scalar @code{uint64} pointer to data for new Tensor. \n\
+@item @var{in5} : scalar @code{uint64} bytesize of data for new Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_AllocateTensor'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to new Tensor. \n\
+@item @var{out} : scalar @code{uint64} pointer to new Tensor. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint32} DataType code for new Tensor. \n\
-@item @var{in3}: scalar @code{int64} size of dimensions for new Tensor. \n\
-@item @var{in4}: scalar @code{int32} number of dimensions for new Tensor. \n\
-@item @var{in5}: scalar @code{uint64} bytesize of data for new Tensor. \n\
+@item @var{in2} : scalar @code{uint32} DataType code for new Tensor. \n\
+@item @var{in3} : scalar @code{int64} size of dimensions for new Tensor. \n\
+@item @var{in4} : scalar @code{int32} number of dimensions for new Tensor. \n\
+@item @var{in5} : scalar @code{uint64} bytesize of data for new Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_TensorMaybeMove'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to maybe moved Tensor. \n\
+@item @var{out} : scalar @code{uint64} pointer to maybe moved Tensor. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_DeleteTensor'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_TensorType'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint32} DataType code of Tensor. \n\
+@item @var{out} : scalar @code{uint32} DataType code of Tensor. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_SetShape'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
-@item @var{in3}: scalar @code{int64} size of dimensions for new Tensor. \n\
-@item @var{in4}: scalar @code{int32} number of dimensions for new Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in3} : scalar @code{int64} size of dimensions for new Tensor. \n\
+@item @var{in4} : scalar @code{int32} number of dimensions for new Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_NumDims'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{int32} number of dimensions of Tensor. \n\
+@item @var{out} : scalar @code{int32} number of dimensions of Tensor. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_Dim'} \n\
 @itemize \n\
-@item @var{out}: vector @code{int64} size of indexed dimension of Tensor. \n\
+@item @var{out} : vector @code{int64} size of indexed dimension of Tensor. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
-@item @var{in3}: scalar @code{int32} dimension index. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in3} : scalar @code{int32} dimension index. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_TensorByteSize'} \n\
 @itemize \n\
-@item @var{out}: vector @code{uint64} bytesize of Tensor. \n\
+@item @var{out} : vector @code{uint64} bytesize of Tensor. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_TensorData'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{uint64} pointer to data from Tensor. \n\
+@item @var{out} : scalar @code{uint64} pointer to data from Tensor. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_TensorFromProto'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Buffer. \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
-@item @var{in2}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Buffer. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_TensorElementCount'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{int64} number of elements in Tensor. \n\
+@item @var{out} : scalar @code{int64} number of elements in Tensor. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_TensorBitcastFrom'} \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to source Tensor. \n\
-@item @var{in3}: scalar @code{uint32} DataType code for target Tensor. \n\
-@item @var{in4}: scalar @code{uint64} pointer to target Tensor. \n\
-@item @var{in5}: scalar @code{int64} size of dimensions for new Tensor. \n\
-@item @var{in6}: scalar @code{int32} number of dimensions for new Tensor. \n\
-@item @var{in7}: scalar @code{uint64} pointer to Status. \n\
+@item @var{in2} : scalar @code{uint64} pointer to source Tensor. \n\
+@item @var{in3} : scalar @code{uint32} DataType code for target Tensor. \n\
+@item @var{in4} : scalar @code{uint64} pointer to target Tensor. \n\
+@item @var{in5} : scalar @code{int64} size of dimensions for new Tensor. \n\
+@item @var{in6} : scalar @code{int32} number of dimensions for new Tensor. \n\
+@item @var{in7} : scalar @code{uint64} pointer to Status. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_TensorIsAligned'} \n\
 @itemize \n\
-@item @var{out}: scalar @code{bool} value for Tensor alignment. \n\
+@item @var{out} : scalar @code{bool} value for Tensor alignment. \n\
 @end itemize \n\
 @itemize \n\
-@item @var{in2}: scalar @code{uint64} pointer to Tensor. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Tensor. \n\
 @end itemize \n\
 @end itemize \n\
 \n\

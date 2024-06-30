@@ -161,8 +161,9 @@
 </li></ul>
 
 
-<p>C API functions relared to the TF_Buffer classdef 
-</p><ul>
+<a name="C-API-functions-relared-to-the-TF_005fBuffer-classdef"></a>
+<h3 class="subheading">C API functions relared to the TF_Buffer classdef </h3>
+<ul>
 <li> <code>'TF_NewBuffer'</code> 
 <ul>
 <li> <var>out</var> : scalar <code>uint64</code> pointer to new Buffer. 
@@ -203,8 +204,9 @@
 </li></ul>
 
 
-<p>C API functions relared to the TF_DataType classdef 
-</p><ul>
+<a name="C-API-functions-relared-to-the-TF_005fDataType-classdef"></a>
+<h3 class="subheading">C API functions relared to the TF_DataType classdef </h3>
+<ul>
 <li> <code>'TF_DataTypeName'</code> 
 <ul>
 <li> <var>in2</var> : scalar <code>uint32</code> index to DataType. 
@@ -226,8 +228,9 @@
 </li></ul>
 
 
-<p>C API functions relared to the TF_Graph classdef 
-</p><ul>
+<a name="C-API-functions-relared-to-the-TF_005fGraph-classdef"></a>
+<h3 class="subheading">C API functions relared to the TF_Graph classdef </h3>
+<ul>
 <li> <code>'TF_NewGraph'</code> 
 <ul>
 <li> <var>out</var> : scalar <code>uint64</code> pointer to new Graph. 
@@ -451,8 +454,175 @@
 </li></ul>
 
 
-<p>C API functions relared to the TF_OperationDescription classdef 
-</p><ul>
+<a name="C-API-functions-relared-to-the-TF_005fInput-classdef"></a>
+<h3 class="subheading">C API functions relared to the TF_Input classdef </h3>
+<ul>
+<li> <code>'TF_Input'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>uint64</code> pointer to Input. 
+</li></ul>
+
+
+</li><li> <code>'TF_DeleteInput'</code> 
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Input. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationInputType'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>uint32</code> index to DataType. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Input. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationInput'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>uint64</code> pointer to Output. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Input. 
+</li></ul>
+
+</li></ul>
+
+
+<a name="C-API-functions-relared-to-the-TF_005fOperation-classdef"></a>
+<h3 class="subheading">C API functions relared to the TF_Operation classdef </h3>
+<ul>
+<li> <code>'TF_OperationName'</code> 
+<ul>
+<li> <var>out</var> : vector <code>char</code> operation name. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationOpType'</code> 
+<ul>
+<li> <var>out</var> : vector <code>char</code> operation type. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationDevice'</code> 
+<ul>
+<li> <var>out</var> : vector <code>char</code> operation device. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationNumOutputs'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>int32</code> number of outputs in Operation. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationOutputListLength'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>int32</code> length of output list in Operation. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li><li> <var>in2</var> : vector <code>char</code> name of output list in Operation. 
+</li><li> <var>in2</var> : scalar <code>uint64</code> pointer to Status. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationNumInputs'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>int32</code> number of inputs in Operation. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationInputListLength'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>int32</code> length of input list in Operation. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li><li> <var>in2</var> : vector <code>char</code> name of input list in Operation. 
+</li><li> <var>in2</var> : scalar <code>uint64</code> pointer to Status. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationAllInputs'</code> 
+<ul>
+<li> <var>out</var> : vector <code>uint64</code> pointers to Output inputs in Operation. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li></ul>
+
+
+</li><li> <code>'OCT_TF_OperationNumControlInputs'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>int32</code> number of control inputs to an Operation. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li></ul>
+
+
+</li><li> <code>'OCT_TF_OperationGetControlInputs'</code> 
+<ul>
+<li> <var>out</var> : vector <code>uint64</code> pointers to control inputs to an Operation. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li></ul>
+
+
+</li><li> <code>'OCT_TF_OperationNumControlOutputs'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>int32</code> number of operations that have Operation <var>in2</var> as a control input. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li></ul>
+
+
+</li><li> <code>'OCT_TF_OperationGetControlOutputs'</code> 
+<ul>
+<li> <var>out</var> : vector <code>uint64</code> pointers to operations that have Operation <var>in2</var> as a control input. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Operation. 
+</li></ul>
+
+</li></ul>
+
+
+<a name="C-API-functions-relared-to-the-TF_005fOperationDescription-classdef"></a>
+<h3 class="subheading">C API functions relared to the TF_OperationDescription classdef </h3>
+<ul>
 <li> <code>'TF_SetDevice'</code> 
 <ul>
 <li> <var>in2</var> : scalar <code>uint64</code> pointer to OperationDescription. 
@@ -664,8 +834,56 @@
 </li></ul>
 
 
-<p>C API functions relared to the TF_Status classdef 
-</p><ul>
+<a name="C-API-functions-relared-to-the-TF_005fOutput-classdef"></a>
+<h3 class="subheading">C API functions relared to the TF_Output classdef </h3>
+<ul>
+<li> <code>'TF_Output'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>uint64</code> pointer to Output. 
+</li></ul>
+
+
+</li><li> <code>'TF_DeleteOutput'</code> 
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Output. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationOutputType'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>uint32</code> index to DataType. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Output. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationOutputNumConsumers'</code> 
+<ul>
+<li> <var>out</var> : scalar <code>int32</code> number of consumers of Output. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Output. 
+</li></ul>
+
+
+</li><li> <code>'TF_OperationOutputConsumers'</code> 
+<ul>
+<li> <var>out</var> : vector <code>uint64</code> pointers to consumers of Output. 
+</li></ul>
+
+<ul>
+<li> <var>in2</var> : scalar <code>uint64</code> pointer to Output. 
+</li></ul>
+
+</li></ul>
+
+
+<a name="C-API-functions-relared-to-the-TF_005fStatus-classdef"></a>
+<h3 class="subheading">C API functions relared to the TF_Status classdef </h3>
+<ul>
 <li> <code>'TF_NewStatus'</code> 
 <ul>
 <li> <var>out</var> : scalar <code>uint64</code> pointer to new Status. 
@@ -716,8 +934,9 @@
 </li></ul>
 
 
-<p>C API functions relared to the TF_TString classdef 
-</p><ul>
+<a name="C-API-functions-relared-to-the-TF_005fTString-classdef"></a>
+<h3 class="subheading">C API functions relared to the TF_TString classdef </h3>
+<ul>
 <li> <code>'TF_NewTString'</code> 
 <ul>
 <li> <var>out</var> : scalar <code>uint64</code> pointer to new TString. 
@@ -814,8 +1033,9 @@
 </li></ul>
 
 
-<p>C API functions relared to the TF_Tensor classdef 
-</p><ul>
+<a name="C-API-functions-relared-to-the-TF_005fTensor-classdef"></a>
+<h3 class="subheading">C API functions relared to the TF_Tensor classdef </h3>
+<ul>
 <li> <code>'TF_LoadTensor'</code> 
 <ul>
 <li> <var>out</var> : scalar <code>uint64</code> pointer to new Tensor. 
@@ -981,7 +1201,7 @@
 
 
 <p><strong>Source Code: </strong>
-  <a href="https://github.com/pr0m1th3as/tensorflow/tree/main/oct-6iVNkx/tensorflow/src/tensorflow.cc">tensorflow</a>
+  <a href="https://github.com/pr0m1th3as/tensorflow/tree/main/src/tensorflow.cc">tensorflow</a>
 </div>
 
 

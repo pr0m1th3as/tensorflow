@@ -258,9 +258,17 @@ octave_value OCT_TF_OperationAllInputs (OCT_ARGS)
                       (malloc (sizeof (TF_Output) * max_inputs));
   // Get list of all inputs of Operation
   TF_OperationAllInputs (oper, inputs, max_inputs);
-  // Return pointer to input array
-  octave_uint64 ptr = (uint64_t) inputs;
-  octave_value plhs = ptr;
+  // Copy pointers to retrieved Output inputs into returning octave value
+  dim_vector oct_dims;
+  oct_dims.resize (2);
+  oct_dims(0) = 1;
+  oct_dims(1) = max_inputs;
+  uint64NDArray oct_data(oct_dims);
+  for (int i = 0; i < max_inputs; i++)
+  {
+    oct_data(0,i) = (uint64_t) (inputs + i);
+  }
+  octave_value plhs = oct_data;
   return plhs;
 }
 

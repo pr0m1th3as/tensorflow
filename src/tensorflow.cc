@@ -73,7 +73,7 @@ Extra input arguments are identified as @var{in2}, @var{in3}, @var{in3}, etc. \
 @end itemize \n\
 @end itemize \n\
 \n\
-C API functions relared to the TF_Buffer classdef \n\
+@subheading C API functions relared to the TF_Buffer classdef \n\
 @itemize \n\
 @item @qcode{'TF_NewBuffer'} \n\
 @itemize \n\
@@ -107,7 +107,7 @@ C API functions relared to the TF_Buffer classdef \n\
 @end itemize \n\
 @end itemize \n\
 \n\
-C API functions relared to the TF_DataType classdef \n\
+@subheading C API functions relared to the TF_DataType classdef \n\
 @itemize \n\
 @item @qcode{'TF_DataTypeName'} \n\
 @itemize \n\
@@ -125,7 +125,7 @@ C API functions relared to the TF_DataType classdef \n\
 @end itemize \n\
 @end itemize \n\
 \n\
-C API functions relared to the TF_Graph classdef \n\
+@subheading C API functions relared to the TF_Graph classdef \n\
 @itemize \n\
 @item @qcode{'TF_NewGraph'} \n\
 @itemize \n\
@@ -318,7 +318,143 @@ C API functions relared to the TF_Graph classdef \n\
 @end itemize \n\
 @end itemize \n\
 \n\
-C API functions relared to the TF_OperationDescription classdef \n\
+@subheading C API functions relared to the TF_Input classdef \n\
+@itemize \n\
+@item @qcode{'TF_Input'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint64} pointer to Input. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DeleteInput'} \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Input. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationInputType'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} index to DataType. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Input. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationInput'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint64} pointer to Output. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Input. \n\
+@end itemize \n\
+@end itemize \n\
+\n\
+@subheading C API functions relared to the TF_Operation classdef \n\
+@itemize \n\
+@item @qcode{'TF_OperationName'} \n\
+@itemize \n\
+@item @var{out} : vector @code{char} operation name. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationOpType'} \n\
+@itemize \n\
+@item @var{out} : vector @code{char} operation type. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationDevice'} \n\
+@itemize \n\
+@item @var{out} : vector @code{char} operation device. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationNumOutputs'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{int32} number of outputs in Operation. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationOutputListLength'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{int32} length of output list in Operation. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@item @var{in2} : vector @code{char} name of output list in Operation. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationNumInputs'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{int32} number of inputs in Operation. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationInputListLength'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{int32} length of input list in Operation. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@item @var{in2} : vector @code{char} name of input list in Operation. \n\
+@item @var{in2} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationAllInputs'} \n\
+@itemize \n\
+@item @var{out} : vector @code{uint64} pointers to Output inputs in Operation. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+\n\
+@item @qcode{'OCT_TF_OperationNumControlInputs'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{int32} number of control inputs to an \
+Operation. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+\n\
+@item @qcode{'OCT_TF_OperationGetControlInputs'} \n\
+@itemize \n\
+@item @var{out} : vector @code{uint64} pointers to control inputs to an \
+Operation. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+\n\
+@item @qcode{'OCT_TF_OperationNumControlOutputs'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{int32} number of operations that have \
+Operation @var{in2} as a control input. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+\n\
+@item @qcode{'OCT_TF_OperationGetControlOutputs'} \n\
+@itemize \n\
+@item @var{out} : vector @code{uint64} pointers to operations that have \
+Operation @var{in2} as a control input. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation. \n\
+@end itemize \n\
+@end itemize \n\
+\n\
+@subheading C API functions relared to the TF_OperationDescription classdef \n\
 @itemize \n\
 @item @qcode{'TF_SetDevice'} \n\
 @itemize \n\
@@ -511,7 +647,44 @@ protocol buffer for attribute. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
-C API functions relared to the TF_Status classdef \n\
+@subheading C API functions relared to the TF_Output classdef \n\
+@itemize \n\
+@item @qcode{'TF_Output'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint64} pointer to Output. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DeleteOutput'} \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Output. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationOutputType'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} index to DataType. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Output. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationOutputNumConsumers'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{int32} number of consumers of Output. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Output. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OperationOutputConsumers'} \n\
+@itemize \n\
+@item @var{out} : vector @code{uint64} pointers to consumers of Output. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Output. \n\
+@end itemize \n\
+@end itemize \n\
+\n\
+@subheading C API functions relared to the TF_Status classdef \n\
 @itemize \n\
 @item @qcode{'TF_NewStatus'} \n\
 @itemize \n\
@@ -555,7 +728,7 @@ C API functions relared to the TF_Status classdef \n\
 @end itemize \n\
 @end itemize \n\
 \n\
-C API functions relared to the TF_TString classdef \n\
+@subheading C API functions relared to the TF_TString classdef \n\
 @itemize \n\
 @item @qcode{'TF_NewTString'} \n\
 @itemize \n\
@@ -635,7 +808,7 @@ C API functions relared to the TF_TString classdef \n\
 @end itemize \n\
 @end itemize \n\
 \n\
-C API functions relared to the TF_Tensor classdef \n\
+@subheading C API functions relared to the TF_Tensor classdef \n\
 @itemize \n\
 @item @qcode{'TF_LoadTensor'} \n\
 @itemize \n\
@@ -925,6 +1098,78 @@ C API functions relared to the TF_Tensor classdef \n\
     plhs = OCT_TF_GraphToFunctionWithControlOutputs (nrhs, args);
   }
   // ---------------------------------------------------------------------------
+  // C API functions referenced by the TF_Input classdef
+  // ---------------------------------------------------------------------------
+  else if (c_api == "TF_NewInput")                 // OCTAVE specific
+  {
+    plhs = OCT_TF_NewInput (nrhs, args);
+  }
+  else if (c_api == "TF_DeleteInput")              // OCTAVE specific
+  {
+    OCT_TF_DeleteInput (nrhs, args);
+  }
+  else if (c_api == "TF_OperationInputType")
+  {
+    plhs = OCT_TF_OperationInputType (nrhs, args);
+  }
+  else if (c_api == "TF_OperationInput")
+  {
+    plhs = OCT_TF_OperationInput (nrhs, args);
+  }
+  // ---------------------------------------------------------------------------
+  // C API functions referenced by the TF_Operation classdef
+  // ---------------------------------------------------------------------------
+  else if (c_api == "TF_OperationName")
+  {
+    plhs = OCT_TF_OperationName (nrhs, args);
+  }
+  else if (c_api == "TF_OperationOpType")
+  {
+    plhs = OCT_TF_OperationOpType (nrhs, args);
+  }
+  else if (c_api == "TF_OperationDevice")
+  {
+    plhs = OCT_TF_OperationDevice (nrhs, args);
+  }
+  else if (c_api == "TF_OperationNumOutputs")
+  {
+    plhs = OCT_TF_OperationNumOutputs (nrhs, args);
+  }
+  else if (c_api == "TF_OperationOutputListLength")
+  {
+    plhs = OCT_TF_OperationOutputListLength (nrhs, args);
+  }
+  else if (c_api == "TF_OperationNumInputs")
+  {
+    plhs = OCT_TF_OperationNumInputs (nrhs, args);
+  }
+  else if (c_api == "TF_OperationInputListLength")
+  {
+    plhs = OCT_TF_OperationInputListLength (nrhs, args);
+  }
+  else if (c_api == "TF_OperationAllInputs")
+  {
+    plhs = OCT_TF_OperationAllInputs (nrhs, args);
+  }
+  else if (c_api == "TF_OperationNumControlInputs")
+  {
+    plhs = OCT_TF_OperationNumControlInputs (nrhs, args);
+  }
+  else if (c_api == "TF_OperationGetControlInputs")
+  {
+    plhs = OCT_TF_OperationGetControlInputs (nrhs, args);
+  }
+  else if (c_api == "TF_OperationNumControlOutputs")
+  {
+    plhs = OCT_TF_OperationNumControlOutputs (nrhs, args);
+  }
+  else if (c_api == "TF_OperationGetControlOutputs")
+  {
+    plhs = OCT_TF_OperationGetControlOutputs (nrhs, args);
+  }
+
+
+  // ---------------------------------------------------------------------------
   // C API functions referenced by the TF_OperationDescription classdef
   // ---------------------------------------------------------------------------
   else if (c_api == "TF_SetDevice")
@@ -1026,6 +1271,29 @@ C API functions relared to the TF_Tensor classdef \n\
   else if (c_api == "TF_FinishOperation")
   {
     plhs = OCT_TF_FinishOperation (nrhs, args);
+  }
+  // ---------------------------------------------------------------------------
+  // C API functions referenced by the TF_Output classdef
+  // ---------------------------------------------------------------------------
+  else if (c_api == "TF_NewOutput")                // OCTAVE specific
+  {
+    plhs = OCT_TF_NewOutput (nrhs, args);
+  }
+  else if (c_api == "TF_DeleteOutput")             // OCTAVE specific
+  {
+    OCT_TF_DeleteOutput (nrhs, args);
+  }
+  else if (c_api == "TF_OperationOutputType")
+  {
+    plhs = OCT_TF_OperationOutputType (nrhs, args);
+  }
+  else if (c_api == "TF_OperationOutputNumConsumers")
+  {
+    plhs = OCT_TF_OperationOutputNumConsumers (nrhs, args);
+  }
+  else if (c_api == "TF_OperationOutputConsumers")
+  {
+    plhs = OCT_TF_OperationOutputConsumers (nrhs, args);
   }
   // ---------------------------------------------------------------------------
   // C API functions referenced by the TF_Status classdef
@@ -1626,6 +1894,142 @@ C API functions relared to the TF_Tensor classdef \n\
 %! tensorflow ('TF_GraphToFunctionWithControlOutputs')
 
   ## ---------------------------------------------------------------------------
+  ## C API functions referenced by the TF_Input classdef
+  ## ---------------------------------------------------------------------------
+%!error <tensorflow: one extra argument is required for the 'TF_DeleteInput' OCTAVE function.> ...
+%! tensorflow ('TF_DeleteInput');
+%!error <tensorflow: 2nd argument must be uint64 scalar pointer to the Input parsed to the 'TF_DeleteInput' OCTAVE function.> ...
+%! tensorflow ('TF_DeleteInput', 1);
+%!error <tensorflow: 2nd argument must be uint64 scalar pointer to the Input parsed to the 'TF_DeleteInput' OCTAVE function.> ...
+%! tensorflow ('TF_DeleteInput', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationInputType' C API function.> ...
+%! tensorflow ('TF_OperationInputType');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Input parsed to the 'TF_OperationInputType' C API function.> ...
+%! tensorflow ('TF_OperationInputType', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Input parsed to the 'TF_OperationInputType' C API function.> ...
+%! tensorflow ('TF_OperationInputType', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationInput' C API function.> ...
+%! tensorflow ('TF_OperationInput');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Input parsed to the 'TF_OperationInput' C API function.> ...
+%! tensorflow ('TF_OperationInput', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Input parsed to the 'TF_OperationInput' C API function.> ...
+%! tensorflow ('TF_OperationInput', uint64 ([1, 2]));
+
+  ## ---------------------------------------------------------------------------
+  ## C API functions referenced by the TF_Operation classdef
+  ## ---------------------------------------------------------------------------
+%!error <tensorflow: one extra argument is required for the 'TF_OperationName' C API function.> ...
+%! tensorflow ('TF_OperationName');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationName' C API function.> ...
+%! tensorflow ('TF_OperationName', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationName' C API function.> ...
+%! tensorflow ('TF_OperationName', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationOpType' C API function.> ...
+%! tensorflow ('TF_OperationOpType');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationOpType' C API function.> ...
+%! tensorflow ('TF_OperationOpType', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationOpType' C API function.> ...
+%! tensorflow ('TF_OperationOpType', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationDevice' C API function.> ...
+%! tensorflow ('TF_OperationDevice');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationDevice' C API function.> ...
+%! tensorflow ('TF_OperationDevice', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationDevice' C API function.> ...
+%! tensorflow ('TF_OperationDevice', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationNumOutputs' C API function.> ...
+%! tensorflow ('TF_OperationNumOutputs');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationNumOutputs' C API function.> ...
+%! tensorflow ('TF_OperationNumOutputs', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationNumOutputs' C API function.> ...
+%! tensorflow ('TF_OperationNumOutputs', uint64 ([1, 2]));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_OperationOutputListLength' C API function.> ...
+%! tensorflow ('TF_OperationOutputListLength');
+%!error <tensorflow: three extra arguments are required for the 'TF_OperationOutputListLength' C API function.> ...
+%! tensorflow ('TF_OperationOutputListLength', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_OperationOutputListLength' C API function.> ...
+%! tensorflow ('TF_OperationOutputListLength', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationOutputListLength' C API function.> ...
+%! tensorflow ('TF_OperationOutputListLength', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationOutputListLength' C API function.> ...
+%! tensorflow ('TF_OperationOutputListLength', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the name of Output list of Operation parsed to the 'TF_OperationOutputListLength' C API function.> ...
+%! tensorflow ('TF_OperationOutputListLength', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the name of Output list of Operation parsed to the 'TF_OperationOutputListLength' C API function.> ...
+%! tensorflow ('TF_OperationOutputListLength', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_OperationOutputListLength' C API function.> ...
+%! tensorflow ('TF_OperationOutputListLength', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_OperationOutputListLength' C API function.> ...
+%! tensorflow ('TF_OperationOutputListLength', uint64 (1), 'name', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationNumInputs' C API function.> ...
+%! tensorflow ('TF_OperationNumInputs');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationNumInputs' C API function.> ...
+%! tensorflow ('TF_OperationNumInputs', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationNumInputs' C API function.> ...
+%! tensorflow ('TF_OperationNumInputs', uint64 ([1, 2]));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_OperationInputListLength' C API function.> ...
+%! tensorflow ('TF_OperationInputListLength');
+%!error <tensorflow: three extra arguments are required for the 'TF_OperationInputListLength' C API function.> ...
+%! tensorflow ('TF_OperationInputListLength', 1);
+%!error <tensorflow: three extra arguments are required for the 'TF_OperationInputListLength' C API function.> ...
+%! tensorflow ('TF_OperationInputListLength', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationInputListLength' C API function.> ...
+%! tensorflow ('TF_OperationInputListLength', 1, 2, 3);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationInputListLength' C API function.> ...
+%! tensorflow ('TF_OperationInputListLength', uint64 ([1, 2]), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the name of Input list of Operation parsed to the 'TF_OperationInputListLength' C API function.> ...
+%! tensorflow ('TF_OperationInputListLength', uint64 (1), 2, 3);
+%!error <tensorflow: 3rd argument must be a character vector defining the name of Input list of Operation parsed to the 'TF_OperationInputListLength' C API function.> ...
+%! tensorflow ('TF_OperationInputListLength', uint64 (1), ['a'; 'b'], 3);
+%!error <tensorflow: 4th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_OperationInputListLength' C API function.> ...
+%! tensorflow ('TF_OperationInputListLength', uint64 (1), 'name', 3);
+%!error <tensorflow: 4th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_OperationInputListLength' C API function.> ...
+%! tensorflow ('TF_OperationInputListLength', uint64 (1), 'name', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationAllInputs' C API function.> ...
+%! tensorflow ('TF_OperationAllInputs');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationAllInputs' C API function.> ...
+%! tensorflow ('TF_OperationAllInputs', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationAllInputs' C API function.> ...
+%! tensorflow ('TF_OperationAllInputs', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationNumControlInputs' C API function.> ...
+%! tensorflow ('TF_OperationNumControlInputs');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationNumControlInputs' C API function.> ...
+%! tensorflow ('TF_OperationNumControlInputs', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationNumControlInputs' C API function.> ...
+%! tensorflow ('TF_OperationNumControlInputs', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationGetControlInputs' C API function.> ...
+%! tensorflow ('TF_OperationGetControlInputs');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationGetControlInputs' C API function.> ...
+%! tensorflow ('TF_OperationGetControlInputs', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationGetControlInputs' C API function.> ...
+%! tensorflow ('TF_OperationGetControlInputs', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationNumControlOutputs' C API function.> ...
+%! tensorflow ('TF_OperationNumControlOutputs');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationNumControlOutputs' C API function.> ...
+%! tensorflow ('TF_OperationNumControlOutputs', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationNumControlOutputs' C API function.> ...
+%! tensorflow ('TF_OperationNumControlOutputs', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationGetControlOutputs' C API function.> ...
+%! tensorflow ('TF_OperationGetControlOutputs');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationGetControlOutputs' C API function.> ...
+%! tensorflow ('TF_OperationGetControlOutputs', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationGetControlOutputs' C API function.> ...
+%! tensorflow ('TF_OperationGetControlOutputs', uint64 ([1, 2]));
+
+
+  ## ---------------------------------------------------------------------------
   ## C API functions referenced by the TF_OperationDescription classdef
   ## ---------------------------------------------------------------------------
 %!error <tensorflow: two extra arguments are required for the 'TF_SetDevice' C API function.> ...
@@ -1634,6 +2038,8 @@ C API functions relared to the TF_Tensor classdef \n\
 %! tensorflow ('TF_SetDevice', 1);
 %!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetDevice' C API function.> ...
 %! tensorflow ('TF_SetDevice', 1, 2);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the OperationDescription parsed to the 'TF_SetDevice' C API function.> ...
+%! tensorflow ('TF_SetDevice', uint64 ([1, 2]), 2);
 %!error <tensorflow: 3rd argument must be a character vector defining the device parsed to the 'TF_SetDevice' C API function.> ...
 %! tensorflow ('TF_SetDevice', uint64 (1), 2);
 %!error <tensorflow: 3rd argument must be a character vector defining the device parsed to the 'TF_SetDevice' C API function.> ...
@@ -2112,6 +2518,37 @@ C API functions relared to the TF_Tensor classdef \n\
 %! tensorflow ('TF_FinishOperation', uint64 (1), 2);
 %!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the Status parsed to the 'TF_FinishOperation' C API function.> ...
 %! tensorflow ('TF_FinishOperation', uint64 (1), uint64 ([2, 2]));
+
+  ## ---------------------------------------------------------------------------
+  ## C API functions referenced by the TF_Status classdef
+  ## ---------------------------------------------------------------------------
+%!error <tensorflow: one extra argument is required for the 'TF_DeleteOutput' OCTAVE function.> ...
+%! tensorflow ('TF_DeleteOutput');
+%!error <tensorflow: 2nd argument must be uint64 scalar pointer to the Output parsed to the 'TF_DeleteOutput' OCTAVE function.> ...
+%! tensorflow ('TF_DeleteOutput', 1);
+%!error <tensorflow: 2nd argument must be uint64 scalar pointer to the Output parsed to the 'TF_DeleteOutput' OCTAVE function.> ...
+%! tensorflow ('TF_DeleteOutput', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationOutputType' C API function.> ...
+%! tensorflow ('TF_OperationOutputType');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the  Output parsed to the 'TF_OperationOutputType' C API function.> ...
+%! tensorflow ('TF_OperationOutputType', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the  Output parsed to the 'TF_OperationOutputType' C API function.> ...
+%! tensorflow ('TF_OperationOutputType', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationOutputNumConsumers' C API function.> ...
+%! tensorflow ('TF_OperationOutputNumConsumers');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Output parsed to the 'TF_OperationOutputNumConsumers' C API function.> ...
+%! tensorflow ('TF_OperationOutputNumConsumers', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Output parsed to the 'TF_OperationOutputNumConsumers' C API function.> ...
+%! tensorflow ('TF_OperationOutputNumConsumers', uint64 ([1, 2]));
+
+%!error <tensorflow: one extra argument is required for the 'TF_OperationOutputConsumers' C API function.> ...
+%! tensorflow ('TF_OperationOutputConsumers');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationOutputConsumers' C API function.> ...
+%! tensorflow ('TF_OperationOutputConsumers', 1);
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_OperationOutputConsumers' C API function.> ...
+%! tensorflow ('TF_OperationOutputConsumers', uint64 ([1, 2]));
 
   ## ---------------------------------------------------------------------------
   ## C API functions referenced by the TF_Status classdef

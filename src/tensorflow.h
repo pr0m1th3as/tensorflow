@@ -75,6 +75,29 @@ void OCT_TF_AddGradientsWithPrefix (OCT_ARGS);
 octave_value OCT_TF_GraphToFunction (OCT_ARGS);
 octave_value OCT_TF_GraphToFunctionWithControlOutputs (OCT_ARGS);
 // -----------------------------------------------------------------------------
+// C API functions referenced by the TF_Input classdef
+// -----------------------------------------------------------------------------
+octave_value OCT_TF_NewInput (OCT_ARGS);           // OCTAVE specific
+void OCT_TF_DeleteInput (OCT_ARGS);                // OCTAVE specific
+octave_value OCT_TF_OperationInputType (OCT_ARGS);
+octave_value OCT_TF_OperationInput (OCT_ARGS);
+// -----------------------------------------------------------------------------
+// C API functions referenced by the TF_Operation classdef
+// -----------------------------------------------------------------------------
+octave_value OCT_TF_OperationName (OCT_ARGS);
+octave_value OCT_TF_OperationOpType (OCT_ARGS);
+octave_value OCT_TF_OperationDevice (OCT_ARGS);
+octave_value OCT_TF_OperationNumOutputs (OCT_ARGS);
+octave_value OCT_TF_OperationOutputListLength (OCT_ARGS);
+octave_value OCT_TF_OperationNumInputs (OCT_ARGS);
+octave_value OCT_TF_OperationInputListLength (OCT_ARGS);
+octave_value OCT_TF_OperationAllInputs (OCT_ARGS);
+octave_value OCT_TF_OperationNumControlInputs (OCT_ARGS);
+octave_value OCT_TF_OperationGetControlInputs (OCT_ARGS);
+octave_value OCT_TF_OperationNumControlOutputs (OCT_ARGS);
+octave_value OCT_TF_OperationGetControlOutputs (OCT_ARGS);
+
+// -----------------------------------------------------------------------------
 // C API functions referenced by the TF_OperationDescription classdef
 // -----------------------------------------------------------------------------
 void OCT_TF_SetDevice (OCT_ARGS);
@@ -102,6 +125,14 @@ void OCT_TF_SetAttrTensorList (OCT_ARGS);
 void OCT_TF_SetAttrValueProto (OCT_ARGS);
 octave_value OCT_TF_FinishOperationLocked (OCT_ARGS);
 octave_value OCT_TF_FinishOperation (OCT_ARGS);
+// -----------------------------------------------------------------------------
+// C API functions referenced by the TF_Output classdef
+// -----------------------------------------------------------------------------
+octave_value OCT_TF_NewOutput (OCT_ARGS);          // OCTAVE specific
+void OCT_TF_DeleteOutput (OCT_ARGS);               // OCTAVE specific
+octave_value OCT_TF_OperationOutputType (OCT_ARGS);
+octave_value OCT_TF_OperationOutputNumConsumers (OCT_ARGS);
+octave_value OCT_TF_OperationOutputConsumers (OCT_ARGS);
 // ---------------------------------------------------------------------------
 // C API functions referenced by the TF_Status classdef
 // ---------------------------------------------------------------------------

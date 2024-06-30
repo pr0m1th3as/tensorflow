@@ -22,7 +22,7 @@ wget https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-cpu-l
 sudo tar -C /usr/local -xzf libtensorflow-cpu-linux-x86_64-2.15.0.tar.gz
 sudo ldconfig /usr/local/lib
 ```
-From within the Octave command, you can install the latest `tensorflow` (`v0.1.0`) package as usual with
+From within the Octave command, you can install the latest `tensorflow` package as usual with
 ```
 pkg install -forge tensorflow
 ```

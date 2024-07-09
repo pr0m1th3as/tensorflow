@@ -1,5 +1,6 @@
 /*
 Copyright (C) 2024 Andreas Bertsatos <abertsatos@biol.uoa.gr>
+Copyright (C) 2024 Linux BCKP <linuxbckp@gmail.com>
 
 This file is part of the statistics package for GNU Octave.
 
@@ -944,6 +945,92 @@ protocol buffer for attribute. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
+@subheading C API status constants in tf_status.h \n\
+@item @qcode{'TF_OK'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_OK. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_CANCELLED'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_CANCELLED. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_UNKNOWN'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_UNKNOWN. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_INVALID_ARGUMENT'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_INVALID_ARGUMENT. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DEADLINE_EXCEEDED'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_DEADLINE_EXCEEDED. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_NOT_FOUND'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_NOT_FOUND. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_ALREADY_EXISTS'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_ALREADY_EXISTS. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_PERMISSION_DENIED'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_PERMISSION_DENIED. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_UNAUTHENTICATED'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_UNAUTHENTICATED. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_RESOURCE_EXHAUSTED'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_RESOURCE_EXHAUSTED. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_FAILED_PRECONDITION'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_FAILED_PRECONDITION. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_ABORTED'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_ABORTED. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_OUT_OF_RANGE'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_OUT_OF_RANGE. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_UNIMPLEMENTED'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_UNIMPLEMENTED. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_INTERNAL'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_INTERNAL. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_UNAVAILABLE'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_UNAVAILABLE. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DATA_LOSS'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint32} size of TF_DATA_LOSS. \n\
+@end itemize \n\
+\n\
 @end deftypefn")
 {
   int nlhs = nargout;
@@ -1443,6 +1530,77 @@ protocol buffer for attribute. \n\
   else if (c_api == "TF_TensorIsAligned")
   {
     plhs = OCT_TF_TensorIsAligned (nrhs, args);
+  }
+  // ---------------------------------------------------------------------------
+  // C API status constants in tf_status.h
+  // ---------------------------------------------------------------------------
+  else if (c_api == "TF_OK")
+  {
+    plhs = OCT_TF_OK ();
+  }
+  else if (c_api == "TF_CANCELLED")
+  {
+    plhs = OCT_TF_CANCELLED ();
+  }
+  else if (c_api == "TF_UNKNOWN")
+  {
+    plhs = OCT_TF_UNKNOWN ();
+  }
+  else if (c_api == "TF_INVALID_ARGUMENT")
+  {
+    plhs = OCT_TF_INVALID_ARGUMENT ();
+  }
+  else if (c_api == "TF_DEADLINE_EXCEEDED")
+  {
+    plhs = OCT_TF_DEADLINE_EXCEEDED ();
+  }
+  else if (c_api == "TF_NOT_FOUND")
+  {
+    plhs = OCT_TF_NOT_FOUND ();
+  }
+  else if (c_api == "TF_ALREADY_EXISTS")
+  {
+    plhs = OCT_TF_ALREADY_EXISTS ();
+  }
+  else if (c_api == "TF_PERMISSION_DENIED")
+  {
+    plhs = OCT_TF_PERMISSION_DENIED ();
+  }
+  else if (c_api == "TF_UNAUTHENTICATED")
+  {
+    plhs = OCT_TF_UNAUTHENTICATED ();
+  }
+  else if (c_api == "TF_RESOURCE_EXHAUSTED")
+  {
+    plhs = OCT_TF_RESOURCE_EXHAUSTED ();
+  }
+  else if (c_api == "TF_FAILED_PRECONDITION")
+  {
+    plhs = OCT_TF_FAILED_PRECONDITION ();
+  }
+  else if (c_api == "TF_ABORTED")
+  {
+    plhs = OCT_TF_ABORTED ();
+  }
+  else if (c_api == "TF_OUT_OF_RANGE")
+  {
+    plhs = OCT_TF_OUT_OF_RANGE ();
+  }
+  else if (c_api == "TF_UNIMPLEMENTED")
+  {
+    plhs = OCT_TF_UNIMPLEMENTED ();
+  }
+  else if (c_api == "TF_INTERNAL")
+  {
+    plhs = OCT_TF_INTERNAL ();
+  }
+  else if (c_api == "TF_UNAVAILABLE")
+  {
+    plhs = OCT_TF_UNAVAILABLE ();
+  }
+  else if (c_api == "TF_DATA_LOSS")
+  {
+    plhs = OCT_TF_DATA_LOSS ();
   }
   // ---------------------------------------------------------------------------
   else

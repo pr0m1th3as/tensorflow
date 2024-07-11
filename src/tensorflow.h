@@ -1,5 +1,6 @@
 /*
 Copyright (C) 2024 Andreas Bertsatos <abertsatos@biol.uoa.gr>
+Copyright (C) 2024 Linux BCKP <linuxbckp@gmail.com>
 
 This file is part of the statistics package for GNU Octave.
 
@@ -177,4 +178,24 @@ void OCT_TF_TensorFromProto (OCT_ARGS);
 octave_value OCT_TF_TensorElementCount (OCT_ARGS);
 void OCT_TF_TensorBitcastFrom (OCT_ARGS);
 octave_value OCT_TF_TensorIsAligned (OCT_ARGS);
+// ---------------------------------------------------------------------------
+// C API status constants in tf_status.h
+// ---------------------------------------------------------------------------
+octave_value OCT_TF_OK (void);
+octave_value OCT_TF_CANCELLED (void);
+octave_value OCT_TF_UNKNOWN (void);
+octave_value OCT_TF_INVALID_ARGUMENT (void);
+octave_value OCT_TF_DEADLINE_EXCEEDED (void);
+octave_value OCT_TF_NOT_FOUND (void);
+octave_value OCT_TF_ALREADY_EXISTS (void);
+octave_value OCT_TF_PERMISSION_DENIED (void);
+octave_value OCT_TF_UNAUTHENTICATED (void);
+octave_value OCT_TF_RESOURCE_EXHAUSTED (void);
+octave_value OCT_TF_FAILED_PRECONDITION (void);
+octave_value OCT_TF_ABORTED (void);
+octave_value OCT_TF_OUT_OF_RANGE (void);
+octave_value OCT_TF_UNIMPLEMENTED (void);
+octave_value OCT_TF_INTERNAL (void);
+octave_value OCT_TF_UNAVAILABLE (void);
+octave_value OCT_TF_DATA_LOSS (void);
 #endif // TENSORFLOW_H

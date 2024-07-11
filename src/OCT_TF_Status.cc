@@ -1,5 +1,6 @@
 /*
 Copyright (C) 2024 Andreas Bertsatos <abertsatos@biol.uoa.gr>
+Copyright (C) 2024 Linux BCKP <linuxbckp@gmail.com>
 
 This file is part of the statistics package for GNU Octave.
 
@@ -213,5 +214,145 @@ octave_value OCT_TF_Message (OCT_ARGS)
   const char* msg = TF_Message (status);
   charMatrix msg_ = msg;
   octave_value plhs = msg_;
+  return plhs;
+}
+
+// -----------------------------------------------------------------------------
+// C API status constants in tf_status.h
+// -----------------------------------------------------------------------------
+
+// #define TF_OK TSL_OK
+octave_value OCT_TF_OK (void)
+{
+  octave_uint32 st = TF_OK;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_CANCELLED TSL_CANCELLED
+octave_value OCT_TF_CANCELLED (void)
+{
+  octave_uint32 st = TF_CANCELLED;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_UNKNOWN TSL_UNKNOWN
+octave_value OCT_TF_UNKNOWN (void)
+{
+  octave_uint32 st = TF_UNKNOWN;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_INVALID_ARGUMENT TSL_INVALID_ARGUMENT
+octave_value OCT_TF_INVALID_ARGUMENT (void)
+{
+  octave_uint32 st = TF_INVALID_ARGUMENT;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_DEADLINE_EXCEEDED TSL_DEADLINE_EXCEEDED
+octave_value OCT_TF_DEADLINE_EXCEEDED (void)
+{
+  octave_uint32 st = TF_DEADLINE_EXCEEDED;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_NOT_FOUND TSL_NOT_FOUND
+octave_value OCT_TF_NOT_FOUND (void)
+{
+  octave_uint32 st = TF_NOT_FOUND;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_ALREADY_EXISTS TSL_ALREADY_EXISTS
+octave_value OCT_TF_ALREADY_EXISTS (void)
+{
+  octave_uint32 st = TF_ALREADY_EXISTS;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_PERMISSION_DENIED TSL_PERMISSION_DENIED
+octave_value OCT_TF_PERMISSION_DENIED (void)
+{
+  octave_uint32 st = TF_PERMISSION_DENIED;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_UNAUTHENTICATED TSL_UNAUTHENTICATED
+octave_value OCT_TF_UNAUTHENTICATED (void)
+{
+  octave_uint32 st = TF_UNAUTHENTICATED;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_RESOURCE_EXHAUSTED TSL_RESOURCE_EXHAUSTED
+octave_value OCT_TF_RESOURCE_EXHAUSTED (void)
+{
+  octave_uint32 st = TF_RESOURCE_EXHAUSTED;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_FAILED_PRECONDITION TSL_FAILED_PRECONDITION
+octave_value OCT_TF_FAILED_PRECONDITION (void)
+{
+  octave_uint32 st = TF_FAILED_PRECONDITION;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_ABORTED TSL_ABORTED
+octave_value OCT_TF_ABORTED (void)
+{
+  octave_uint32 st = TF_ABORTED;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_OUT_OF_RANGE TSL_OUT_OF_RANGE
+octave_value OCT_TF_OUT_OF_RANGE (void)
+{
+  octave_uint32 st = TF_OUT_OF_RANGE;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_UNIMPLEMENTED TSL_UNIMPLEMENTED
+octave_value OCT_TF_UNIMPLEMENTED (void)
+{
+  octave_uint32 st = TF_UNIMPLEMENTED;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_INTERNAL TSL_INTERNAL
+octave_value OCT_TF_INTERNAL (void)
+{
+  octave_uint32 st = TF_INTERNAL;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_UNAVAILABLE TSL_UNAVAILABLE
+octave_value OCT_TF_UNAVAILABLE (void)
+{
+  octave_uint32 st = TF_UNAVAILABLE;
+  octave_value plhs = st;
+  return plhs;
+}
+
+// #define TF_DATA_LOSS TSL_DATA_LOSS
+octave_value OCT_TF_DATA_LOSS (void)
+{
+  octave_uint32 st = TF_DATA_LOSS;
+  octave_value plhs = st;
   return plhs;
 }

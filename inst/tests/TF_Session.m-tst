@@ -43,7 +43,7 @@
 %! d = s.devices ();
 %! assert (numel (d) >= 1);
 %! assert_equal (fieldnames (d), {"Name"; "Type"; "MemoryBytes"; "Incarnation"});
-%! assert_equal (d(1).Type, "CPU");
+%! assert (any (strcmp ({d.Type}, "CPU")));
 
 %!test
 %! s = TF_Session.fromSavedModel (__tf_test_model__ ());

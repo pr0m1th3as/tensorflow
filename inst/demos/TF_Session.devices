@@ -1,6 +1,8 @@
 %!demo
 %! ## `devices` reports what the session can execute on.  A build of
-%! ## libtensorflow without GPU support finds the CPU alone.
+%! ## libtensorflow without GPU support finds the CPU alone; a GPU build also
+%! ## lists each visible GPU, which TensorFlow then places operations on by
+%! ## itself.
 %!
 %! sess = TF_Session.fromSavedModel (__tf_test_model__ ());
 %! d = sess.devices ();

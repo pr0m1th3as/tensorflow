@@ -19,6 +19,16 @@ Summary of important user-visible changes for tensorflow 0.2.0:
 
  ** GNU Octave 11.1 is now required.
 
+ ** The GPU build of libtensorflow is now tested and needs no change to the
+    package; inference is placed on the GPU automatically.  Set
+    TF_FORCE_GPU_ALLOW_GROWTH=true before starting Octave, or TensorFlow
+    reserves almost the whole card whatever the size of the model.
+
+ ** TensorFlow's INFO logging is silenced on load through TF_CPP_MIN_LOG_LEVEL,
+    which covers the six lines printed on every SavedModel load.  Messages
+    routed through absl are not affected by it at any level; the GPU build
+    emits more of them than the CPU build.
+
  ** Data is repositioned between Octave's column major and TensorFlow's row
     major storage.  Previously the shape was passed through unchanged while the
     elements were transposed, so any model taking an input of two or more

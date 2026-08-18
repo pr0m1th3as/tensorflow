@@ -1,0 +1,24 @@
+%!demo
+%! ## A `TF_Tensor` holds a copy of an Octave array in the form TensorFlow
+%! ## works with.  The values are copied, so the array it was built from may be
+%! ## changed or cleared afterwards.
+%!
+%! t = TF_Tensor (single ([1, 2, 3; 4, 5, 6]))
+
+%!demo
+%! ## Octave stores arrays column major and TensorFlow stores them row major,
+%! ## so the elements are repositioned in both directions.  The shape and the
+%! ## values that come back are those that went in, whatever the rank.
+%!
+%! x = reshape (1:24, 2, 3, 4);
+%! t = TF_Tensor (x);
+%! t.shape ()
+%! isequal (t.value (), x)
+
+%!demo
+%! ## The Octave class decides the TensorFlow data type.
+%!
+%! TF_Tensor (1.5).dataType ()
+%! TF_Tensor (single (1.5)).dataType ()
+%! TF_Tensor (int32 (1)).dataType ()
+%! TF_Tensor (true).dataType ()

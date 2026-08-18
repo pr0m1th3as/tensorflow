@@ -1,0 +1,24 @@
+%!demo
+%! ## `TFModel` loads a model that was trained and exported elsewhere, from the
+%! ## directory holding its SavedModel.  The package ships a small one for its
+%! ## own tests, which computes `y = w .* x + b` for `w = [2, 3, 4]` and
+%! ## `b = [1, 1, 1]`.
+%!
+%! model = TFModel (__tf_test_model__ ())
+
+%!demo
+%! ## The operations the model is fed through and read from are found by
+%! ## inspecting its graph, and reported so they can be checked.  A model
+%! ## exported by some other means may not follow those names, in which case
+%! ## they are given to the constructor with `InputNames` and `OutputNames`.
+%!
+%! model = TFModel (__tf_test_model__ ());
+%! model.InputNames
+%! model.OutputNames
+
+%!demo
+%! ## The tags select which graph to load from the SavedModel, and default to
+%! ## `serve`, the one exported for inference.
+%!
+%! model = TFModel (__tf_test_model__ (), "Tags", "serve");
+%! model.Tags

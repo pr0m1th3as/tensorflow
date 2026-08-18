@@ -1,0 +1,21 @@
+%!demo
+%! ## `value` returns the contents of the tensor as an ordinary Octave array,
+%! ## of the class matching its TensorFlow data type.
+%!
+%! t = TF_Tensor (int32 (magic (3)));
+%! v = t.value ()
+%! class (v)
+
+%!demo
+%! ## The tensor is released once no variable refers to it, so it does not have
+%! ## to be freed by hand.  Releasing it explicitly is allowed, after which it
+%! ## no longer holds anything to return.
+%!
+%! t = TF_Tensor (42);
+%! t.value ()
+%! t.delete ();
+%! try
+%!   t.value ()
+%! catch err
+%!   disp (err.message)
+%! end

@@ -1,0 +1,20 @@
+%!demo
+%! ## The graph of a loaded model can be inspected, which is how the operations
+%! ## to feed and to read are found when a model does not follow the usual
+%! ## names.  Placeholders are fed; here `serving_default_x` is the model input
+%! ## and `saver_filename` belongs to the checkpoint saver.
+%!
+%! sess = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! names = sess.Graph.operationNames ();
+%! types = sess.Graph.operationTypes ();
+%! names(strcmp (types, "Placeholder"))
+
+%!demo
+%! ## Every operation of the graph, with its type.
+%!
+%! sess = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! names = sess.Graph.operationNames ();
+%! types = sess.Graph.operationTypes ();
+%! for i = 1:numel (names)
+%!   printf ("%-32s %s\n", names{i}, types{i});
+%! endfor

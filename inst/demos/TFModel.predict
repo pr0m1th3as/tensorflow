@@ -1,0 +1,26 @@
+%!demo
+%! ## `predict` runs the model on an input and returns its output.  This model
+%! ## expects rows of three values and scales each column by `[2, 3, 4]` before
+%! ## adding one.
+%!
+%! model = TFModel (__tf_test_model__ ());
+%! x = single ([1, 2, 3])
+%! y = model.predict (x)
+
+%!demo
+%! ## Each row is an independent observation, so several are predicted at once
+%! ## by stacking them.
+%!
+%! model = TFModel (__tf_test_model__ ());
+%! x = single ([1, 2, 3; 4, 5, 6; 0, 0, 0])
+%! y = model.predict (x)
+
+%!demo
+%! ## The input may also be given as a `TF_Tensor`, which is useful when the
+%! ## same values are predicted more than once, since the conversion from an
+%! ## Octave array happens only when the tensor is built.
+%!
+%! model = TFModel (__tf_test_model__ ());
+%! t = TF_Tensor (single ([1, 1, 1]));
+%! model.predict (t)
+%! model.predict (t)

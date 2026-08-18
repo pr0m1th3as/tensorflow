@@ -1,0 +1,25 @@
+%!demo
+%! ## `run` executes a graph, naming the operations to feed and those to read.
+%! ## It is what `TFModel.predict` uses, and is the way to reach a model whose
+%! ## operations are not named as `TFModel` expects.
+%!
+%! sess = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! x = single ([1, 2, 3]);
+%! y = sess.run ("serving_default_x", x, "StatefulPartitionedCall")
+
+%!demo
+%! ## An operation may have several outputs, and the one wanted is named after
+%! ## a colon.  Without it the first output, index 0, is read.
+%!
+%! sess = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! x = single ([1, 1, 1]);
+%! sess.run ("serving_default_x:0", x, "StatefulPartitionedCall:0")
+
+%!demo
+%! ## Asking for more than one output returns a cell array holding them in the
+%! ## order they were named.
+%!
+%! sess = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! x = single ([2, 2, 2]);
+%! y = sess.run ("serving_default_x", x, ...
+%!               {"StatefulPartitionedCall", "StatefulPartitionedCall"})

@@ -1,0 +1,9 @@
+%!demo
+%! ## `devices` reports what the session can execute on.  A build of
+%! ## libtensorflow without GPU support finds the CPU alone.
+%!
+%! sess = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! d = sess.devices ();
+%! for i = 1:numel (d)
+%!   printf ("%s  (%s, %d bytes)\n", d(i).Name, d(i).Type, d(i).MemoryBytes);
+%! endfor

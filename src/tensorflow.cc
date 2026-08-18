@@ -3578,4 +3578,22 @@ which is 0 if the index is out of bounds. \n\
 %! tensorflow ('TF_DeleteSessionOptions', opts);
 %! tensorflow ('TF_DeleteGraph', graph);
 %! tensorflow ('TF_DeleteStatus', status);
+%!demo
+%! ## The `tensorflow` function is the intermediate `OCT` interface, which
+%! ## passes calls to TensorFlow's C API.  Everything it hands back that is not
+%! ## a plain value is a `uint64` pointer that must be released by the matching
+%! ## call, which is what the `TF_Tensor`, `TF_Graph` and `TF_Session` classes
+%! ## do on their own.
+%!
+%! tensorflow ('TF_Version')
+
+%!demo
+%! ## A Tensor is built from an Octave array and read back from it.  The
+%! ## elements are repositioned between Octave's column major and TensorFlow's
+%! ## row major storage, so the shape and the values are preserved.
+%!
+%! t = tensorflow ('TF_LoadTensor', single ([1, 2, 3; 4, 5, 6]));
+%! tensorflow ('TF_NumDims', t)
+%! tensorflow ('TF_SaveTensor', t)
+%! tensorflow ('TF_DeleteTensor', t);
 */

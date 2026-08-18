@@ -1708,7 +1708,7 @@ which is 0 if the index is out of bounds. \n\
 %!error <tensorflow: unrecognized reference to C API function.> tensorflow ('');
 %!test
 %! v = tensorflow ('TF_Version');
-%! assert (class (v), "char");
+%! assert_equal (class (v), "char");
 %! assert (! isempty (regexp (v, '^\d+\.\d+\.\d+', 'once')));
   ## ---------------------------------------------------------------------------
   ## C API functions referenced by the TF_Buffer classdef
@@ -1735,27 +1735,27 @@ which is 0 if the index is out of bounds. \n\
 
 %!test
 %! ref = tensorflow ('TF_NewBuffer');
-%! assert (class (ref), "uint64");
+%! assert_equal (class (ref), "uint64");
 %! tensorflow ('TF_DeleteBuffer', ref);
 
 %!test
 %! ref = tensorflow ('TF_NewBufferFromString', 'This');
-%! assert (class (ref), "uint64");
+%! assert_equal (class (ref), "uint64");
 %! out = tensorflow ('TF_GetBufferToString', ref);
-%! assert (class (out), "char");
-%! assert (out, 'This');
+%! assert_equal (class (out), "char");
+%! assert_equal (out, 'This');
 %! out = tensorflow ('TF_GetBuffer', ref);
-%! assert (class (out), "uint8");
-%! assert (out, uint8 ([84, 104, 105, 115]));
+%! assert_equal (class (out), "uint8");
+%! assert_equal (out, uint8 ([84, 104, 105, 115]));
 %! tensorflow ('TF_DeleteBuffer', ref);
 %!test
 %! ref = tensorflow ('TF_NewBufferFromString', uint8 ([1:5]));
-%! assert (class (ref), "uint64");
+%! assert_equal (class (ref), "uint64");
 %! out = tensorflow ('TF_GetBufferToString', ref);
-%! assert (class (out), "char");
+%! assert_equal (class (out), "char");
 %! out = tensorflow ('TF_GetBuffer', ref);
-%! assert (class (out), "uint8");
-%! assert (out, uint8 ([1:5]));
+%! assert_equal (class (out), "uint8");
+%! assert_equal (out, uint8 ([1:5]));
 %! tensorflow ('TF_DeleteBuffer', ref);
 
   ## ---------------------------------------------------------------------------
@@ -1766,53 +1766,53 @@ which is 0 if the index is out of bounds. \n\
 %!error <tensorflow: 2nd argument must be an uint32 scalar indexing the appropriate TF_DataType to be parsed to the 'TF_DataTypeName' OCTAVE function.> ...
 %! tensorflow ('TF_DataTypeName', 1);
 %!test
-%! assert (tensorflow ('TF_DataTypeName', uint32 (1)), "TF_FLOAT");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (2)), "TF_DOUBLE");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (3)), "TF_INT32");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (4)), "TF_UINT8");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (5)), "TF_INT16");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (6)), "TF_INT8");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (7)), "TF_STRING");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (8)), "TF_COMPLEX64");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (9)), "TF_INT64");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (10)), "TF_BOOL");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (11)), "TF_QINT8");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (12)), "TF_QUINT8");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (13)), "TF_QINT32");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (14)), "TF_BFLOAT16");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (15)), "TF_QINT16");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (16)), "TF_QUINT16");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (17)), "TF_UINT16");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (18)), "TF_COMPLEX128");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (19)), "TF_HALF");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (20)), "TF_RESOURCE");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (21)), "TF_VARIANT");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (22)), "TF_UINT32");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (23)), "TF_UINT64");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (24)), "TF_FLOAT8_E5M2");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (25)), "TF_FLOAT8_E4M3FN");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (29)), "TF_INT4");
-%! assert (tensorflow ('TF_DataTypeName', uint32 (30)), "TF_UINT4");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (1)), "TF_FLOAT");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (2)), "TF_DOUBLE");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (3)), "TF_INT32");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (4)), "TF_UINT8");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (5)), "TF_INT16");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (6)), "TF_INT8");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (7)), "TF_STRING");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (8)), "TF_COMPLEX64");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (9)), "TF_INT64");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (10)), "TF_BOOL");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (11)), "TF_QINT8");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (12)), "TF_QUINT8");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (13)), "TF_QINT32");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (14)), "TF_BFLOAT16");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (15)), "TF_QINT16");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (16)), "TF_QUINT16");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (17)), "TF_UINT16");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (18)), "TF_COMPLEX128");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (19)), "TF_HALF");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (20)), "TF_RESOURCE");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (21)), "TF_VARIANT");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (22)), "TF_UINT32");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (23)), "TF_UINT64");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (24)), "TF_FLOAT8_E5M2");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (25)), "TF_FLOAT8_E4M3FN");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (29)), "TF_INT4");
+%! assert_equal (tensorflow ('TF_DataTypeName', uint32 (30)), "TF_UINT4");
 
 %!error <tensorflow: one extra argument is required for the 'TF_DataTypeSize' C API function.> ...
 %! tensorflow ('TF_DataTypeSize');
 %!error <tensorflow: 2nd argument must be an uint32 scalar indexing the appropriate TF_DataType to be parsed to the 'TF_DataTypeSize' C API function.> ...
 %! tensorflow ('TF_DataTypeSize', 1);
 %!test
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (1)), uint64 (4));   ## TF_FLOAT
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (2)), uint64 (8));   ## TF_DOUBLE
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (3)), uint64 (4));   ## TF_INT32
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (4)), uint64 (1));   ## TF_UINT8
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (5)), uint64 (2));   ## TF_INT16
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (6)), uint64 (1));   ## TF_INT8
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (7)), uint64 (0));   ## TF_STRING
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (8)), uint64 (8));   ## TF_COMPLEX64
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (9)), uint64 (8));   ## TF_INT64
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (10)), uint64 (1));  ## TF_BOOL
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (17)), uint64 (2));  ## TF_UINT16
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (18)), uint64 (16)); ## TF_COMPLEX128
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (22)), uint64 (4));  ## TF_UINT32
-%! assert (tensorflow ('TF_DataTypeSize', uint32 (23)), uint64 (8));  ## TF_UINT64
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (1)), uint64 (4));   ## TF_FLOAT
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (2)), uint64 (8));   ## TF_DOUBLE
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (3)), uint64 (4));   ## TF_INT32
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (4)), uint64 (1));   ## TF_UINT8
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (5)), uint64 (2));   ## TF_INT16
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (6)), uint64 (1));   ## TF_INT8
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (7)), uint64 (0));   ## TF_STRING
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (8)), uint64 (8));   ## TF_COMPLEX64
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (9)), uint64 (8));   ## TF_INT64
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (10)), uint64 (1));  ## TF_BOOL
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (17)), uint64 (2));  ## TF_UINT16
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (18)), uint64 (16)); ## TF_COMPLEX128
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (22)), uint64 (4));  ## TF_UINT32
+%! assert_equal (tensorflow ('TF_DataTypeSize', uint32 (23)), uint64 (8));  ## TF_UINT64
 
   ## ---------------------------------------------------------------------------
   ## C API functions referenced by the TF_Graph classdef
@@ -3205,7 +3205,7 @@ which is 0 if the index is out of bounds. \n\
 
 %!test
 %! opts = tensorflow ('TF_NewSessionOptions');
-%! assert (class (opts), "uint64");
+%! assert_equal (class (opts), "uint64");
 %! assert (opts != 0);
 %! tensorflow ('TF_SetTarget', opts, 'local');
 %! tensorflow ('TF_DeleteSessionOptions', opts);
@@ -3270,13 +3270,13 @@ which is 0 if the index is out of bounds. \n\
 %! opts = tensorflow ('TF_NewSessionOptions');
 %! graph = tensorflow ('TF_NewGraph');
 %! session = tensorflow ('TF_NewSession', graph, opts, status);
-%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert_equal (tensorflow ('TF_GetCode', status), uint32 (0));
 %! assert (session != 0);
 %! devices = tensorflow ('TF_SessionListDevices', session, status);
-%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert_equal (tensorflow ('TF_GetCode', status), uint32 (0));
 %! num = tensorflow ('TF_DeviceListCount', devices);
 %! assert (num >= 1);
-%! assert (tensorflow ('TF_DeviceListType', devices, int32 (0), status), "CPU");
+%! assert_equal (tensorflow ('TF_DeviceListType', devices, int32 (0), status), "CPU");
 %! tensorflow ('TF_DeleteDeviceList', devices);
 %! tensorflow ('TF_CloseSession', session, status);
 %! tensorflow ('TF_DeleteSession', session, status);
@@ -3291,8 +3291,8 @@ which is 0 if the index is out of bounds. \n\
 %! graph = tensorflow ('TF_NewGraph');
 %! session = tensorflow ('TF_LoadSessionFromSavedModel', opts, uint64 (0), ...
 %!                       '/no/such/model', {'serve'}, graph, uint64 (0), status);
-%! assert (session, uint64 (0));
-%! assert (tensorflow ('TF_GetCode', status), uint32 (5));
+%! assert_equal (session, uint64 (0));
+%! assert_equal (tensorflow ('TF_GetCode', status), uint32 (5));
 %! assert (! isempty (strfind (tensorflow ('TF_Message', status), '/no/such/model')));
 %! tensorflow ('TF_DeleteSessionOptions', opts);
 %! tensorflow ('TF_DeleteGraph', graph);
@@ -3315,7 +3315,7 @@ which is 0 if the index is out of bounds. \n\
 %! tensorflow ('TF_AddInput', desc, out_x);
 %! tensorflow ('TF_AddInput', desc, out_y);
 %! op_z = tensorflow ('TF_FinishOperation', desc, status);
-%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert_equal (tensorflow ('TF_GetCode', status), uint32 (0));
 %! out_z = tensorflow ('TF_NewOutput', op_z, int32 (0));
 %! opts = tensorflow ('TF_NewSessionOptions');
 %! session = tensorflow ('TF_NewSession', graph, opts, status);
@@ -3323,9 +3323,9 @@ which is 0 if the index is out of bounds. \n\
 %! ty = tensorflow ('TF_LoadTensor', single ([10, 20, 30; 40, 50, 60]));
 %! out = tensorflow ('TF_SessionRun', session, uint64 (0), [out_x, out_y], ...
 %!                   [tx, ty], out_z, uint64 ([]), uint64 (0), status);
-%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
-%! assert (numel (out), 1);
-%! assert (tensorflow ('TF_SaveTensor', out(1)), single ([11, 22, 33; 44, 55, 66]));
+%! assert_equal (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert_equal (numel (out), 1);
+%! assert_equal (tensorflow ('TF_SaveTensor', out(1)), single ([11, 22, 33; 44, 55, 66]));
 %! tensorflow ('TF_DeleteTensor', out(1));
 %! tensorflow ('TF_DeleteTensor', tx);
 %! tensorflow ('TF_DeleteTensor', ty);
@@ -3400,8 +3400,8 @@ which is 0 if the index is out of bounds. \n\
 %! tensorflow ('TF_SetAttrType', desc, 'dtype', uint32 (1));
 %! oper = tensorflow ('TF_FinishOperation', desc, status);
 %! output = tensorflow ('TF_NewOutput', oper, int32 (0));
-%! assert (tensorflow ('TF_OperationOutputType', output), uint32 (1));
-%! assert (tensorflow ('TF_OperationOutputNumConsumers', output), int32 (0));
+%! assert_equal (tensorflow ('TF_OperationOutputType', output), uint32 (1));
+%! assert_equal (tensorflow ('TF_OperationOutputNumConsumers', output), int32 (0));
 %! tensorflow ('TF_DeleteOutput', output);
 %! tensorflow ('TF_DeleteGraph', graph);
 %! tensorflow ('TF_DeleteStatus', status);
@@ -3417,7 +3417,7 @@ which is 0 if the index is out of bounds. \n\
 %! graph = tensorflow ('TF_NewGraph');
 %! session = tensorflow ('TF_LoadSessionFromSavedModel', opts, uint64 (0), ...
 %!                       model, {'serve'}, graph, uint64 (0), status);
-%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert_equal (tensorflow ('TF_GetCode', status), uint32 (0));
 %! assert (session != 0);
 %! op_in = tensorflow ('TF_GraphOperationByName', graph, 'serving_default_x');
 %! op_out = tensorflow ('TF_GraphOperationByName', graph, 'StatefulPartitionedCall');
@@ -3428,8 +3428,8 @@ which is 0 if the index is out of bounds. \n\
 %! tx = tensorflow ('TF_LoadTensor', single ([1, 2, 3]));
 %! res = tensorflow ('TF_SessionRun', session, uint64 (0), in, tx, out, ...
 %!                   uint64 ([]), uint64 (0), status);
-%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
-%! assert (tensorflow ('TF_SaveTensor', res(1)), single ([3, 7, 13]));
+%! assert_equal (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert_equal (tensorflow ('TF_SaveTensor', res(1)), single ([3, 7, 13]));
 %! tensorflow ('TF_DeleteTensor', res(1));
 %! tensorflow ('TF_DeleteTensor', tx);
 %! tensorflow ('TF_DeleteOutput', in);
@@ -3456,8 +3456,8 @@ which is 0 if the index is out of bounds. \n\
 %!   tx = tensorflow ('TF_LoadTensor', single ([1, 1, 1; 2, 2, 2]));
 %!   res = tensorflow ('TF_SessionRun', session, uint64 (0), in, tx, out, ...
 %!                     uint64 ([]), uint64 (0), status);
-%!   assert (tensorflow ('TF_GetCode', status), uint32 (0));
-%!   assert (tensorflow ('TF_SaveTensor', res(1)), single ([3, 4, 5; 5, 7, 9]));
+%!   assert_equal (tensorflow ('TF_GetCode', status), uint32 (0));
+%!   assert_equal (tensorflow ('TF_SaveTensor', res(1)), single ([3, 4, 5; 5, 7, 9]));
 %!   tensorflow ('TF_DeleteTensor', res(1));
 %!   tensorflow ('TF_DeleteTensor', tx);
 %! endfor
@@ -3477,8 +3477,8 @@ which is 0 if the index is out of bounds. \n\
 %! for i = 1:numel (vals)
 %!   tensor = tensorflow ('TF_LoadTensor', vals{i});
 %!   back = tensorflow ('TF_SaveTensor', tensor);
-%!   assert (back, vals{i});
-%!   assert (size (back), size (vals{i}));
+%!   assert_equal (back, vals{i});
+%!   assert_equal (size (back), size (vals{i}));
 %!   tensorflow ('TF_DeleteTensor', tensor);
 %! endfor
 
@@ -3486,9 +3486,9 @@ which is 0 if the index is out of bounds. \n\
 ## Tensor of shape [2, 3], not [3, 2].
 %!test
 %! tensor = tensorflow ('TF_LoadTensor', rand (2, 3));
-%! assert (tensorflow ('TF_NumDims', tensor), int32 (2));
-%! assert (tensorflow ('TF_Dim', tensor, int32 (1)), uint64 (2));
-%! assert (tensorflow ('TF_Dim', tensor, int32 (2)), uint64 (3));
+%! assert_equal (tensorflow ('TF_NumDims', tensor), int32 (2));
+%! assert_equal (tensorflow ('TF_Dim', tensor, int32 (1)), uint64 (2));
+%! assert_equal (tensorflow ('TF_Dim', tensor, int32 (2)), uint64 (3));
 %! tensorflow ('TF_DeleteTensor', tensor);
 
 ## Inference on a matrix whose rows differ.  The model broadcasts its
@@ -3509,9 +3509,9 @@ which is 0 if the index is out of bounds. \n\
 %! tx = tensorflow ('TF_LoadTensor', x);
 %! res = tensorflow ('TF_SessionRun', session, uint64 (0), in, tx, out, ...
 %!                   uint64 ([]), uint64 (0), status);
-%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
-%! assert (tensorflow ('TF_SaveTensor', res(1)), ...
-%!         x .* single ([2, 3, 4]) + single ([1, 1, 1]));
+%! assert_equal (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert_equal (tensorflow ('TF_SaveTensor', res(1)), ...
+%!               x .* single ([2, 3, 4]) + single ([1, 1, 1]));
 %! tensorflow ('TF_DeleteTensor', res(1));
 %! tensorflow ('TF_DeleteTensor', tx);
 %! tensorflow ('TF_DeleteOutput', in);

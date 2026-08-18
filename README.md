@@ -8,7 +8,16 @@ TensorFlow interface for GNU Octave
 3. Contribute
 
 ## 1. About
-This is an experimental Octave Package for interfacing GNU Octave to the TensorFlow library (`v2.18.0`) through its C API. At the moment, there is only a single dynamically linked octave library (the `tensorflow` function), which is handling the interface between Octave and TensorFlow's C API. This package is at a very early stage of development and the calls to the intermediate **`OCT`** interface might (most likely) change in the near future. Once the **`OCT`** interface supports most of TensorFlow's C API, Octave classdefs will be added as wrappers to facilitate the use of the TensorFlow library through GNU Octave. This package has been inspired by @asteinh's work on [tensorflow.m](https://github.com/asteinh/tensorflow.m).
+This is an Octave Package for interfacing GNU Octave to the TensorFlow library (`v2.18.0`) through its C API. It runs inference with trained models saved in the SavedModel format:
+
+```matlab
+model = TFModel ("path/to/saved_model");
+y = model.predict (x);
+```
+
+Underneath, `TF_Session`, `TF_Graph` and `TF_Tensor` wrap the corresponding TensorFlow objects, each releasing what it owns when it goes out of scope, and the `tensorflow` function is the intermediate **`OCT`** interface handling the calls to the C API directly. 111 of the 208 exported C API functions are wrapped, covering graph construction and execution; training is not supported, since the layer that makes it usable lives in TensorFlow's Python API and has no counterpart in the C API.
+
+This package has been inspired by @asteinh's work on [tensorflow.m](https://github.com/asteinh/tensorflow.m).
 
 
 Documentation for the `tensorflow` Octave Package can be found [here](https://pr0m1th3as.github.io/tensorflow/).

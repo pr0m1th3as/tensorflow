@@ -1,0 +1,40 @@
+Summary of important user-visible changes for tensorflow 0.2.0:
+-------------------------------------------------------------------
+
+ ** The package now runs inference with trained models.  `TFModel` loads a
+    SavedModel directory and `predict` runs it, over the new `TF_Session`,
+    `TF_Graph` and `TF_Tensor` classes, which release what they own when no
+    variable refers to them any more.
+
+ ** The Session group of the C API is available through the `OCT` interface:
+    TF_NewSessionOptions, TF_SetTarget, TF_SetConfig, TF_DeleteSessionOptions,
+    TF_NewSession, TF_LoadSessionFromSavedModel, TF_SessionRun,
+    TF_SessionListDevices, TF_CloseSession, TF_DeleteSession, and the six
+    device list functions.  TF_GraphOperations returns every operation of a
+    graph in one call.
+
+ ** libtensorflow 2.18.0 is now required, the last release for Linux x86.  The
+    download URL changed with it, and `ldconfig` must be run without arguments
+    for the loader to find the library.
+
+ ** GNU Octave 11.1 is now required.
+
+ ** Data is repositioned between Octave's column major and TensorFlow's row
+    major storage.  Previously the shape was passed through unchanged while the
+    elements were transposed, so any model taking an input of two or more
+    dimensions returned wrong values without reporting an error.
+
+ ** TF_LoadTensor built every tensor over the buffer of a local Octave array,
+    which was released while the tensor still pointed into it.  The tensor now
+    owns its data.  It also accepts a scalar logical, which it rejected before.
+
+ ** TF_SetAttrType and TF_GraphNextOperation read an argument value as an
+    address and crashed on every call.  TF_GraphNextOperation now returns the
+    position along with the operation, Octave having no way of passing it by
+    reference.
+
+ ** A TF_Output can now be given the operation and index it refers to, which
+    nothing could set before, leaving graph wiring and TF_SessionRun
+    unreachable.
+
+ ** Character arguments reached the C API without a terminating null.

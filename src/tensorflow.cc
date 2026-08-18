@@ -3405,4 +3405,120 @@ which is 0 if the index is out of bounds. \n\
 %! tensorflow ('TF_DeleteOutput', output);
 %! tensorflow ('TF_DeleteGraph', graph);
 %! tensorflow ('TF_DeleteStatus', status);
+## Load the SavedModel shipped in inst/tf_test_model and run inference through
+## it.  The model holds its coefficients as variables, so the expected values
+## can only be produced if the checkpoint was restored as well as the graph
+## imported.  It was exported by TensorFlow 2.21, which is newer than the
+## libtensorflow 2.18 this package links against.
+%!test
+%! model = __tf_test_model__ ();
+%! status = tensorflow ('TF_NewStatus');
+%! opts = tensorflow ('TF_NewSessionOptions');
+%! graph = tensorflow ('TF_NewGraph');
+%! session = tensorflow ('TF_LoadSessionFromSavedModel', opts, uint64 (0), ...
+%!                       model, {'serve'}, graph, uint64 (0), status);
+%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert (session != 0);
+%! op_in = tensorflow ('TF_GraphOperationByName', graph, 'serving_default_x');
+%! op_out = tensorflow ('TF_GraphOperationByName', graph, 'StatefulPartitionedCall');
+%! assert (op_in != 0);
+%! assert (op_out != 0);
+%! in = tensorflow ('TF_NewOutput', op_in, int32 (0));
+%! out = tensorflow ('TF_NewOutput', op_out, int32 (0));
+%! tx = tensorflow ('TF_LoadTensor', single ([1, 2, 3]));
+%! res = tensorflow ('TF_SessionRun', session, uint64 (0), in, tx, out, ...
+%!                   uint64 ([]), uint64 (0), status);
+%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert (tensorflow ('TF_SaveTensor', res(1)), single ([3, 7, 13]));
+%! tensorflow ('TF_DeleteTensor', res(1));
+%! tensorflow ('TF_DeleteTensor', tx);
+%! tensorflow ('TF_DeleteOutput', in);
+%! tensorflow ('TF_DeleteOutput', out);
+%! tensorflow ('TF_CloseSession', session, status);
+%! tensorflow ('TF_DeleteSession', session, status);
+%! tensorflow ('TF_DeleteSessionOptions', opts);
+%! tensorflow ('TF_DeleteGraph', graph);
+%! tensorflow ('TF_DeleteStatus', status);
+
+## The same model, run twice through one Session, gives the same answer.
+%!test
+%! model = __tf_test_model__ ();
+%! status = tensorflow ('TF_NewStatus');
+%! opts = tensorflow ('TF_NewSessionOptions');
+%! graph = tensorflow ('TF_NewGraph');
+%! session = tensorflow ('TF_LoadSessionFromSavedModel', opts, uint64 (0), ...
+%!                       model, {'serve'}, graph, uint64 (0), status);
+%! op_in = tensorflow ('TF_GraphOperationByName', graph, 'serving_default_x');
+%! op_out = tensorflow ('TF_GraphOperationByName', graph, 'StatefulPartitionedCall');
+%! in = tensorflow ('TF_NewOutput', op_in, int32 (0));
+%! out = tensorflow ('TF_NewOutput', op_out, int32 (0));
+%! for i = 1:2
+%!   tx = tensorflow ('TF_LoadTensor', single ([1, 1, 1; 2, 2, 2]));
+%!   res = tensorflow ('TF_SessionRun', session, uint64 (0), in, tx, out, ...
+%!                     uint64 ([]), uint64 (0), status);
+%!   assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%!   assert (tensorflow ('TF_SaveTensor', res(1)), single ([3, 4, 5; 5, 7, 9]));
+%!   tensorflow ('TF_DeleteTensor', res(1));
+%!   tensorflow ('TF_DeleteTensor', tx);
+%! endfor
+%! tensorflow ('TF_DeleteOutput', in);
+%! tensorflow ('TF_DeleteOutput', out);
+%! tensorflow ('TF_CloseSession', session, status);
+%! tensorflow ('TF_DeleteSession', session, status);
+%! tensorflow ('TF_DeleteSessionOptions', opts);
+%! tensorflow ('TF_DeleteGraph', graph);
+%! tensorflow ('TF_DeleteStatus', status);
+## Octave stores arrays column major and TensorFlow stores them row major, so
+## the elements are repositioned in both directions while the shape is kept.
+## A round trip must therefore return the array unchanged, whatever its rank.
+%!test
+%! vals = {rand(3, 5), single(rand(2, 4)), int32(magic (4)), rand(2, 3, 4), ...
+%!         rand(2, 3, 4, 2), true(3, 2), rand(1, 7), 42};
+%! for i = 1:numel (vals)
+%!   tensor = tensorflow ('TF_LoadTensor', vals{i});
+%!   back = tensorflow ('TF_SaveTensor', tensor);
+%!   assert (back, vals{i});
+%!   assert (size (back), size (vals{i}));
+%!   tensorflow ('TF_DeleteTensor', tensor);
+%! endfor
+
+## The shape is preserved rather than reversed: an Octave 2x3 matrix is a
+## Tensor of shape [2, 3], not [3, 2].
+%!test
+%! tensor = tensorflow ('TF_LoadTensor', rand (2, 3));
+%! assert (tensorflow ('TF_NumDims', tensor), int32 (2));
+%! assert (tensorflow ('TF_Dim', tensor, int32 (1)), uint64 (2));
+%! assert (tensorflow ('TF_Dim', tensor, int32 (2)), uint64 (3));
+%! tensorflow ('TF_DeleteTensor', tensor);
+
+## Inference on a matrix whose rows differ.  The model broadcasts its
+## coefficients along the last axis, so unlike an element-wise operation it is
+## not invariant under transposition, and it fails if the storage order of the
+## input or the output is not converted.
+%!test
+%! status = tensorflow ('TF_NewStatus');
+%! opts = tensorflow ('TF_NewSessionOptions');
+%! graph = tensorflow ('TF_NewGraph');
+%! session = tensorflow ('TF_LoadSessionFromSavedModel', opts, uint64 (0), ...
+%!                       __tf_test_model__ (), {'serve'}, graph, uint64 (0), status);
+%! in = tensorflow ('TF_NewOutput', ...
+%!        tensorflow ('TF_GraphOperationByName', graph, 'serving_default_x'), int32 (0));
+%! out = tensorflow ('TF_NewOutput', ...
+%!        tensorflow ('TF_GraphOperationByName', graph, 'StatefulPartitionedCall'), int32 (0));
+%! x = single ([1, 2, 3; 4, 5, 6]);
+%! tx = tensorflow ('TF_LoadTensor', x);
+%! res = tensorflow ('TF_SessionRun', session, uint64 (0), in, tx, out, ...
+%!                   uint64 ([]), uint64 (0), status);
+%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert (tensorflow ('TF_SaveTensor', res(1)), ...
+%!         x .* single ([2, 3, 4]) + single ([1, 1, 1]));
+%! tensorflow ('TF_DeleteTensor', res(1));
+%! tensorflow ('TF_DeleteTensor', tx);
+%! tensorflow ('TF_DeleteOutput', in);
+%! tensorflow ('TF_DeleteOutput', out);
+%! tensorflow ('TF_CloseSession', session, status);
+%! tensorflow ('TF_DeleteSession', session, status);
+%! tensorflow ('TF_DeleteSessionOptions', opts);
+%! tensorflow ('TF_DeleteGraph', graph);
+%! tensorflow ('TF_DeleteStatus', status);
 */

@@ -1,6 +1,9 @@
 ## Makefile for compiling and linking tensorflow octave
 ## interface to the C API of the tensorflow library
 
+## Set by 'pkg install'; the default lets the Makefile be run on its own.
+MKOCTFILE ?= mkoctfile
+
 all:
 	$(MKOCTFILE) tensorflow.cc \
                OCT_TF_Buffer.cc \

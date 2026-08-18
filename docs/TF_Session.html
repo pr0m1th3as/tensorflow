@@ -458,7 +458,7 @@ Return the devices the Session can execute on as a struct array with
           </div>
           <div class="collapse" id="TF_Session_devices-example1">
             <div class="card-body">
-                <p><code>devices</code> reports what the session can execute on.  A build of libtensorflow without GPU support finds the CPU alone.</p>
+                <p><code>devices</code> reports what the session can execute on.  A build of libtensorflow without GPU support finds the CPU alone; a GPU build also lists each visible GPU, which TensorFlow then places operations on by itself.</p>
                 <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> sess = TF_Session.fromSavedModel (__tf_test_model__ ());
  d = sess.devices ();
  for i = 1:numel (d)

@@ -4,7 +4,9 @@
 %! ## own tests, which computes `y = w .* x + b` for `w = [2, 3, 4]` and
 %! ## `b = [1, 1, 1]`.
 %!
-%! model = TFModel (__tf_test_model__ ())
+%! model = TFModel (__tf_test_model__ ());
+%! class (model)
+%! model.predict (single ([1, 1, 1]))
 
 %!demo
 %! ## The operations the model is fed through and read from are found by

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TensorFlow interface for GNU Octave: TFModel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+    <script type="text/javascript">
+      window.addEventListener("load", () => {
+        for (let i of document.querySelectorAll(".collapse ul")) {
+          let tog = document.createElement("div");
+          tog.innerHTML = i.previousSibling.textContent;
+          tog.className = "toggle";
+          tog.onclick = () => tog.classList.toggle("show");
+          i.parentElement.removeChild(i.previousSibling);
+          i.parentElement.insertBefore(tog, i);
+        }
+      });
+      // Open the collapsible demo an "#example" link points to, then scroll to
+      // it.  getElementById (not querySelector) matches ids that contain a dot,
+      // e.g. "Class.method-example1".
+      function openHashTarget () {
+        if (! window.location.hash) { return; }
+        let el = document.getElementById (
+          decodeURIComponent (window.location.hash.slice (1)));
+        if (! el) { return; }
+        if (el.classList.contains ("collapse") &&
+            ! el.classList.contains ("show")) {
+          bootstrap.Collapse.getOrCreateInstance (el).show ();
+        }
+        el.scrollIntoView ();
+      }
+      window.addEventListener ("DOMContentLoaded", openHashTarget);
+      window.addEventListener ("hashchange", openHashTarget);
+      // When the collapsible named by the current URL fragment is collapsed,
+      // drop the fragment (replaceState: no scroll, no history entry).  Otherwise
+      // the fragment would still equal this id, so clicking the same #example
+      // link again fires no "hashchange" and the example would not re-expand.
+      document.addEventListener ("hide.bs.collapse", (e) => {
+        if (e.target.id && window.location.hash === "#" + e.target.id) {
+          history.replaceState (null, "",
+            window.location.pathname + window.location.search);
+        }
+      });
+    </script>
+    <style>
+    h5.fs {
+    margin-top: -0.15em;
+    margin-bottom: -0.15em;
+    }
+    h6:hover {
+      color: gray;
+    }
+    code {
+    font-family: Consolas, "Courier New", monospace;
+    border-radius: 0.3em;
+    white-space: nowrap;
+    color: gray;
+    }
+    code.description {
+    font-family: Consolas, "Courier New", monospace;
+    border-radius: 0.3em;
+    white-space: normal;
+    font-size:1.2em;
+    color: gray;
+    }
+    var {
+    font-family: Consolas, "Courier New", monospace;
+    border-radius: 0.3em;
+    font-style: normal;
+    font-weight: bold;
+    color: gray;
+    }
+    td {
+      vertical-align: top;
+    }
+    [id^="togList"],                        /* HIDE CHECKBOX */
+    [id^="togList"] ~ .list,                /* HIDE LIST */
+    [id^="togList"] + label  span + span,   /* HIDE "Collapse" */
+    [id^="togList"]:checked + label span{   /* HIDE "Expand" (IF CHECKED) */
+      display:none;
+    }
+    [id^="togList"]:checked + label span + span{
+      display:inline-block;                 /* SHOW "Collapse" (IF CHECKED) */
+    }
+    [id^="togList"]:checked ~ .list{
+      display:block;                        /* SHOW LIST (IF CHECKED) */
+    }
+    </style>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <div class="container-xl">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href=index.html>
+              <img src="assets/tensorflow.png" alt="tensorflow" class="d-inline-block align-top" width="25" height="25">
+              TensorFlow interface for GNU Octave
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html#Inference">
+                    <i class="fas fa-list-alt"></i>
+                    Inference
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://gnu-octave.github.io/packages/">
+                  <img src="assets/octave-logo.svg" alt="GNU Octave logo" class="d-inline-block align-top" width="25" height="25">
+                    Octave Packages
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://www.octave.org">
+                    <i class="fas fa-home"></i>
+                    GNU Octave website
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="container-xl my-4">
+      <div class="row flex-nowrap" style="min-height:0">
+        <div class="col-md-2 bg-light" style="overflow-y: scroll; width: 250px;">
+          <div class="p-2" style="text-align: center;">
+            <h3>Categories &</h3>
+            <h4 style="color: blue">Functions List</h4>
+          </div>
+			<div class="row">
+				<input id="togList1" type="checkbox" checked>
+				<label for="togList1">
+					<span><h6>Inference</h6></span>
+					<span><h6>Inference</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="TFModel.html" class="text-decoration-none font-monospace fw-bolder"><small>TFModel</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList2" type="checkbox">
+				<label for="togList2">
+					<span><h6>Objects</h6></span>
+					<span><h6>Objects</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="TF_Tensor.html" class="text-decoration-none font-monospace"><small>TF_Tensor</small></a></li>
+					<li><a href="TF_Graph.html" class="text-decoration-none font-monospace"><small>TF_Graph</small></a></li>
+					<li><a href="TF_Session.html" class="text-decoration-none font-monospace"><small>TF_Session</small></a></li>
+				</ul>
+				</div>
+			</div>
+			<div class="row">
+				<input id="togList3" type="checkbox">
+				<label for="togList3">
+					<span><h6>Octave API</h6></span>
+					<span><h6>Octave API</h6></span>
+				</label>
+				<div class="list">
+				<ul style="list-style-type: none; padding-left: 20px;">
+					<li><a href="tensorflow.html" class="text-decoration-none font-monospace"><small>tensorflow</small></a></li>
+				</ul>
+				</div>
+			</div>
+
+			  </div>
+			  <div class="col-md-10">
+          <div class="card rounded">
+            <div class="card-header card-header-mod">
+              <div class="row d-flex flex-wrap align-items-center">
+                <h3 class="d-inline-block mr-2">
+                Class&nbsp;Definition: <b><code>TFModel</code></b>
+                </h3>
+              </div>
+            </div>
+            <div class="card-body">
+<dl><code><h5 class="description">tensorflow: TFModel</h5></code></dl>
+<p> A trained TensorFlow model loaded from a SavedModel directory, for running
+ inference.
+</p>
+<div class="ms-5">
+<table><tr><td>&nbsp;</td><td><pre class="example"> model = TFModel (&quot;path/to/saved_model&quot;);
+ y = model.predict (x);
+</pre></td></tr></table>
+
+<p> The operations feeding and reading the model are found by inspecting the
+ Graph, following the names <code>tf.saved_model.save</code> gives them: the
+ inputs are the placeholders named <code>'serving_default_<var>name</var>'</code> and
+ the output is the operation named <code>'StatefulPartitionedCall'</code>.  Both
+ are reported by the <code>'InputNames'</code> and <code>'OutputNames'</code>
+ properties and can be given explicitly to the constructor when a model
+ does not follow those names.
+</p>
+<p> Signature names are not read from the SavedModel itself, which would mean
+ decoding the MetaGraphDef, so a model exported some other way may need its
+ operation names supplied.  Inspect them with
+ <code><var>model</var>.Session.Graph.operationNames ()</code>.
+</p>
+<p><strong>Source Code: </strong>
+  <a href="https://github.com/pr0m1th3as/tensorflow/tree/main/inst/TFModel.m">TFModel</a>
+</p>
+</div>
+        <p class="lead my-3">The <code>TFModel</code> class contains the following properties:</p>
+
+        <div class="container-xl my-1">
+          <div class="row">
+            <button class="btn btn-light btn-sm w-100 text-start" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseProperty1"
+              aria-expanded="false" aria-controls="collapseProperty1">
+              <div class="row align-items-center">
+                <div class="col-4">
+                  <h4 class="d-inline-block mr-4">
+                    <b><code>Directory</code></b>
+                  </h4>
+                </div>
+                <div class="col-8">
+The directory the SavedModel was loaded from.
+                </div>
+              </div>
+          </div>
+          <div class="collapse multi-collapse" id="collapseProperty1">
+            <div class="border-bottom py-2">
+
+<p> </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-1">
+          <div class="row">
+            <button class="btn btn-light btn-sm w-100 text-start" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseProperty2"
+              aria-expanded="false" aria-controls="collapseProperty2">
+              <div class="row align-items-center">
+                <div class="col-4">
+                  <h4 class="d-inline-block mr-4">
+                    <b><code>Tags</code></b>
+                  </h4>
+                </div>
+                <div class="col-8">
+The tags the MetaGraphDef was identified by.
+                </div>
+              </div>
+          </div>
+          <div class="collapse multi-collapse" id="collapseProperty2">
+            <div class="border-bottom py-2">
+
+<p> </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-1">
+          <div class="row">
+            <button class="btn btn-light btn-sm w-100 text-start" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseProperty3"
+              aria-expanded="false" aria-controls="collapseProperty3">
+              <div class="row align-items-center">
+                <div class="col-4">
+                  <h4 class="d-inline-block mr-4">
+                    <b><code>InputNames</code></b>
+                  </h4>
+                </div>
+                <div class="col-8">
+The operations the inputs are fed to, as a cellstr row vector.
+                </div>
+              </div>
+          </div>
+          <div class="collapse multi-collapse" id="collapseProperty3">
+            <div class="border-bottom py-2">
+
+<p> </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-1">
+          <div class="row">
+            <button class="btn btn-light btn-sm w-100 text-start" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseProperty4"
+              aria-expanded="false" aria-controls="collapseProperty4">
+              <div class="row align-items-center">
+                <div class="col-4">
+                  <h4 class="d-inline-block mr-4">
+                    <b><code>OutputNames</code></b>
+                  </h4>
+                </div>
+                <div class="col-8">
+The operations the outputs are read from, as a cellstr row vector.
+                </div>
+              </div>
+          </div>
+          <div class="collapse multi-collapse" id="collapseProperty4">
+            <div class="border-bottom py-2">
+
+<p> </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-1">
+          <div class="row">
+            <button class="btn btn-light btn-sm w-100 text-start" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseProperty5"
+              aria-expanded="false" aria-controls="collapseProperty5">
+              <div class="row align-items-center">
+                <div class="col-4">
+                  <h4 class="d-inline-block mr-4">
+                    <b><code>Session</code></b>
+                  </h4>
+                </div>
+                <div class="col-8">
+The <code>TF_Session</code> the model runs in.
+                </div>
+              </div>
+          </div>
+          <div class="collapse multi-collapse" id="collapseProperty5">
+            <div class="border-bottom py-2">
+
+<p> </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <p class="lead my-3">The <code>TFModel</code> class offers the following public methods:</p>
+
+        <div class="container-xl my-1">
+          <div class="row">
+            <button class="btn btn-light btn-sm w-100 text-start" type="button"
+              data-bs-toggle="collapse" data-bs-target="#colapsibleConstructor"
+              aria-expanded="false" aria-controls="colapsibleConstructor">
+              <div class="row align-items-center">
+                <div class="col-4">
+                  <h4 class="d-inline-block mr-4">
+                    <b><code>TFModel</code></b>
+                  </h4>
+                </div>
+                <div class="col-8">
+Load a SavedModel from the directory <var>dirname</var>.
+                </div>
+              </div>
+          </div>
+          <div class="collapse multi-collapse" id="colapsibleConstructor">
+            <div class="border-bottom py-2">
+<dl>
+<dt><code><h5 class="fs">TFModel: <var>obj</var> = <b>TFModel</b> (<var>dirname</var>)</code></h5></dt>
+<dt><code><h5 class="fs">TFModel: <var>obj</var> = <b>TFModel</b> (<var>dirname</var>, <var>name</var>, <var>value</var>, &hellip;)</code></h5></dt>
+</dl>
+<p> </p>
+<p> The following optional Name/Value pairs are accepted.
+</p>
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-sm">
+<thead class="table-primary"><tr><th width="20%"><var>Name</var></th><th width="5%"></th><th width="75%"><var>Value</var></th></tr></thead>
+<tr><td width="20%"><code>'Tags'</code></td><td width="5%"></td><td width="75%">The tags identifying the MetaGraphDef to
+ load, a character vector or a cellstr vector.  The default is
+ <code>{'serve'}</code>.</td></tr>
+<tr><td width="20%"><code>'InputNames'</code></td><td width="5%"></td><td width="75%">The operations to feed, a character
+ vector or a cellstr vector.  The default is every placeholder named
+ <code>'serving_default_<var>name</var>'</code>, sorted by name.</td></tr>
+<tr><td width="20%"><code>'OutputNames'</code></td><td width="5%"></td><td width="75%">The operations to read, a character
+ vector or a cellstr vector.  The default is every output of the operation
+ named <code>'StatefulPartitionedCall'</code>.</td></tr>
+</table>
+</div>
+
+
+        <div class="card rounded my-4">
+          <div class="card-header card-header-mod">
+            <div class="row d-flex flex-wrap align-items-center">
+              <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                <button class="btn btn-link fs-4 fw-normal d-inline-block mr-2 p-0 text-reset text-decoration-none"
+                  type="button" data-bs-toggle="collapse"
+                  data-bs-target="#TFModel_TFModel-example1" aria-expanded="false"
+                  aria-controls="TFModel_TFModel-example1">
+                Example: 1
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="collapse" id="TFModel_TFModel-example1">
+            <div class="card-body">
+                <p><code>TFModel</code> loads a model that was trained and exported elsewhere, from the directory holding its SavedModel.  The package ships a small one for its own tests, which computes <code>y = w .* x + b</code> for <code>w = [2, 3, 4]</code> and <code>b = [1, 1, 1]</code>.</p>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> model = TFModel (__tf_test_model__ ());
+ class (model)</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">ans = TFModel</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> model.predict (single ([1, 1, 1]))</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">ans =
+
+   3   4   5</pre>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card rounded my-4">
+          <div class="card-header card-header-mod">
+            <div class="row d-flex flex-wrap align-items-center">
+              <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                <button class="btn btn-link fs-4 fw-normal d-inline-block mr-2 p-0 text-reset text-decoration-none"
+                  type="button" data-bs-toggle="collapse"
+                  data-bs-target="#TFModel_TFModel-example2" aria-expanded="false"
+                  aria-controls="TFModel_TFModel-example2">
+                Example: 2
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="collapse" id="TFModel_TFModel-example2">
+            <div class="card-body">
+                <p>The operations the model is fed through and read from are found by inspecting its graph, and reported so they can be checked.  A model exported by some other means may not follow those names, in which case they are given to the constructor with <code>InputNames</code> and <code>OutputNames</code>.</p>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> model = TFModel (__tf_test_model__ ());
+ model.InputNames</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">ans =
+{
+  [1,1] = serving_default_x
+}</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> model.OutputNames</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">ans =
+{
+  [1,1] = StatefulPartitionedCall:0
+}</pre>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card rounded my-4">
+          <div class="card-header card-header-mod">
+            <div class="row d-flex flex-wrap align-items-center">
+              <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                <button class="btn btn-link fs-4 fw-normal d-inline-block mr-2 p-0 text-reset text-decoration-none"
+                  type="button" data-bs-toggle="collapse"
+                  data-bs-target="#TFModel_TFModel-example3" aria-expanded="false"
+                  aria-controls="TFModel_TFModel-example3">
+                Example: 3
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="collapse" id="TFModel_TFModel-example3">
+            <div class="card-body">
+                <p>The tags select which graph to load from the SavedModel, and default to <code>serve</code>, the one exported for inference.</p>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> model = TFModel (__tf_test_model__ (), "Tags", "serve");
+ model.Tags</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">ans =
+{
+  [1,1] = serve
+}</pre>
+
+            </div>
+          </div>
+        </div>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-1">
+          <div class="row">
+            <button class="btn btn-light btn-sm w-100 text-start" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseMethod1"
+              aria-expanded="false" aria-controls="collapseMethod1">
+              <div class="row align-items-center">
+                <div class="col-4">
+                  <h4 class="d-inline-block mr-4">
+                    <b><code>predict</code></b>
+                  </h4>
+                </div>
+                <div class="col-8">
+Run the model on <var>x</var> and return its output.
+                </div>
+              </div>
+          </div>
+          <div class="collapse multi-collapse" id="collapseMethod1">
+            <div class="border-bottom py-2">
+<dl>
+<dt><code><h5 class="fs">TFModel: <var>y</var> = <b>predict</b> (<var>obj</var>, <var>x</var>)</code></h5></dt>
+<dt><code><h5 class="fs">TFModel: <var>y</var> = <b>predict</b> (<var>obj</var>, <var>x1</var>, &hellip;, <var>xN</var>)</code></h5></dt>
+</dl>
+<p> </p>
+<p> As many inputs must be given as the model has <code>'InputNames'</code>, in
+ that order.  <var>y</var> is an Octave array when the model has a single
+ output, and a cell array of them otherwise.
+</p>
+
+        <div class="card rounded my-4">
+          <div class="card-header card-header-mod">
+            <div class="row d-flex flex-wrap align-items-center">
+              <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                <button class="btn btn-link fs-4 fw-normal d-inline-block mr-2 p-0 text-reset text-decoration-none"
+                  type="button" data-bs-toggle="collapse"
+                  data-bs-target="#TFModel_predict-example1" aria-expanded="false"
+                  aria-controls="TFModel_predict-example1">
+                Example: 1
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="collapse" id="TFModel_predict-example1">
+            <div class="card-body">
+                <p><code>predict</code> runs the model on an input and returns its output.  This model expects rows of three values and scales each column by <code>[2, 3, 4]</code> before adding one.</p>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> model = TFModel (__tf_test_model__ ());
+ x = single ([1, 2, 3])</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">x =
+
+   1   2   3</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> y = model.predict (x)</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">y =
+
+    3    7   13</pre>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card rounded my-4">
+          <div class="card-header card-header-mod">
+            <div class="row d-flex flex-wrap align-items-center">
+              <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                <button class="btn btn-link fs-4 fw-normal d-inline-block mr-2 p-0 text-reset text-decoration-none"
+                  type="button" data-bs-toggle="collapse"
+                  data-bs-target="#TFModel_predict-example2" aria-expanded="false"
+                  aria-controls="TFModel_predict-example2">
+                Example: 2
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="collapse" id="TFModel_predict-example2">
+            <div class="card-body">
+                <p>Each row is an independent observation, so several are predicted at once by stacking them.</p>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> model = TFModel (__tf_test_model__ ());
+ x = single ([1, 2, 3; 4, 5, 6; 0, 0, 0])</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">x =
+
+   1   2   3
+   4   5   6
+   0   0   0</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> y = model.predict (x)</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">y =
+
+    3    7   13
+    9   16   25
+    1    1    1</pre>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card rounded my-4">
+          <div class="card-header card-header-mod">
+            <div class="row d-flex flex-wrap align-items-center">
+              <div class="col-sm-3 col-md-5 mb-2 mb-sm-0">
+                <button class="btn btn-link fs-4 fw-normal d-inline-block mr-2 p-0 text-reset text-decoration-none"
+                  type="button" data-bs-toggle="collapse"
+                  data-bs-target="#TFModel_predict-example3" aria-expanded="false"
+                  aria-controls="TFModel_predict-example3">
+                Example: 3
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="collapse" id="TFModel_predict-example3">
+            <div class="card-body">
+                <p>The input may also be given as a <code>TF_Tensor</code>, which is useful when the same values are predicted more than once, since the conversion from an Octave array happens only when the tensor is built.</p>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> model = TFModel (__tf_test_model__ ());
+ t = TF_Tensor (single ([1, 1, 1]));
+ model.predict (t)</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">ans =
+
+   3   4   5</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0; border: 1px solid #cfe0e6; border-left: 4px solid #4a90a4; border-radius: 4px; background-color: #eef5f8;"> model.predict (t)</pre>
+                <pre style="overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; margin: 0.3rem 0 0.8rem 0; border: 1px solid #e2e2e2; border-left: 4px solid #b7b7b7; border-radius: 4px; background-color: #fafafa;">ans =
+
+   3   4   5</pre>
+
+            </div>
+          </div>
+        </div>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container-xl my-1">
+          <div class="row">
+            <button class="btn btn-light btn-sm w-100 text-start" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapseMethod2"
+              aria-expanded="false" aria-controls="collapseMethod2">
+              <div class="row align-items-center">
+                <div class="col-4">
+                  <h4 class="d-inline-block mr-4">
+                    <b><code>delete</code></b>
+                  </h4>
+                </div>
+                <div class="col-8">
+Release the model and the Session it runs in.
+                </div>
+              </div>
+          </div>
+          <div class="collapse multi-collapse" id="collapseMethod2">
+            <div class="border-bottom py-2">
+<dl>
+<dt><code><h5 class="fs">TFModel: <b>delete</b> (<var>obj</var>)</code></h5></dt>
+</dl>
+<p> </p>
+
+
+            </div>
+          </div>
+        </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

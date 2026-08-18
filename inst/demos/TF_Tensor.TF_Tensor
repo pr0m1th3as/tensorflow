@@ -3,7 +3,10 @@
 %! ## works with.  The values are copied, so the array it was built from may be
 %! ## changed or cleared afterwards.
 %!
-%! t = TF_Tensor (single ([1, 2, 3; 4, 5, 6]))
+%! t = TF_Tensor (single ([1, 2, 3; 4, 5, 6]));
+%! t.shape ()
+%! t.dataType ()
+%! t.value ()
 
 %!demo
 %! ## Octave stores arrays column major and TensorFlow stores them row major,

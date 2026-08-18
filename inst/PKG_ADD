@@ -1,2 +1,7 @@
 addpath (fullfile (fileparts (canonicalize_file_name (mfilename ("fullpath"))), "demos"));
 addpath (fullfile (fileparts (canonicalize_file_name (mfilename ("fullpath"))), "tests"));
+## Silence TensorFlow's own INFO logging, which prints six lines every time a
+## SavedModel is loaded.  A value already chosen by the user is left alone.
+if (isempty (getenv ("TF_CPP_MIN_LOG_LEVEL")))
+  setenv ("TF_CPP_MIN_LOG_LEVEL", "1");
+endif

@@ -1,0 +1,54 @@
+## Copyright (C) 2026 Andreas Bertsatos <abertsatos@biol.uoa.gr>
+##
+## This file is part of the tensorflow package for GNU Octave.
+##
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
+##
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
+##
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
+
+################################################################################
+##                    ** Create and release 'TFModel' **                      ##
+################################################################################
+
+%!test
+%! m = TFModel (__tf_test_model__ ());
+%! assert_equal (class (m), "TFModel");
+%! assert_equal (m.Directory, __tf_test_model__ ());
+%! assert_equal (m.Tags, {"serve"});
+%! assert_equal (class (m.Session), "TF_Session");
+%!test
+%! m = TFModel (__tf_test_model__ ());
+%! assert_equal (m.InputNames, {"serving_default_x"});
+%! assert_equal (m.OutputNames, {"StatefulPartitionedCall:0"});
+%!error <TFModel: optional arguments must be given in Name/Value pairs.> ...
+%! TFModel (__tf_test_model__ (), "Tags");
+%!error <TFModel: unrecognized parameter name 'Nope'.> ...
+%! TFModel (__tf_test_model__ (), "Nope", 1);
+
+%!test
+%! m = TFModel (__tf_test_model__ ());
+%! x = single ([1, 2, 3; 4, 5, 6]);
+%! assert_equal (m.predict (x), x .* single ([2, 3, 4]) + single ([1, 1, 1]));
+%!test
+%! m = TFModel (__tf_test_model__ ());
+%! assert_equal (m.predict (single ([1, 1, 1])), single ([3, 4, 5]));
+%!test
+%! m = TFModel (__tf_test_model__ ());
+%! assert_equal (m.predict (TF_Tensor (single ([1, 1, 1]))), single ([3, 4, 5]));
+%!test
+%! m = TFModel (__tf_test_model__ (), "InputNames", "serving_default_x", ...
+%!              "OutputNames", "StatefulPartitionedCall:0");
+%! assert_equal (m.predict (single ([1, 1, 1])), single ([3, 4, 5]));
+%!error <TFModel.predict: 1 input\(s\) expected, 2 given.> ...
+%! m = TFModel (__tf_test_model__ ()); m.predict (1, 2);
+%!error <TFModel.predict: the model has already been released.> ...
+%! m = TFModel (__tf_test_model__ ()); m.delete (); m.predict (1);

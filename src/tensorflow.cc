@@ -198,11 +198,23 @@ Extra input arguments are identified as @var{in2}, @var{in3}, @var{in3}, etc. \
 \n\
 @item @qcode{'TF_GraphNextOperation'} \n\
 @itemize \n\
-@item @var{out} : scalar @code{uint64} pointer to Operation. \n\
+@item @var{out} : two element @code{uint64} vector, the pointer to the \n\
+Operation and the position following it, the pointer being 0 once the Graph \n\
+is exhausted.  The position is returned rather than updated in place, since \n\
+Octave cannot pass it by reference, and it may advance by more than one. \n\
 @end itemize \n\
 @itemize \n\
 @item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
 @item @var{in3} : scalar @code{uint64} position of Operation in Graph. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_GraphOperations'} \n\
+@itemize \n\
+@item @var{out} : vector @code{uint64} pointers to every Operation in the \n\
+Graph. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
 @end itemize \n\
 \n\
 @item @qcode{'TF_GraphToGraphDef'} \n\
@@ -1244,6 +1256,10 @@ which is 0 if the index is out of bounds. \n\
   else if (c_api == "TF_GraphNextOperation")
   {
     plhs = OCT_TF_GraphNextOperation (nrhs, args);
+  }
+  else if (c_api == "TF_GraphOperations")          // OCTAVE specific
+  {
+    plhs = OCT_TF_GraphOperations (nrhs, args);
   }
   else if (c_api == "TF_GraphToGraphDef")
   {
@@ -3516,6 +3532,47 @@ which is 0 if the index is out of bounds. \n\
 %! tensorflow ('TF_DeleteTensor', tx);
 %! tensorflow ('TF_DeleteOutput', in);
 %! tensorflow ('TF_DeleteOutput', out);
+%! tensorflow ('TF_CloseSession', session, status);
+%! tensorflow ('TF_DeleteSession', session, status);
+%! tensorflow ('TF_DeleteSessionOptions', opts);
+%! tensorflow ('TF_DeleteGraph', graph);
+%! tensorflow ('TF_DeleteStatus', status);
+%!error <tensorflow: one extra argument is required for the 'TF_GraphOperations' OCTAVE function.> ...
+%! tensorflow ('TF_GraphOperations');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Graph parsed to the 'TF_GraphOperations' OCTAVE function.> ...
+%! tensorflow ('TF_GraphOperations', 1);
+
+## An empty Graph holds no operations, and walking it with
+## TF_GraphNextOperation ends at once.
+%!test
+%! graph = tensorflow ('TF_NewGraph');
+%! assert_equal (tensorflow ('TF_GraphOperations', graph), zeros (0, 0, "uint64"));
+%! res = tensorflow ('TF_GraphNextOperation', graph, uint64 (0));
+%! assert_equal (numel (res), 2);
+%! assert_equal (res(1), uint64 (0));
+%! tensorflow ('TF_DeleteGraph', graph);
+
+## Walking a loaded Graph reaches every operation TF_GraphOperations reports.
+%!test
+%! status = tensorflow ('TF_NewStatus');
+%! opts = tensorflow ('TF_NewSessionOptions');
+%! graph = tensorflow ('TF_NewGraph');
+%! session = tensorflow ('TF_LoadSessionFromSavedModel', opts, uint64 (0), ...
+%!                       __tf_test_model__ (), {'serve'}, graph, uint64 (0), status);
+%! opers = tensorflow ('TF_GraphOperations', graph);
+%! assert (numel (opers) > 0);
+%! walked = {};
+%! pos = uint64 (0);
+%! do
+%!   res = tensorflow ('TF_GraphNextOperation', graph, pos);
+%!   if (res(1) == 0)
+%!     break;
+%!   endif
+%!   walked{end+1} = tensorflow ('TF_OperationName', res(1));
+%!   pos = res(2);
+%! until (false)
+%! assert_equal (numel (walked), numel (opers));
+%! assert (any (strcmp (walked, 'serving_default_x')));
 %! tensorflow ('TF_CloseSession', session, status);
 %! tensorflow ('TF_DeleteSession', session, status);
 %! tensorflow ('TF_DeleteSessionOptions', opts);

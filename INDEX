@@ -1,3 +1,9 @@
 tensorflow >> TensorFlow interface for GNU Octave
+Inference
+ TFModel
+Objects
+ TF_Tensor
+ TF_Graph
+ TF_Session
 Octave API
  tensorflow

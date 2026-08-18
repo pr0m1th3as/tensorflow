@@ -232,7 +232,7 @@ octave_value OCT_TF_LoadTensor (OCT_ARGS)
                  TF_DataTypeSize (TF_UINT8), nelem, true);
   }
   // TF_BOOL
-  else if (args(1).is_bool_matrix ())
+  else if (args(1).islogical ())
   {
     boolNDArray oct_data = args(1).bool_array_value ();
     size_t len = TF_DataTypeSize (TF_BOOL) * (int) nelem;

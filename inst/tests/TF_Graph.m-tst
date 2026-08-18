@@ -1,0 +1,66 @@
+## Copyright (C) 2026 Andreas Bertsatos <abertsatos@biol.uoa.gr>
+##
+## This file is part of the tensorflow package for GNU Octave.
+##
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
+##
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
+##
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
+
+################################################################################
+##                    ** Create and release 'TF_Graph' **                     ##
+################################################################################
+
+%!test
+%! g = TF_Graph ();
+%! assert_equal (class (g), "TF_Graph");
+%! assert (g.Pointer != 0);
+%!test
+%! g = TF_Graph ();
+%! g.delete ();
+%! assert_equal (g.Pointer, uint64 (0));
+%!test
+%! g = TF_Graph ();
+%! g.delete ();
+%! g.delete ();
+%! assert_equal (g.Pointer, uint64 (0));
+%!error <TF_Graph.hasOperation: the Graph has already been released.> ...
+%! g = TF_Graph (); g.delete (); g.hasOperation ("x");
+
+%!test
+%! g = TF_Graph ();
+%! assert_equal (g.operationNames (), cell (1, 0));
+%!test
+%! g = TF_Graph ();
+%! assert_equal (g.operationTypes (), cell (1, 0));
+%!test
+%! g = TF_Graph ();
+%! assert_equal (g.hasOperation ("nothing"), false);
+%!error <TF_Graph.hasOperation: NAME must be a character vector.> ...
+%! g = TF_Graph (); g.hasOperation (5);
+
+%!test
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! names = s.Graph.operationNames ();
+%! types = s.Graph.operationTypes ();
+%! assert_equal (numel (names), numel (types));
+%! assert (numel (names) > 0);
+%! assert (any (strcmp (names, "serving_default_x")));
+%! assert (any (strcmp (types, "Placeholder")));
+%!test
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! assert_equal (s.Graph.hasOperation ("serving_default_x"), true);
+%! assert_equal (s.Graph.hasOperation ("no_such_operation"), false);
+%!test
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! assert_equal (s.Graph.numOutputs ("StatefulPartitionedCall"), 1);
+%!error <TF_Graph.numOutputs: the Graph holds no operation named 'nope'.> ...
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ()); s.Graph.numOutputs ("nope");

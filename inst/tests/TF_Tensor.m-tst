@@ -1,0 +1,92 @@
+## Copyright (C) 2026 Andreas Bertsatos <abertsatos@biol.uoa.gr>
+##
+## This file is part of the tensorflow package for GNU Octave.
+##
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
+##
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
+##
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
+
+################################################################################
+##                   ** Create and release 'TF_Tensor' **                     ##
+################################################################################
+
+%!test
+%! t = TF_Tensor (magic (3));
+%! assert_equal (class (t), "TF_Tensor");
+%! assert (t.Pointer != 0);
+%!test
+%! t = TF_Tensor (magic (3));
+%! t.delete ();
+%! assert_equal (t.Pointer, uint64 (0));
+%!test
+%! t = TF_Tensor (magic (3));
+%! t.delete ();
+%! t.delete ();
+%! assert_equal (t.Pointer, uint64 (0));
+%!test
+%! t = TF_Tensor (magic (3));
+%! u = t;
+%! t.delete ();
+%! assert_equal (u.Pointer, uint64 (0));
+%!error <TF_Tensor: DATA must not be empty.> TF_Tensor ([]);
+%!error <TF_Tensor.value: the Tensor has already been released.> ...
+%! t = TF_Tensor (1); t.delete (); t.value ();
+
+%!test
+%! t = TF_Tensor (magic (3));
+%! assert_equal (t.value (), magic (3));
+%!test
+%! t = TF_Tensor (single ([1, 2, 3; 4, 5, 6]));
+%! assert_equal (t.value (), single ([1, 2, 3; 4, 5, 6]));
+%!test
+%! t = TF_Tensor (int32 (magic (4)));
+%! assert_equal (t.value (), int32 (magic (4)));
+%!test
+%! t = TF_Tensor (true (2, 3));
+%! assert_equal (t.value (), true (2, 3));
+%!test
+%! x = rand (2, 3, 4);
+%! t = TF_Tensor (x);
+%! assert_equal (t.value (), x);
+
+%!test
+%! t = TF_Tensor (rand (2, 3));
+%! assert_equal (t.shape (), [2, 3]);
+%!test
+%! t = TF_Tensor (rand (2, 3, 4));
+%! assert_equal (t.shape (), [2, 3, 4]);
+%!test
+%! t = TF_Tensor (42);
+%! assert_equal (t.shape (), [1, 1]);
+%!test
+%! t = TF_Tensor (rand (1, 5));
+%! assert_equal (t.shape (), [1, 5]);
+
+%!test
+%! t = TF_Tensor (rand (2, 3, 4));
+%! assert_equal (t.numElements (), 24);
+%!test
+%! t = TF_Tensor (42);
+%! assert_equal (t.numElements (), 1);
+
+%!test
+%! t = TF_Tensor (rand (2, 2));
+%! assert_equal (t.dataType (), "TF_DOUBLE");
+%!test
+%! t = TF_Tensor (single (rand (2, 2)));
+%! assert_equal (t.dataType (), "TF_FLOAT");
+%!test
+%! t = TF_Tensor (int32 (1));
+%! assert_equal (t.dataType (), "TF_INT32");
+%!test
+%! t = TF_Tensor (true);
+%! assert_equal (t.dataType (), "TF_BOOL");

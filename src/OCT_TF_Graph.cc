@@ -17,6 +17,8 @@ You should have received a copy of the GNU General Public License along with
 this program; if not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <vector>
+
 #include "tensorflow.h"
 
 // -----------------------------------------------------------------------------
@@ -348,11 +350,57 @@ octave_value OCT_TF_GraphNextOperation (OCT_ARGS)
   // Get pointer to Graph
   TF_Graph* graph = (TF_Graph*) args(1).uint64_value ();
   // Get position of Operation in Graph
-  size_t* op_pos = (size_t*) args(2).int64_value ();
-  // Get operation
-  TF_Operation* oper = TF_GraphNextOperation (graph, op_pos);
-  octave_uint64 str_ptr = (uint64_t) oper;
-  octave_value plhs = str_ptr;
+  size_t op_pos = (size_t) args(2).uint64_value ();
+  // Get operation.  The C API function advances the position past the
+  // returned Operation, which it may do by more than one when the Graph
+  // holds deleted nodes, so the new position is returned along with the
+  // Operation, Octave having no way of passing it by reference.
+  TF_Operation* oper = TF_GraphNextOperation (graph, &op_pos);
+  dim_vector oct_dims;
+  oct_dims.resize (2);
+  oct_dims(0) = 1;
+  oct_dims(1) = 2;
+  uint64NDArray out (oct_dims);
+  out(0) = (uint64_t) oper;
+  out(1) = (uint64_t) op_pos;
+  octave_value plhs = out;
+  return plhs;
+}
+
+// uint64NDArray TF_GraphOperations(TF_Graph* graph);   // OCTAVE specific
+//
+// Return the pointers to every Operation of the Graph, by walking it with
+// TF_GraphNextOperation until it is exhausted.
+octave_value OCT_TF_GraphOperations (OCT_ARGS)
+{
+  if (nrhs < 2)
+  {
+    error ("tensorflow: one extra argument is required "
+           "for the 'TF_GraphOperations' OCTAVE function.");
+  }
+  // Check octave_value type for pointer to Graph
+  if (! args(1).is_uint64_type () || ! args(1).is_scalar_type ())
+  {
+    error ("tensorflow: 2nd argument must be an uint64 scalar pointer to "
+           "the Graph parsed to the 'TF_GraphOperations' OCTAVE function.");
+  }
+  // Get pointer to Graph
+  TF_Graph* graph = (TF_Graph*) args(1).uint64_value ();
+  // Collect the pointer to every Operation in the Graph
+  std::vector<uint64_t> opers;
+  size_t op_pos = 0;
+  TF_Operation* oper;
+  while ((oper = TF_GraphNextOperation (graph, &op_pos)) != nullptr)
+  {
+    opers.push_back ((uint64_t) oper);
+  }
+  dim_vector oct_dims;
+  oct_dims.resize (2);
+  oct_dims(0) = opers.size () > 0 ? 1 : 0;
+  oct_dims(1) = opers.size ();
+  uint64NDArray out (oct_dims);
+  for (size_t i = 0; i < opers.size (); i++) {out(i) = opers[i];}
+  octave_value plhs = out;
   return plhs;
 }
 

@@ -69,6 +69,7 @@ octave_value OCT_TF_NewOperationLocked (OCT_ARGS);
 octave_value OCT_TF_NewOperation (OCT_ARGS);
 octave_value OCT_TF_GraphOperationByName (OCT_ARGS);
 octave_value OCT_TF_GraphNextOperation (OCT_ARGS);
+octave_value OCT_TF_GraphOperations (OCT_ARGS);   // OCTAVE specific
 void OCT_TF_GraphToGraphDef (OCT_ARGS);
 void OCT_TF_GraphGetOpDef (OCT_ARGS);
 void OCT_TF_GraphVersions (OCT_ARGS);

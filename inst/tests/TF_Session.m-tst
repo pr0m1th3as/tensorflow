@@ -1,0 +1,93 @@
+## Copyright (C) 2026 Andreas Bertsatos <abertsatos@biol.uoa.gr>
+##
+## This file is part of the tensorflow package for GNU Octave.
+##
+## This program is free software; you can redistribute it and/or modify it under
+## the terms of the GNU General Public License as published by the Free Software
+## Foundation; either version 3 of the License, or (at your option) any later
+## version.
+##
+## This program is distributed in the hope that it will be useful, but WITHOUT
+## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+## FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+## details.
+##
+## You should have received a copy of the GNU General Public License along with
+## this program; if not, see <http://www.gnu.org/licenses/>.
+
+################################################################################
+##                   ** Create and release 'TF_Session' **                    ##
+################################################################################
+
+%!test
+%! g = TF_Graph ();
+%! s = TF_Session (g);
+%! assert_equal (class (s), "TF_Session");
+%! assert (s.Pointer != 0);
+%! assert_equal (class (s.Graph), "TF_Graph");
+%!test
+%! s = TF_Session (TF_Graph ());
+%! s.delete ();
+%! assert_equal (s.Pointer, uint64 (0));
+%!test
+%! s = TF_Session (TF_Graph ());
+%! s.delete ();
+%! s.delete ();
+%! assert_equal (s.Pointer, uint64 (0));
+%!error <TF_Session: GRAPH must be a TF_Graph object.> TF_Session (5);
+%!error <TF_Session.run: the Session has already been released.> ...
+%! s = TF_Session (TF_Graph ()); s.delete (); s.run ("a", 1, "b");
+
+%!test
+%! s = TF_Session (TF_Graph ());
+%! d = s.devices ();
+%! assert (numel (d) >= 1);
+%! assert_equal (fieldnames (d), {"Name"; "Type"; "MemoryBytes"; "Incarnation"});
+%! assert_equal (d(1).Type, "CPU");
+
+%!test
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! assert_equal (class (s), "TF_Session");
+%! assert (s.Pointer != 0);
+%!test
+%! s = TF_Session.fromSavedModel (__tf_test_model__ (), "serve");
+%! assert (s.Pointer != 0);
+%!test
+%! s = TF_Session.fromSavedModel (__tf_test_model__ (), {"serve"});
+%! assert (s.Pointer != 0);
+%!error <TF_Session.fromSavedModel: DIRNAME must be a character vector.> ...
+%! TF_Session.fromSavedModel (5);
+%!error <TF_Session.fromSavedModel: '/no/such/dir' is not a directory.> ...
+%! TF_Session.fromSavedModel ("/no/such/dir");
+
+%!test
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! x = single ([1, 2, 3; 4, 5, 6]);
+%! y = s.run ("serving_default_x", x, "StatefulPartitionedCall");
+%! assert_equal (y, x .* single ([2, 3, 4]) + single ([1, 1, 1]));
+%!test
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! x = single ([1, 2, 3]);
+%! y = s.run ({"serving_default_x:0"}, {x}, {"StatefulPartitionedCall:0"});
+%! assert_equal (y, single ([3, 7, 13]));
+%!test
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! x = single ([1, 2, 3]);
+%! y = s.run ("serving_default_x", TF_Tensor (x), "StatefulPartitionedCall");
+%! assert_equal (y, single ([3, 7, 13]));
+%!test
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ());
+%! x = single ([1, 2, 3]);
+%! y = s.run ("serving_default_x", x, {"StatefulPartitionedCall", "StatefulPartitionedCall"});
+%! assert_equal (class (y), "cell");
+%! assert_equal (numel (y), 2);
+%! assert_equal (y{1}, y{2});
+%!error <TF_Session.run: VALUES must have as many elements as INPUTS.> ...
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ()); ...
+%! s.run ("serving_default_x", {1, 2}, "StatefulPartitionedCall");
+%!error <TF_Session.run: the Graph holds no operation named 'nope'.> ...
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ()); ...
+%! s.run ("nope", single (1), "StatefulPartitionedCall");
+%!error <TF_Session.run: operation 'StatefulPartitionedCall' has 1 output\(s\), index 7 requested.> ...
+%! s = TF_Session.fromSavedModel (__tf_test_model__ ()); ...
+%! s.run ("serving_default_x", single ([1, 2, 3]), "StatefulPartitionedCall:7");

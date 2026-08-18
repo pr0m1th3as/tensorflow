@@ -153,11 +153,11 @@ octave_value OCT_TF_OperationOutputListLength (OCT_ARGS)
   // Get pointer to Operation
   TF_Operation* oper = (TF_Operation*) args(1).uint64_value ();
   // Get name of Output list
-  charMatrix arg_name = args(2).char_matrix_value ();
+  string arg_name = args(2).string_value ();
   // Get pointer to Status
   TF_Status* status = (TF_Status*) args(3).uint64_value ();
   // Get length of Output list
-  int listlen = TF_OperationOutputListLength (oper, arg_name.data (), status);
+  int listlen = TF_OperationOutputListLength (oper, arg_name.c_str (), status);
   // Return length to Octave as int32
   octave_int32 list_len = listlen;
   octave_value plhs = list_len;
@@ -222,11 +222,11 @@ octave_value OCT_TF_OperationInputListLength (OCT_ARGS)
   // Get pointer to Operation
   TF_Operation* oper = (TF_Operation*) args(1).uint64_value ();
   // Get name of Input list
-  charMatrix arg_name = args(2).char_matrix_value ();
+  string arg_name = args(2).string_value ();
   // Get pointer to Status
   TF_Status* status = (TF_Status*) args(3).uint64_value ();
   // Get length of Input list
-  int listlen = TF_OperationInputListLength (oper, arg_name.data (), status);
+  int listlen = TF_OperationInputListLength (oper, arg_name.c_str (), status);
   // Return length to Octave as int32
   octave_int32 list_len = listlen;
   octave_value plhs = list_len;

@@ -320,10 +320,16 @@ Extra input arguments are identified as @var{in2}, @var{in3}, @var{in3}, etc. \
 \n\
 @subheading C API functions relared to the TF_Input classdef \n\
 @itemize \n\
-@item @qcode{'TF_Input'} \n\
+@item @qcode{'TF_NewInput'} \n\
 @itemize \n\
 @item @var{out} : scalar @code{uint64} pointer to Input. \n\
 @end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation, optional. \n\
+@item @var{in3} : scalar @code{int32} input index of Operation, optional. \n\
+@end itemize \n\
+Without the optional arguments the Input is zero initialized and refers to no \n\
+Operation, in which case it must not be parsed to any other C API function. \n\
 \n\
 @item @qcode{'TF_DeleteInput'} \n\
 @itemize \n\
@@ -649,10 +655,16 @@ protocol buffer for attribute. \n\
 \n\
 @subheading C API functions relared to the TF_Output classdef \n\
 @itemize \n\
-@item @qcode{'TF_Output'} \n\
+@item @qcode{'TF_NewOutput'} \n\
 @itemize \n\
 @item @var{out} : scalar @code{uint64} pointer to Output. \n\
 @end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Operation, optional. \n\
+@item @var{in3} : scalar @code{int32} output index of Operation, optional. \n\
+@end itemize \n\
+Without the optional arguments the Output is zero initialized and refers to no \n\
+Operation, in which case it must not be parsed to any other C API function. \n\
 \n\
 @item @qcode{'TF_DeleteOutput'} \n\
 @itemize \n\
@@ -681,6 +693,171 @@ protocol buffer for attribute. \n\
 @end itemize \n\
 @itemize \n\
 @item @var{in2} : scalar @code{uint64} pointer to Output. \n\
+@end itemize \n\
+@end itemize \n\
+\n\
+@subheading C API functions relared to the TF_SessionOptions classdef \n\
+@itemize \n\
+@item @qcode{'TF_NewSessionOptions'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint64} pointer to new SessionOptions. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetTarget'} \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to SessionOptions. \n\
+@item @var{in3} : vector @code{char} target, which may be empty, a single \n\
+entry, or a comma separated list of entries. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SetConfig'} \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to SessionOptions. \n\
+@item @var{in3} : vector @code{char} or @code{uint8} serialized ConfigProto. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DeleteSessionOptions'} \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to SessionOptions. \n\
+@end itemize \n\
+@end itemize \n\
+\n\
+@subheading C API functions relared to the TF_Session classdef \n\
+@itemize \n\
+@item @qcode{'TF_NewSession'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint64} pointer to new Session. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Graph. \n\
+@item @var{in3} : scalar @code{uint64} pointer to SessionOptions. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_LoadSessionFromSavedModel'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint64} pointer to new Session, which is 0 if \n\
+the SavedModel could not be loaded, in which case the Status carries the \n\
+reason. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to SessionOptions. \n\
+@item @var{in3} : scalar @code{uint64} pointer to run options Buffer, or 0 \n\
+for none. \n\
+@item @var{in4} : vector @code{char} path of the exported SavedModel. \n\
+@item @var{in5} : vector @code{cellstr} tags identifying one MetaGraphDef in \n\
+the SavedModel, or a @code{char} vector for a single tag. \n\
+@item @var{in6} : scalar @code{uint64} pointer to Graph, which must be newly \n\
+allocated and is populated with the contents of the SavedModel. \n\
+@item @var{in7} : scalar @code{uint64} pointer to MetaGraphDef Buffer, or 0 \n\
+for none. \n\
+@item @var{in8} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_SessionRun'} \n\
+@itemize \n\
+@item @var{out} : vector @code{uint64} pointers to the output Tensors, one \n\
+per requested output, which the caller must delete. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Session. \n\
+@item @var{in3} : scalar @code{uint64} pointer to run options Buffer, or 0 \n\
+for none. \n\
+@item @var{in4} : vector @code{uint64} pointers to the input Outputs. \n\
+@item @var{in5} : vector @code{uint64} pointers to the input Tensors, which \n\
+must have as many elements as @var{in4}. \n\
+@item @var{in6} : vector @code{uint64} pointers to the output Outputs. \n\
+@item @var{in7} : vector @code{uint64} pointers to the target Operations, \n\
+which may be empty. \n\
+@item @var{in8} : scalar @code{uint64} pointer to run metadata Buffer, or 0 \n\
+for none. \n\
+@item @var{in9} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+The number of inputs, outputs and targets is taken from the number of \n\
+elements of the corresponding vectors, hence the 'ninputs', 'noutputs' and \n\
+'ntargets' arguments of the C API function are omitted. \n\
+\n\
+@item @qcode{'TF_SessionListDevices'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint64} pointer to DeviceList, which the \n\
+caller must delete. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Session. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_CloseSession'} \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Session. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DeleteSession'} \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to Session. \n\
+@item @var{in3} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+@end itemize \n\
+\n\
+@subheading C API functions relared to the TF_DeviceList classdef \n\
+@itemize \n\
+@item @qcode{'TF_DeviceListCount'} \n\
+@itemize \n\
+@item @var{out} : scalar number of devices in DeviceList. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to DeviceList. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DeviceListName'} \n\
+@itemize \n\
+@item @var{out} : vector @code{char} full name of the device, which is empty \n\
+if the index is out of bounds. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to DeviceList. \n\
+@item @var{in3} : scalar @code{int32} zero based device index. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DeviceListType'} \n\
+@itemize \n\
+@item @var{out} : vector @code{char} type of the device, which is empty if \n\
+the index is out of bounds. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to DeviceList. \n\
+@item @var{in3} : scalar @code{int32} zero based device index. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DeviceListMemoryBytes'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{int64} memory of the device, which is -1 if \n\
+the index is out of bounds. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to DeviceList. \n\
+@item @var{in3} : scalar @code{int32} zero based device index. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DeviceListIncarnation'} \n\
+@itemize \n\
+@item @var{out} : scalar @code{uint64} incarnation number of the device, \n\
+which is 0 if the index is out of bounds. \n\
+@end itemize \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to DeviceList. \n\
+@item @var{in3} : scalar @code{int32} zero based device index. \n\
+@item @var{in4} : scalar @code{uint64} pointer to Status. \n\
+@end itemize \n\
+\n\
+@item @qcode{'TF_DeleteDeviceList'} \n\
+@itemize \n\
+@item @var{in2} : scalar @code{uint64} pointer to DeviceList. \n\
 @end itemize \n\
 @end itemize \n\
 \n\
@@ -1003,6 +1180,33 @@ protocol buffer for attribute. \n\
     plhs = OCT_TF_DataTypeSize (nrhs, args);
   }
   // ---------------------------------------------------------------------------
+  // C API functions referenced by the TF_DeviceList classdef
+  // ---------------------------------------------------------------------------
+  else if (c_api == "TF_DeleteDeviceList")
+  {
+    OCT_TF_DeleteDeviceList (nrhs, args);
+  }
+  else if (c_api == "TF_DeviceListCount")
+  {
+    plhs = OCT_TF_DeviceListCount (nrhs, args);
+  }
+  else if (c_api == "TF_DeviceListName")
+  {
+    plhs = OCT_TF_DeviceListName (nrhs, args);
+  }
+  else if (c_api == "TF_DeviceListType")
+  {
+    plhs = OCT_TF_DeviceListType (nrhs, args);
+  }
+  else if (c_api == "TF_DeviceListMemoryBytes")
+  {
+    plhs = OCT_TF_DeviceListMemoryBytes (nrhs, args);
+  }
+  else if (c_api == "TF_DeviceListIncarnation")
+  {
+    plhs = OCT_TF_DeviceListIncarnation (nrhs, args);
+  }
+  // ---------------------------------------------------------------------------
   // C API functions referenced by the TF_Graph classdef
   // ---------------------------------------------------------------------------
   else if (c_api == "TF_NewGraph")
@@ -1296,6 +1500,52 @@ protocol buffer for attribute. \n\
     plhs = OCT_TF_OperationOutputConsumers (nrhs, args);
   }
   // ---------------------------------------------------------------------------
+  // C API functions referenced by the TF_Session classdef
+  // ---------------------------------------------------------------------------
+  else if (c_api == "TF_NewSession")
+  {
+    plhs = OCT_TF_NewSession (nrhs, args);
+  }
+  else if (c_api == "TF_LoadSessionFromSavedModel")
+  {
+    plhs = OCT_TF_LoadSessionFromSavedModel (nrhs, args);
+  }
+  else if (c_api == "TF_CloseSession")
+  {
+    OCT_TF_CloseSession (nrhs, args);
+  }
+  else if (c_api == "TF_DeleteSession")
+  {
+    OCT_TF_DeleteSession (nrhs, args);
+  }
+  else if (c_api == "TF_SessionRun")
+  {
+    plhs = OCT_TF_SessionRun (nrhs, args);
+  }
+  else if (c_api == "TF_SessionListDevices")
+  {
+    plhs = OCT_TF_SessionListDevices (nrhs, args);
+  }
+  // ---------------------------------------------------------------------------
+  // C API functions referenced by the TF_SessionOptions classdef
+  // ---------------------------------------------------------------------------
+  else if (c_api == "TF_NewSessionOptions")
+  {
+    plhs = OCT_TF_NewSessionOptions ();
+  }
+  else if (c_api == "TF_SetTarget")
+  {
+    OCT_TF_SetTarget (nrhs, args);
+  }
+  else if (c_api == "TF_SetConfig")
+  {
+    OCT_TF_SetConfig (nrhs, args);
+  }
+  else if (c_api == "TF_DeleteSessionOptions")
+  {
+    OCT_TF_DeleteSessionOptions (nrhs, args);
+  }
+  // ---------------------------------------------------------------------------
   // C API functions referenced by the TF_Status classdef
   // ---------------------------------------------------------------------------
   else if (c_api == "TF_NewStatus")
@@ -1457,7 +1707,9 @@ protocol buffer for attribute. \n\
 %! tensorflow (5);
 %!error <tensorflow: unrecognized reference to C API function.> tensorflow ('');
 %!test
-%! assert (tensorflow ('TF_Version'), "2.15.0")
+%! v = tensorflow ('TF_Version');
+%! assert (class (v), "char");
+%! assert (! isempty (regexp (v, '^\d+\.\d+\.\d+', 'once')));
   ## ---------------------------------------------------------------------------
   ## C API functions referenced by the TF_Buffer classdef
   ## ---------------------------------------------------------------------------
@@ -2927,4 +3179,230 @@ protocol buffer for attribute. \n\
 %! tensorflow ('TF_TensorIsAligned');
 %!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Tensor parsed to the 'TF_TensorIsAligned' C API function.> ...
 %! tensorflow ('TF_TensorIsAligned', 1);
+  ## ---------------------------------------------------------------------------
+  ## C API functions referenced by the TF_SessionOptions classdef
+  ## ---------------------------------------------------------------------------
+%!error <tensorflow: one extra argument is required for the 'TF_DeleteSessionOptions' C API function.> ...
+%! tensorflow ('TF_DeleteSessionOptions');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the SessionOptions parsed to the 'TF_DeleteSessionOptions' C API function.> ...
+%! tensorflow ('TF_DeleteSessionOptions', 1);
+
+%!error <tensorflow: two extra arguments are required for the 'TF_SetTarget' C API function.> ...
+%! tensorflow ('TF_SetTarget');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the SessionOptions parsed to the 'TF_SetTarget' C API function.> ...
+%! tensorflow ('TF_SetTarget', 1, 'local');
+%!error <tensorflow: 3rd argument must be a character vector defining the target parsed to the 'TF_SetTarget' C API function.> ...
+%! tensorflow ('TF_SetTarget', uint64 (1), 1);
+
+%!error <tensorflow: three extra arguments are required for the 'TF_SetConfig' C API function.> ...
+%! tensorflow ('TF_SetConfig');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the SessionOptions parsed to the 'TF_SetConfig' C API function.> ...
+%! tensorflow ('TF_SetConfig', 1, uint8 (1), uint64 (1));
+%!error <tensorflow: 3rd argument must be either a character or a uint8 vector containing a serialized ConfigProto parsed to the 'TF_SetConfig' C API function.> ...
+%! tensorflow ('TF_SetConfig', uint64 (1), 1, uint64 (1));
+%!error <tensorflow: 4th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SetConfig' C API function.> ...
+%! tensorflow ('TF_SetConfig', uint64 (1), uint8 (1), 1);
+
+%!test
+%! opts = tensorflow ('TF_NewSessionOptions');
+%! assert (class (opts), "uint64");
+%! assert (opts != 0);
+%! tensorflow ('TF_SetTarget', opts, 'local');
+%! tensorflow ('TF_DeleteSessionOptions', opts);
+
+  ## ---------------------------------------------------------------------------
+  ## C API functions referenced by the TF_Session classdef
+  ## ---------------------------------------------------------------------------
+%!error <tensorflow: three extra arguments are required for the 'TF_NewSession' C API function.> ...
+%! tensorflow ('TF_NewSession');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Graph parsed to the 'TF_NewSession' C API function.> ...
+%! tensorflow ('TF_NewSession', 1, uint64 (1), uint64 (1));
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the SessionOptions parsed to the 'TF_NewSession' C API function.> ...
+%! tensorflow ('TF_NewSession', uint64 (1), 1, uint64 (1));
+%!error <tensorflow: 4th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_NewSession' C API function.> ...
+%! tensorflow ('TF_NewSession', uint64 (1), uint64 (1), 1);
+
+%!error <tensorflow: seven extra arguments are required for the 'TF_LoadSessionFromSavedModel' C API function.> ...
+%! tensorflow ('TF_LoadSessionFromSavedModel');
+%!error <tensorflow: 4th argument must be a character vector defining the export directory parsed to the 'TF_LoadSessionFromSavedModel' C API function.> ...
+%! tensorflow ('TF_LoadSessionFromSavedModel', uint64 (1), uint64 (0), 1, ...
+%!             {'serve'}, uint64 (1), uint64 (0), uint64 (1));
+%!error <tensorflow: 5th argument must be a cellstr vector, or a character vector for a single tag, defining the tags parsed to the 'TF_LoadSessionFromSavedModel' C API function.> ...
+%! tensorflow ('TF_LoadSessionFromSavedModel', uint64 (1), uint64 (0), '/tmp', ...
+%!             1, uint64 (1), uint64 (0), uint64 (1));
+
+%!error <tensorflow: two extra arguments are required for the 'TF_CloseSession' C API function.> ...
+%! tensorflow ('TF_CloseSession');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Session parsed to the 'TF_CloseSession' C API function.> ...
+%! tensorflow ('TF_CloseSession', 1, uint64 (1));
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the Status parsed to the 'TF_CloseSession' C API function.> ...
+%! tensorflow ('TF_CloseSession', uint64 (1), 1);
+
+%!error <tensorflow: two extra arguments are required for the 'TF_DeleteSession' C API function.> ...
+%! tensorflow ('TF_DeleteSession');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Session parsed to the 'TF_DeleteSession' C API function.> ...
+%! tensorflow ('TF_DeleteSession', 1, uint64 (1));
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the Status parsed to the 'TF_DeleteSession' C API function.> ...
+%! tensorflow ('TF_DeleteSession', uint64 (1), 1);
+
+%!error <tensorflow: eight extra arguments are required for the 'TF_SessionRun' C API function.> ...
+%! tensorflow ('TF_SessionRun');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Session parsed to the 'TF_SessionRun' C API function.> ...
+%! tensorflow ('TF_SessionRun', 1, uint64 (0), uint64 ([]), uint64 ([]), ...
+%!             uint64 ([]), uint64 ([]), uint64 (0), uint64 (1));
+%!error <tensorflow: 4th argument must be an uint64 vector of pointers to the input Outputs parsed to the 'TF_SessionRun' C API function.> ...
+%! tensorflow ('TF_SessionRun', uint64 (1), uint64 (0), 1, uint64 ([]), ...
+%!             uint64 ([]), uint64 ([]), uint64 (0), uint64 (1));
+%!error <tensorflow: the 4th and 5th arguments must have the same number of elements parsed to the 'TF_SessionRun' C API function.> ...
+%! tensorflow ('TF_SessionRun', uint64 (1), uint64 (0), uint64 ([1, 2]), ...
+%!             uint64 (3), uint64 ([]), uint64 ([]), uint64 (0), uint64 (1));
+
+%!error <tensorflow: two extra arguments are required for the 'TF_SessionListDevices' C API function.> ...
+%! tensorflow ('TF_SessionListDevices');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Session parsed to the 'TF_SessionListDevices' C API function.> ...
+%! tensorflow ('TF_SessionListDevices', 1, uint64 (1));
+%!error <tensorflow: 3rd argument must be an uint64 scalar pointer to the Status parsed to the 'TF_SessionListDevices' C API function.> ...
+%! tensorflow ('TF_SessionListDevices', uint64 (1), 1);
+
+## A Session over an empty Graph, listing the devices it can execute on.
+%!test
+%! status = tensorflow ('TF_NewStatus');
+%! opts = tensorflow ('TF_NewSessionOptions');
+%! graph = tensorflow ('TF_NewGraph');
+%! session = tensorflow ('TF_NewSession', graph, opts, status);
+%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert (session != 0);
+%! devices = tensorflow ('TF_SessionListDevices', session, status);
+%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! num = tensorflow ('TF_DeviceListCount', devices);
+%! assert (num >= 1);
+%! assert (tensorflow ('TF_DeviceListType', devices, int32 (0), status), "CPU");
+%! tensorflow ('TF_DeleteDeviceList', devices);
+%! tensorflow ('TF_CloseSession', session, status);
+%! tensorflow ('TF_DeleteSession', session, status);
+%! tensorflow ('TF_DeleteSessionOptions', opts);
+%! tensorflow ('TF_DeleteGraph', graph);
+%! tensorflow ('TF_DeleteStatus', status);
+
+## Loading a SavedModel that is not there reports NOT_FOUND, naming the path.
+%!test
+%! status = tensorflow ('TF_NewStatus');
+%! opts = tensorflow ('TF_NewSessionOptions');
+%! graph = tensorflow ('TF_NewGraph');
+%! session = tensorflow ('TF_LoadSessionFromSavedModel', opts, uint64 (0), ...
+%!                       '/no/such/model', {'serve'}, graph, uint64 (0), status);
+%! assert (session, uint64 (0));
+%! assert (tensorflow ('TF_GetCode', status), uint32 (5));
+%! assert (! isempty (strfind (tensorflow ('TF_Message', status), '/no/such/model')));
+%! tensorflow ('TF_DeleteSessionOptions', opts);
+%! tensorflow ('TF_DeleteGraph', graph);
+%! tensorflow ('TF_DeleteStatus', status);
+
+## Build z = x + y in a Graph, then execute it through a Session.
+%!test
+%! TF_FLOAT = uint32 (1);
+%! status = tensorflow ('TF_NewStatus');
+%! graph = tensorflow ('TF_NewGraph');
+%! desc = tensorflow ('TF_NewOperation', graph, 'Placeholder', 'x');
+%! tensorflow ('TF_SetAttrType', desc, 'dtype', TF_FLOAT);
+%! op_x = tensorflow ('TF_FinishOperation', desc, status);
+%! desc = tensorflow ('TF_NewOperation', graph, 'Placeholder', 'y');
+%! tensorflow ('TF_SetAttrType', desc, 'dtype', TF_FLOAT);
+%! op_y = tensorflow ('TF_FinishOperation', desc, status);
+%! out_x = tensorflow ('TF_NewOutput', op_x, int32 (0));
+%! out_y = tensorflow ('TF_NewOutput', op_y, int32 (0));
+%! desc = tensorflow ('TF_NewOperation', graph, 'AddV2', 'z');
+%! tensorflow ('TF_AddInput', desc, out_x);
+%! tensorflow ('TF_AddInput', desc, out_y);
+%! op_z = tensorflow ('TF_FinishOperation', desc, status);
+%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! out_z = tensorflow ('TF_NewOutput', op_z, int32 (0));
+%! opts = tensorflow ('TF_NewSessionOptions');
+%! session = tensorflow ('TF_NewSession', graph, opts, status);
+%! tx = tensorflow ('TF_LoadTensor', single ([1, 2, 3; 4, 5, 6]));
+%! ty = tensorflow ('TF_LoadTensor', single ([10, 20, 30; 40, 50, 60]));
+%! out = tensorflow ('TF_SessionRun', session, uint64 (0), [out_x, out_y], ...
+%!                   [tx, ty], out_z, uint64 ([]), uint64 (0), status);
+%! assert (tensorflow ('TF_GetCode', status), uint32 (0));
+%! assert (numel (out), 1);
+%! assert (tensorflow ('TF_SaveTensor', out(1)), single ([11, 22, 33; 44, 55, 66]));
+%! tensorflow ('TF_DeleteTensor', out(1));
+%! tensorflow ('TF_DeleteTensor', tx);
+%! tensorflow ('TF_DeleteTensor', ty);
+%! tensorflow ('TF_DeleteOutput', out_x);
+%! tensorflow ('TF_DeleteOutput', out_y);
+%! tensorflow ('TF_DeleteOutput', out_z);
+%! tensorflow ('TF_CloseSession', session, status);
+%! tensorflow ('TF_DeleteSession', session, status);
+%! tensorflow ('TF_DeleteSessionOptions', opts);
+%! tensorflow ('TF_DeleteGraph', graph);
+%! tensorflow ('TF_DeleteStatus', status);
+
+  ## ---------------------------------------------------------------------------
+  ## C API functions referenced by the TF_DeviceList classdef
+  ## ---------------------------------------------------------------------------
+%!error <tensorflow: one extra argument is required for the 'TF_DeleteDeviceList' C API function.> ...
+%! tensorflow ('TF_DeleteDeviceList');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the DeviceList parsed to the 'TF_DeleteDeviceList' C API function.> ...
+%! tensorflow ('TF_DeleteDeviceList', 1);
+
+%!error <tensorflow: one extra argument is required for the 'TF_DeviceListCount' C API function.> ...
+%! tensorflow ('TF_DeviceListCount');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the DeviceList parsed to the 'TF_DeviceListCount' C API function.> ...
+%! tensorflow ('TF_DeviceListCount', 1);
+
+%!error <tensorflow: three extra arguments are required for the 'TF_DeviceListName' C API function.> ...
+%! tensorflow ('TF_DeviceListName');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the DeviceList parsed to the 'TF_DeviceListName' C API function.> ...
+%! tensorflow ('TF_DeviceListName', 1, int32 (0), uint64 (1));
+%!error <tensorflow: 3rd argument must be an int32 scalar value defining the device index parsed to the 'TF_DeviceListName' C API function.> ...
+%! tensorflow ('TF_DeviceListName', uint64 (1), 0, uint64 (1));
+%!error <tensorflow: 4th argument must be an uint64 scalar pointer to the Status parsed to the 'TF_DeviceListName' C API function.> ...
+%! tensorflow ('TF_DeviceListName', uint64 (1), int32 (0), 1);
+
+%!error <tensorflow: three extra arguments are required for the 'TF_DeviceListType' C API function.> ...
+%! tensorflow ('TF_DeviceListType');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the DeviceList parsed to the 'TF_DeviceListType' C API function.> ...
+%! tensorflow ('TF_DeviceListType', 1, int32 (0), uint64 (1));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_DeviceListMemoryBytes' C API function.> ...
+%! tensorflow ('TF_DeviceListMemoryBytes');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the DeviceList parsed to the 'TF_DeviceListMemoryBytes' C API function.> ...
+%! tensorflow ('TF_DeviceListMemoryBytes', 1, int32 (0), uint64 (1));
+
+%!error <tensorflow: three extra arguments are required for the 'TF_DeviceListIncarnation' C API function.> ...
+%! tensorflow ('TF_DeviceListIncarnation');
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the DeviceList parsed to the 'TF_DeviceListIncarnation' C API function.> ...
+%! tensorflow ('TF_DeviceListIncarnation', 1, int32 (0), uint64 (1));
+
+  ## ---------------------------------------------------------------------------
+  ## OCTAVE specific constructors for the TF_Input and TF_Output classdefs
+  ## ---------------------------------------------------------------------------
+%!error <tensorflow: either none or two extra arguments are required for the 'TF_NewOutput' OCTAVE function.> ...
+%! tensorflow ('TF_NewOutput', uint64 (1));
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_NewOutput' OCTAVE function.> ...
+%! tensorflow ('TF_NewOutput', 1, int32 (0));
+%!error <tensorflow: 3rd argument must be an int32 scalar value defining the output index parsed to the 'TF_NewOutput' OCTAVE function.> ...
+%! tensorflow ('TF_NewOutput', uint64 (1), 0);
+
+%!error <tensorflow: either none or two extra arguments are required for the 'TF_NewInput' OCTAVE function.> ...
+%! tensorflow ('TF_NewInput', uint64 (1));
+%!error <tensorflow: 2nd argument must be an uint64 scalar pointer to the Operation parsed to the 'TF_NewInput' OCTAVE function.> ...
+%! tensorflow ('TF_NewInput', 1, int32 (0));
+%!error <tensorflow: 3rd argument must be an int32 scalar value defining the input index parsed to the 'TF_NewInput' OCTAVE function.> ...
+%! tensorflow ('TF_NewInput', uint64 (1), 0);
+
+## An Output referring to an Operation reports that Operation's output type.
+%!test
+%! status = tensorflow ('TF_NewStatus');
+%! graph = tensorflow ('TF_NewGraph');
+%! desc = tensorflow ('TF_NewOperation', graph, 'Placeholder', 'p');
+%! tensorflow ('TF_SetAttrType', desc, 'dtype', uint32 (1));
+%! oper = tensorflow ('TF_FinishOperation', desc, status);
+%! output = tensorflow ('TF_NewOutput', oper, int32 (0));
+%! assert (tensorflow ('TF_OperationOutputType', output), uint32 (1));
+%! assert (tensorflow ('TF_OperationOutputNumConsumers', output), int32 (0));
+%! tensorflow ('TF_DeleteOutput', output);
+%! tensorflow ('TF_DeleteGraph', graph);
+%! tensorflow ('TF_DeleteStatus', status);
 */

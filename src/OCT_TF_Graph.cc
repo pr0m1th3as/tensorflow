@@ -237,12 +237,12 @@ octave_value OCT_TF_NewOperationLocked (OCT_ARGS)
   // Get pointer to Graph
   TF_Graph* graph = (TF_Graph*) args(1).uint64_value ();
   // Get character vector of Operation type in Graph
-  charMatrix op_type = args(2).char_matrix_value ();
+  string op_type = args(2).string_value ();
   // Get character vector of Operation name in Graph
-  charMatrix op_name = args(3).char_matrix_value ();
+  string op_name = args(3).string_value ();
   // Get new locked operation
-  TF_OperationDescription* op_desc = TF_NewOperationLocked (graph, op_type.data (),
-                                                            op_name.data ());
+  TF_OperationDescription* op_desc = TF_NewOperationLocked (graph, op_type.c_str (),
+                                                            op_name.c_str ());
   octave_uint64 str_ptr = (uint64_t) op_desc;
   octave_value plhs = str_ptr;
   return plhs;
@@ -279,12 +279,12 @@ octave_value OCT_TF_NewOperation (OCT_ARGS)
   // Get pointer to Graph
   TF_Graph* graph = (TF_Graph*) args(1).uint64_value ();
   // Get character vector of Operation type in Graph
-  charMatrix op_type = args(2).char_matrix_value ();
+  string op_type = args(2).string_value ();
   // Get character vector of Operation name in Graph
-  charMatrix op_name = args(3).char_matrix_value ();
+  string op_name = args(3).string_value ();
   // Get new operation
-  TF_OperationDescription* op_desc = TF_NewOperation (graph, op_type.data (),
-                                                     op_name.data ());
+  TF_OperationDescription* op_desc = TF_NewOperation (graph, op_type.c_str (),
+                                                     op_name.c_str ());
   octave_uint64 str_ptr = (uint64_t) op_desc;
   octave_value plhs = str_ptr;
   return plhs;
@@ -315,9 +315,9 @@ octave_value OCT_TF_GraphOperationByName (OCT_ARGS)
   // Get pointer to Graph
   TF_Graph* graph = (TF_Graph*) args(1).uint64_value ();
   // Get character vector of Operation name in Graph
-  charMatrix op_name = args(2).char_matrix_value ();
+  string op_name = args(2).string_value ();
   // Get operation
-  TF_Operation* oper = TF_GraphOperationByName (graph, op_name.data ());
+  TF_Operation* oper = TF_GraphOperationByName (graph, op_name.c_str ());
   octave_uint64 str_ptr = (uint64_t) oper;
   octave_value plhs = str_ptr;
   return plhs;
@@ -432,13 +432,13 @@ void OCT_TF_GraphGetOpDef (OCT_ARGS)
   // Get pointer to Graph
   TF_Graph* graph = (TF_Graph*) args(1).uint64_value ();
   // Get character vector of Operation name in Graph
-  charMatrix op_name = args(2).char_matrix_value ();
+  string op_name = args(2).string_value ();
   // Get pointer to Buffer
   TF_Buffer* output_op_def = (TF_Buffer*) args(3).uint64_value ();
   // Get pointer to Status
   TF_Status* status = (TF_Status*) args(4).uint64_value ();
   // Get output Operation definition to Buffer
-  TF_GraphGetOpDef (graph, op_name.data (), output_op_def, status);
+  TF_GraphGetOpDef (graph, op_name.c_str (), output_op_def, status);
 }
 
 // TF_CAPI_EXPORT extern void TF_GraphVersions(TF_Graph* graph,
@@ -971,7 +971,7 @@ void OCT_TF_AddGradientsWithPrefix (OCT_ARGS)
   // Get pointer to Graph
   TF_Graph* graph = (TF_Graph*) args(1).uint64_value ();
   // Get character vector of Operation name in Graph
-  charMatrix prefix = args(2).char_matrix_value ();
+  string prefix = args(2).string_value ();
   // Get pointer to Output y
   TF_Output* y = (TF_Output*) args(3).uint64_value ();
   // Get number of inputs y
@@ -987,7 +987,7 @@ void OCT_TF_AddGradientsWithPrefix (OCT_ARGS)
   // Get pointer to Output dy
   TF_Output* dy = (TF_Output*) args(9).uint64_value ();
   // Add Gradient
-  TF_AddGradientsWithPrefix (graph, prefix.data (), y, ny, x, nx, dx, status, dy);
+  TF_AddGradientsWithPrefix (graph, prefix.c_str (), y, ny, x, nx, dx, status, dy);
 }
 
 // TF_CAPI_EXPORT extern TF_Function* TF_GraphToFunction(const TF_Graph* fn_body,

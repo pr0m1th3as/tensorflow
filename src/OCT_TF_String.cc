@@ -47,12 +47,12 @@ octave_value OCT_TF_LoadTString (OCT_ARGS)
            "to be parsed to the 'TF_LoadTString' OCTAVE function.");
   }
   // Get character vector and its length
-  charMatrix src_str = args(1).char_matrix_value ();
+  string src_str = args(1).string_value ();
   size_t str_len = (size_t) args(1).numel ();
   // Create a TString and return its pointer
   TF_TString* ts = reinterpret_cast<TF_TString*> (malloc (sizeof (TF_TString)));
   TF_StringInit (ts);
-  TF_StringCopy (ts, src_str.data (), str_len);
+  TF_StringCopy (ts, src_str.c_str (), str_len);
   octave_uint64 ptr = (uint64_t) ts;
   octave_value plhs = ptr;
   return plhs;
@@ -135,10 +135,10 @@ void OCT_TF_StringCopy (OCT_ARGS)
   // Get pointer to target TString
   TF_TString* tstring = (TF_TString*) args(1).uint64_value ();
   // Get source string
-  charMatrix source = args(2).char_matrix_value ();
+  string source = args(2).string_value ();
   // Get size of source string
   size_t size = args(3).uint64_value ();
-  TF_StringCopy (tstring, source.data (), size);
+  TF_StringCopy (tstring, source.c_str (), size);
 }
 
 // TF_CAPI_EXPORT extern void TF_StringAssignView(TF_TString *dst,
@@ -172,10 +172,10 @@ void OCT_TF_StringAssignView (OCT_ARGS)
   // Get pointer to target TString
   TF_TString* tstring = (TF_TString*) args(1).uint64_value ();
   // Get source string
-  charMatrix source = args(2).char_matrix_value ();
+  string source = args(2).string_value ();
   // Get size of source string
   size_t size = args(3).uint64_value ();
-  TF_StringAssignView (tstring, source.data (), size);
+  TF_StringAssignView (tstring, source.c_str (), size);
 }
 
 // TF_CAPI_EXPORT extern const char *TF_StringGetDataPointer(const TF_TString *tstr);

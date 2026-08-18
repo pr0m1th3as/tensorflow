@@ -66,104 +66,117 @@ octave_value OCT_TF_LoadTensor (OCT_ARGS)
   {
     NDArray oct_data = args(1).array_value ();
     size_t len = TF_DataTypeSize (TF_DOUBLE) * (int) nelem;
-    newTensor = TF_NewTensor (TF_DOUBLE, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_DOUBLE, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_COMPLEX128
   else if (args(1).is_double_type () && args(1).iscomplex ())
   {
     ComplexNDArray oct_data = args(1).complex_array_value ();
     size_t len = TF_DataTypeSize (TF_COMPLEX128) * (int) nelem;
-    newTensor = TF_NewTensor (TF_COMPLEX128, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_COMPLEX128, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_FLOAT
   else if (args(1).is_single_type () && ! args(1).iscomplex ())
   {
     FloatNDArray oct_data = args(1).float_array_value ();
     size_t len = TF_DataTypeSize (TF_FLOAT) * (int) nelem;
-    newTensor = TF_NewTensor (TF_FLOAT, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_FLOAT, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_COMPLEX64
   else if (args(1).is_single_type () && args(1).iscomplex ())
   {
     FloatComplexNDArray oct_data = args(1).float_complex_array_value ();
     size_t len = TF_DataTypeSize (TF_COMPLEX64) * (int) nelem;
-    newTensor = TF_NewTensor (TF_COMPLEX64, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_COMPLEX64, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_INT64
   else if (args(1).is_int64_type ())
   {
     int64NDArray oct_data = args(1).int64_array_value ();
     size_t len = TF_DataTypeSize (TF_INT64) * (int) nelem;
-    newTensor = TF_NewTensor (TF_INT64, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_INT64, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_UINT64
   else if (args(1).is_uint64_type ())
   {
     uint64NDArray oct_data = args(1).uint64_array_value ();
     size_t len = TF_DataTypeSize (TF_UINT64) * (int) nelem;
-    newTensor = TF_NewTensor (TF_UINT64, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_UINT64, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_INT32
   else if (args(1).is_int32_type ())
   {
     int32NDArray oct_data = args(1).int32_array_value ();
     size_t len = TF_DataTypeSize (TF_INT32) * (int) nelem;
-    newTensor = TF_NewTensor (TF_INT32, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_INT32, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_UINT32
   else if (args(1).is_uint32_type ())
   {
     uint32NDArray oct_data = args(1).uint32_array_value ();
     size_t len = TF_DataTypeSize (TF_UINT32) * (int) nelem;
-    newTensor = TF_NewTensor (TF_UINT32, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_UINT32, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_INT16
   else if (args(1).is_int16_type ())
   {
     int16NDArray oct_data = args(1).int16_array_value ();
     size_t len = TF_DataTypeSize (TF_INT16) * (int) nelem;
-    newTensor = TF_NewTensor (TF_INT16, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_INT16, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_UINT16
   else if (args(1).is_uint16_type ())
   {
     uint16NDArray oct_data = args(1).uint16_array_value ();
     size_t len = TF_DataTypeSize (TF_UINT16) * (int) nelem;
-    newTensor = TF_NewTensor (TF_UINT16, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_UINT16, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_INT8
   else if (args(1).is_int8_type ())
   {
     int8NDArray oct_data = args(1).int8_array_value ();
     size_t len = TF_DataTypeSize (TF_INT8) * (int) nelem;
-    newTensor = TF_NewTensor (TF_INT8, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_INT8, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_UINT8
   else if (args(1).is_uint8_type ())
   {
     uint8NDArray oct_data = args(1).uint8_array_value ();
     size_t len = TF_DataTypeSize (TF_UINT8) * (int) nelem;
-    newTensor = TF_NewTensor (TF_UINT8, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_UINT8, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_BOOL
   else if (args(1).is_bool_matrix ())
   {
     boolNDArray oct_data = args(1).bool_array_value ();
     size_t len = TF_DataTypeSize (TF_BOOL) * (int) nelem;
-    newTensor = TF_NewTensor (TF_BOOL, tf_dims, num_dims,
-                             (void*) oct_data.data (), len, &NoOpDeallocator, 0);
+    newTensor = TF_AllocateTensor (TF_BOOL, tf_dims, num_dims, len);
+    memcpy (TF_TensorData (newTensor), (const void*) oct_data.data (),
+            len);
   }
   // TF_STRING
   else if (args(1).is_char_matrix ())
@@ -173,11 +186,11 @@ octave_value OCT_TF_LoadTensor (OCT_ARGS)
       error ("tensorflow: only a character vector can be loaded into Tensor. "
              "For multiple rows of characters use a cellstr array.");
     }
-    charMatrix oct_data = args(1).char_matrix_value ();
+    string oct_data = args(1).string_value ();
     size_t str_len = (size_t) args(1).numel ();
     TF_TString* tstring = reinterpret_cast<TF_TString*> (malloc (sizeof (TF_TString)));
     TF_StringInit (tstring);
-    TF_StringCopy (tstring, oct_data.data (), str_len);
+    TF_StringCopy (tstring, oct_data.c_str (), str_len);
     int64_t dims[] = {1};
     int ndims = 1;
     newTensor = TF_NewTensor (TF_STRING, dims, ndims, tstring,

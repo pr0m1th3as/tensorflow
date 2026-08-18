@@ -84,7 +84,7 @@ void OCT_TF_SetStatus (OCT_ARGS)
   // Get status code
   TF_Code code = (TF_Code) args(2).uint_value ();
   // Get message
-  charMatrix msg = args(3).char_matrix_value ();
+  string msg = args(3).string_value ();
   TF_SetStatus (status, code, msg.data());
 }
 
@@ -118,10 +118,10 @@ void OCT_TF_SetPayload (OCT_ARGS)
   // Get pointer to status
   TF_Status* status = (TF_Status*) args(1).uint64_value ();
   // Get key
-  charMatrix key = args(2).char_matrix_value ();
+  string key = args(2).string_value ();
   // Get value
-  charMatrix value = args(3).char_matrix_value ();
-  TF_SetPayload (status, key.data (), value.data ());
+  string value = args(3).string_value ();
+  TF_SetPayload (status, key.c_str (), value.c_str ());
 }
 
 // TF_CAPI_EXPORT extern void TF_ForEachPayload(const TF_Status* s,
@@ -166,7 +166,7 @@ void OCT_TF_SetStatusFromIOError (OCT_ARGS)
   // Get error_code
   int error_code = args(2).int_value();
   // Get message
-  charMatrix context = args(3).char_matrix_value ();
+  string context = args(3).string_value ();
   TF_SetStatusFromIOError (status, error_code, context.data());
 }
 

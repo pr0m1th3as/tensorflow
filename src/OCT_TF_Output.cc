@@ -23,10 +23,44 @@ this program; if not, see <http://www.gnu.org/licenses/>.
 // OCTAVE specific functions referenced by the TF_Output classdef
 // -----------------------------------------------------------------------------
 
-// TF_Input* TF_Output()
+// TF_Output* TF_NewOutput()
+// TF_Output* TF_NewOutput(TF_Operation* oper, int index)
+//
+// Without arguments the Output is zero initialized, in which case it does not
+// reference any Operation and must not be parsed to any other C API function.
+// The Operation and its output index identify which output of which Operation
+// the returned Output refers to.
 octave_value OCT_TF_NewOutput (OCT_ARGS)
 {
+  if (nrhs == 2)
+  {
+    error ("tensorflow: either none or two extra arguments are required "
+           "for the 'TF_NewOutput' OCTAVE function.");
+  }
+  TF_Operation* oper = nullptr;
+  int index = 0;
+  if (nrhs > 2)
+  {
+    // Check octave_value type for pointer to Operation
+    if (! args(1).is_uint64_type () || ! args(1).is_scalar_type ())
+    {
+      error ("tensorflow: 2nd argument must be an uint64 scalar pointer to "
+             "the Operation parsed to the 'TF_NewOutput' OCTAVE function.");
+    }
+    // Check octave_value type for output index
+    if (! args(2).is_int32_type () || ! args(2).is_scalar_type ())
+    {
+      error ("tensorflow: 3rd argument must be an int32 scalar value defining "
+             "the output index parsed to the 'TF_NewOutput' OCTAVE function.");
+    }
+    // Get pointer to Operation
+    oper = (TF_Operation*) args(1).uint64_value ();
+    // Get output index
+    index = args(2).int_value ();
+  }
   TF_Output* output = reinterpret_cast<TF_Output*> (malloc (sizeof (TF_Output)));
+  output->oper = oper;
+  output->index = index;
   octave_uint64 ptr = (uint64_t) output;
   octave_value plhs = ptr;
   return plhs;

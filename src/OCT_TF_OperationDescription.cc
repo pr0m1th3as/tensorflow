@@ -47,9 +47,9 @@ void OCT_TF_SetDevice (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get character vector of device
-  charMatrix device = args(2).char_matrix_value ();
+  string device = args(2).string_value ();
   // Set device for Operation
-  TF_SetDevice (desc, device.data ());
+  TF_SetDevice (desc, device.c_str ());
 }
 
 // TF_CAPI_EXPORT extern void TF_AddInput(TF_OperationDescription* desc,
@@ -183,13 +183,13 @@ void OCT_TF_SetAttrString (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get attribute string
-  charMatrix attr_string = args(3).char_matrix_value ();
+  string attr_string = args(3).string_value ();
   // Get attribute string length
   size_t length = (size_t) args(3).numel ();
   // Set attribute string
-  TF_SetAttrString (desc, attr_name.data (), attr_string.data (), length);
+  TF_SetAttrString (desc, attr_name.c_str (), attr_string.c_str (), length);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrStringList(TF_OperationDescription* desc,
@@ -228,7 +228,7 @@ void OCT_TF_SetAttrStringList (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get attribute strings
   Array<string> oct_data = args(3).cellstr_value ();
   // Get number of attribute strings
@@ -245,7 +245,7 @@ void OCT_TF_SetAttrStringList (OCT_ARGS)
   const void* const* value = strings;
   const size_t* len = lengths;
   // Set attribute string list
-  TF_SetAttrStringList (desc, attr_name.data (), value, len, nelem);
+  TF_SetAttrStringList (desc, attr_name.c_str (), value, len, nelem);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrInt(TF_OperationDescription* desc,
@@ -278,11 +278,11 @@ void OCT_TF_SetAttrInt (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get attribute int64 value
   int64_t value = (size_t) args(3).int64_value ();
   // Set attribute string
-  TF_SetAttrInt (desc, attr_name.data (), value);
+  TF_SetAttrInt (desc, attr_name.c_str (), value);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrIntList(TF_OperationDescription* desc,
@@ -319,14 +319,14 @@ void OCT_TF_SetAttrIntList (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get values from int64 vector
   int64NDArray oct_data = args(3).int64_array_value ();
   const int64_t* values = (int64_t*) oct_data.data ();
   // Get number of elements of int64 vector
   int num_values = (int) args(3).numel ();
   // Set attribute string list
-  TF_SetAttrIntList (desc, attr_name.data (), values, num_values);
+  TF_SetAttrIntList (desc, attr_name.c_str (), values, num_values);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrFloat(TF_OperationDescription* desc,
@@ -360,11 +360,11 @@ void OCT_TF_SetAttrFloat (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get attribute int64 value
   float value = args(3).float_value ();
   // Set attribute string
-  TF_SetAttrFloat (desc, attr_name.data (), value);
+  TF_SetAttrFloat (desc, attr_name.c_str (), value);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrFloatList(TF_OperationDescription* desc,
@@ -401,14 +401,14 @@ void OCT_TF_SetAttrFloatList (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get values from int64 vector
   FloatRowVector oct_data = args(3).float_row_vector_value ();
   const float* values = (float*) oct_data.data ();
   // Get number of elements of int64 vector
   int num_values = (int) args(3).numel ();
   // Set attribute string list
-  TF_SetAttrFloatList (desc, attr_name.data (), values, num_values);
+  TF_SetAttrFloatList (desc, attr_name.c_str (), values, num_values);
 }
 
 //TF_CAPI_EXPORT extern void TF_SetAttrBool(TF_OperationDescription* desc,
@@ -443,11 +443,11 @@ void OCT_TF_SetAttrBool (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get attribute int64 value
   unsigned char value = (unsigned char) args(3).bool_value ();
   // Set attribute string
-  TF_SetAttrBool (desc, attr_name.data (), value);
+  TF_SetAttrBool (desc, attr_name.c_str (), value);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrBoolList(TF_OperationDescription* desc,
@@ -484,14 +484,14 @@ void OCT_TF_SetAttrBoolList (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get values from int64 vector
   boolNDArray oct_data = args(3).bool_array_value ();
   const unsigned char* values = (unsigned char*) oct_data.data ();
   // Get number of elements of int64 vector
   int num_values = (int) args(3).numel ();
   // Set attribute string list
-  TF_SetAttrBoolList (desc, attr_name.data (), values, num_values);
+  TF_SetAttrBoolList (desc, attr_name.c_str (), values, num_values);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrType(TF_OperationDescription* desc,
@@ -526,11 +526,11 @@ void OCT_TF_SetAttrType (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get DataType
-  TF_DataType value = *((TF_DataType*) args(3).uint64_value ());
+  TF_DataType value = (TF_DataType) args(3).uint_value ();
   // Set attribute data type
-  TF_SetAttrType (desc, attr_name.data (), value);
+  TF_SetAttrType (desc, attr_name.c_str (), value);
 }
 
 // F_CAPI_EXPORT extern void TF_SetAttrTypeList(TF_OperationDescription* desc,
@@ -566,14 +566,14 @@ void OCT_TF_SetAttrTypeList (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get DataType values from uint32 vector
   uint32NDArray oct_data = args(3).int32_array_value ();
   const TF_DataType* values = (TF_DataType*) oct_data.data ();
   // Get number of elements of int64 vector
   int num_values = (int) args(3).numel ();
   // Set attribute data type list
-  TF_SetAttrTypeList (desc, attr_name.data (), values, num_values);
+  TF_SetAttrTypeList (desc, attr_name.c_str (), values, num_values);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrPlaceholder(TF_OperationDescription* desc,
@@ -609,11 +609,11 @@ void OCT_TF_SetAttrPlaceholder (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get attribute placeholder
-  charMatrix attr_placeholder = args(3).char_matrix_value ();
+  string attr_placeholder = args(3).string_value ();
   // Set attribute placeholder
-  TF_SetAttrPlaceholder (desc, attr_name.data (), attr_placeholder.data ());
+  TF_SetAttrPlaceholder (desc, attr_name.c_str (), attr_placeholder.c_str ());
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrFuncName(TF_OperationDescription* desc,
@@ -648,13 +648,13 @@ void OCT_TF_SetAttrFuncName (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get attribute function name
-  charMatrix attr_fcn_name = args(3).char_matrix_value ();
+  string attr_fcn_name = args(3).string_value ();
   // Get attribute function name length
   size_t length = (size_t) args(3).numel ();
   // Set attribute function name
-  TF_SetAttrFuncName (desc, attr_name.data (), attr_fcn_name.data (), length);
+  TF_SetAttrFuncName (desc, attr_name.c_str (), attr_fcn_name.c_str (), length);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrShape(TF_OperationDescription* desc,
@@ -697,7 +697,7 @@ void OCT_TF_SetAttrShape (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get size and number of dimensions for Tensor
   int64NDArray sz = args(3).int64_array_value ();
   int num_dims = args(4).int32_scalar_value ();
@@ -705,7 +705,7 @@ void OCT_TF_SetAttrShape (OCT_ARGS)
   for (int i = 0; i < num_dims; i++) {dim_size[i] = sz(i);}
   const int64_t* dims = dim_size;
   // Set attribute placeholder
-  TF_SetAttrShape (desc, attr_name.data (), dims, num_dims);
+  TF_SetAttrShape (desc, attr_name.c_str (), dims, num_dims);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrShapeList(TF_OperationDescription* desc,
@@ -750,7 +750,7 @@ void OCT_TF_SetAttrShapeList (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get matrix with size of dimensions as row vectors
   int64NDArray sz_dim = args(3).int64_array_value ();
   // Get vector with number of dimensions as elements
@@ -773,7 +773,7 @@ void OCT_TF_SetAttrShapeList (OCT_ARGS)
   const int64_t* const* dims = dim;
   const int* num_dims = num_dim;
   // Set attribute placeholder
-  TF_SetAttrShapeList (desc, attr_name.data (), dims, num_dims, num_shapes);
+  TF_SetAttrShapeList (desc, attr_name.c_str (), dims, num_dims, num_shapes);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrTensorShapeProto(TF_OperationDescription* desc,
@@ -818,7 +818,7 @@ void OCT_TF_SetAttrTensorShapeProto (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get TensorShapeProto data
   uint8NDArray proto = args(3).uint8_array_value ();
   // Get length of TensorShapeProto data
@@ -826,7 +826,7 @@ void OCT_TF_SetAttrTensorShapeProto (OCT_ARGS)
   // Get pointer to Status
   TF_Status* status = (TF_Status*) args(4).uint64_value ();
   // Set TensorShapeProto
-  TF_SetAttrTensorShapeProto (desc, attr_name.data (),
+  TF_SetAttrTensorShapeProto (desc, attr_name.c_str (),
                               proto.data (), proto_len, status);
 }
 
@@ -893,14 +893,14 @@ void OCT_TF_SetAttrTensorShapeProtoList (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Cast TensorShapeProtos and associated lengths
   const void* const* protos = proto;
   const size_t* proto_lens = lens;
   // Get pointer to Status
   TF_Status* status = (TF_Status*) args(4).uint64_value ();
   // Set TensorShapeProtos
-  TF_SetAttrTensorShapeProtoList (desc, attr_name.data (),
+  TF_SetAttrTensorShapeProtoList (desc, attr_name.c_str (),
                                   protos, proto_lens, num_shapes, status);
 }
 
@@ -944,13 +944,13 @@ void OCT_TF_SetAttrTensor (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get pointer to Tensor
   TF_Tensor* tensor = (TF_Tensor*) args(3).uint64_value ();
   // Get pointer to Status
   TF_Status* status = (TF_Status*) args(4).uint64_value ();
   // Set Tensor
-  TF_SetAttrTensor (desc, attr_name.data (), tensor, status);
+  TF_SetAttrTensor (desc, attr_name.c_str (), tensor, status);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrTensorList(TF_OperationDescription* desc,
@@ -994,7 +994,7 @@ void OCT_TF_SetAttrTensorList (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get pointers to Tensors
   uint64NDArray oct_data = args(3).uint64_array_value ();
   // Get number of pointers to Tensors
@@ -1010,7 +1010,7 @@ void OCT_TF_SetAttrTensorList (OCT_ARGS)
   // Get pointer to Status
   TF_Status* status = (TF_Status*) args(4).uint64_value ();
   // Set Tensors
-  TF_SetAttrTensorList (desc, attr_name.data (), values, num_values, status);
+  TF_SetAttrTensorList (desc, attr_name.c_str (), values, num_values, status);
 }
 
 // TF_CAPI_EXPORT extern void TF_SetAttrValueProto(TF_OperationDescription* desc,
@@ -1055,7 +1055,7 @@ void OCT_TF_SetAttrValueProto (OCT_ARGS)
   // Get pointer to OperationDescription
   TF_OperationDescription* desc = (TF_OperationDescription*) args(1).uint64_value ();
   // Get attribute name
-  charMatrix attr_name = args(2).char_matrix_value ();
+  string attr_name = args(2).string_value ();
   // Get TensorShapeProto data
   uint8NDArray proto = args(3).uint8_array_value ();
   // Get length of TensorShapeProto data
@@ -1063,7 +1063,7 @@ void OCT_TF_SetAttrValueProto (OCT_ARGS)
   // Get pointer to Status
   TF_Status* status = (TF_Status*) args(4).uint64_value ();
   // Set TensorShapeProto
-  TF_SetAttrValueProto (desc, attr_name.data (), proto.data (), p_len, status);
+  TF_SetAttrValueProto (desc, attr_name.c_str (), proto.data (), p_len, status);
 }
 
 // TF_CAPI_EXPORT extern TF_Operation* TF_FinishOperationLocked(

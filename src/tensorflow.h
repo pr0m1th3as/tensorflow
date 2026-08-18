@@ -48,6 +48,15 @@ octave_value OCT_TF_GetBufferToString (OCT_ARGS);  // OCTAVE specific
 // ---------------------------------------------------------------------------
 octave_value OCT_TF_DataTypeName (OCT_ARGS);       // OCTAVE specific
 octave_value OCT_TF_DataTypeSize (OCT_ARGS);
+// ---------------------------------------------------------------------------
+// C API functions referenced by the TF_DeviceList classdef
+// ---------------------------------------------------------------------------
+void OCT_TF_DeleteDeviceList (OCT_ARGS);
+octave_value OCT_TF_DeviceListCount (OCT_ARGS);
+octave_value OCT_TF_DeviceListName (OCT_ARGS);
+octave_value OCT_TF_DeviceListType (OCT_ARGS);
+octave_value OCT_TF_DeviceListMemoryBytes (OCT_ARGS);
+octave_value OCT_TF_DeviceListIncarnation (OCT_ARGS);
 // -----------------------------------------------------------------------------
 // C API functions referenced by the TF_Graph classdef
 // -----------------------------------------------------------------------------
@@ -133,6 +142,22 @@ void OCT_TF_DeleteOutput (OCT_ARGS);               // OCTAVE specific
 octave_value OCT_TF_OperationOutputType (OCT_ARGS);
 octave_value OCT_TF_OperationOutputNumConsumers (OCT_ARGS);
 octave_value OCT_TF_OperationOutputConsumers (OCT_ARGS);
+// -----------------------------------------------------------------------------
+// C API functions referenced by the TF_Session classdef
+// -----------------------------------------------------------------------------
+octave_value OCT_TF_NewSession (OCT_ARGS);
+octave_value OCT_TF_LoadSessionFromSavedModel (OCT_ARGS);
+void OCT_TF_CloseSession (OCT_ARGS);
+void OCT_TF_DeleteSession (OCT_ARGS);
+octave_value OCT_TF_SessionRun (OCT_ARGS);
+octave_value OCT_TF_SessionListDevices (OCT_ARGS);
+// -----------------------------------------------------------------------------
+// C API functions referenced by the TF_SessionOptions classdef
+// -----------------------------------------------------------------------------
+octave_value OCT_TF_NewSessionOptions (void);
+void OCT_TF_SetTarget (OCT_ARGS);
+void OCT_TF_SetConfig (OCT_ARGS);
+void OCT_TF_DeleteSessionOptions (OCT_ARGS);
 // ---------------------------------------------------------------------------
 // C API functions referenced by the TF_Status classdef
 // ---------------------------------------------------------------------------

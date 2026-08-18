@@ -10,6 +10,7 @@ all:
                OCT_TF_Operation.cc \
                OCT_TF_OperationDescription.cc \
                OCT_TF_Output.cc \
+               OCT_TF_Session.cc \
                OCT_TF_Status.cc \
                OCT_TF_String.cc \
                OCT_TF_Tensor.cc \
